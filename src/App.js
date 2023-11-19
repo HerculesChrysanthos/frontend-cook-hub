@@ -26,16 +26,18 @@ function App() {
 export default App;
 */
 import React from 'react';
-import Header from './components/Header';
-import RecipeList from './components/RecipeList';
+import Header from './components/Header/Header';
 import './App.css';
+//import Registrer from './components/Register/Register'; // Make sure to provide the correct path
+
 
 function App() {
   return (
     <div className="App">
       <Header />
       <main>
-        <RecipeList />
+      {/* <h1>Registration Page</h1>
+      <Registrer/> */}
       </main>
     </div>
   );
