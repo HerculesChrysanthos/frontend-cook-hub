@@ -1,6 +1,7 @@
 import React from 'react';
 import Logo from "../../images/Logo.png";
 import { Link } from "react-router-dom"; //best practice to use this component instead of link tag
+import ReorderIcon from '../ReorderIcon/ReorderIcon'; 
 import "../../styles/Navbar.css";
 
 function Navbar() {
@@ -16,6 +17,9 @@ function Navbar() {
         <Link to="/menu"> Recipes </Link>
         <Link to="/about"> About </Link>
         <Link to="/contact"> Contact </Link>
+        <button>
+          <ReorderIcon />
+        </button>
         </div>
     </div>
   )

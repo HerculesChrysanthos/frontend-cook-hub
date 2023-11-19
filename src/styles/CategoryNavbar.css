@@ -1,0 +1,21 @@
+/* categoryNavbar.css */
+.cat-navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0; /* Customize the background color */
+    padding: 20px;
+  }
+  
+  .cat-navbar a{
+    margin-right: 0 15px;
+    text-decoration: none;
+    color: #333; 
+    padding: 10px;
+  }
+  
+  .cat-navbar button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
