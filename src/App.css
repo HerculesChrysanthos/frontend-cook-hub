@@ -26,6 +26,57 @@
 }
 */
 
+/* Header.css */
+header {
+  background-color: #bfc3a5; 
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.header-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-nav li {
+  margin-right: 20px;
+}
+
+.header-nav a {
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  transition: color 0.3s ease-in-out;
+}
+
+.header-nav a:hover {
+  color: #ffcc00; /* Change the color on hover */
+}
+
+/* Style the magnify class */
+.magnify a::before {
+  content: "\1F50D"; /* Unicode character for a magnifying glass */
+  margin-right: 5px;
+  color: #ffcc00; /* Set the color of the magnifying glass icon to a yellowish color */
+}
+
+.logo-container {
+  text-align: left;
+}
+
+.logo-container img {
+  max-height: 100px; /* Adjust the maximum height of the logo as needed */
+}
+
+
 .App-link {
   color: #61dafb;
 }
@@ -50,11 +101,6 @@ main {
   padding: 20px;
 }
 
-header {
-  background-color: rgb(87, 115, 88); /* Green background color */
-  padding: 15px;
-  text-align: right;
-}
 
 nav ul {
   list-style-type: none;
