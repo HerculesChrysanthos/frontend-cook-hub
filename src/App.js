@@ -1,45 +1,20 @@
-/*
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;
-*/
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header/Header';
 import './App.css';
-//import Registrer from './components/Register/Register'; // Make sure to provide the correct path
-
+import Mainpage from './pages/Mainpage';
+import Register_handling from './components/Register/Register_handling';
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <main>
-      {/* <h1>Registration Page</h1>
-      <Registrer/> */}
-      </main>
-    </div>
+    <Router>
+      <div>
+        <Mainpage />
+        <Routes>
+          <Route path="/Register" element={<Register_handling />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

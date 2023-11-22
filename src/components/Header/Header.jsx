@@ -16,7 +16,7 @@ const Header = () => {
           <li><a href="/">Category</a></li>
           <li className="magnify"><a href="/search">Search</a></li>
           <li><a href="/login">Login</a></li>
-          <li><a href="/login">Register</a></li>
+          <li><a href="/Register">Register</a></li>
         </ul>   
       </nav>
     </header>

@@ -28,7 +28,7 @@
 
 /* Header.css */
 header {
-  background-color: #bfc3a5; 
+  background-color: #bfc3a5;
   padding: 10px;
   display: flex;
   justify-content: space-between;
@@ -42,12 +42,13 @@ nav {
 
 .header-nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end; /* Change from space-between to flex-end */
   align-items: center;
+  margin-right: 20px; /* Add margin to the right side */
 }
 
 .header-nav li {
-  margin-right: 20px;
+  margin-left: 15px; /* Adjust the margin as needed */
 }
 
 .header-nav a {
