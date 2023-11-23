@@ -4,6 +4,7 @@ import Header from './components/Header/Header';
 import './App.css';
 import Mainpage from './pages/Mainpage';
 import Register_handling from './components/Register/Register_handling';
+import LoginHandling from './components/Login/LoginHandling';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Mainpage />
         <Routes>
           <Route path="/Register" element={<Register_handling />} />
+          <Route path="/Login" element={< LoginHandling/>} />
         </Routes>
       </div>
     </Router>
