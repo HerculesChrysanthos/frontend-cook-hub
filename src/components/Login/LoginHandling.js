@@ -18,17 +18,29 @@ const LoginHandling = () => {
       setLoading(true);
       setError(null);
 
+      const headers = {
+        'Content-Type': 'application/json',
+      };
       // Perform the login request
-      const response = await axios.post('http://localhost:8080/api/users/login', {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        '/api/users/login',
+        {
+          email,
+          password,
+        },
+        headers
+      );
+
+      console.log(response);
 
       // Login success
       setSuccessMessage(response.data.message);
     } catch (error) {
+      console.log(error);
       // Registration error
-      setError(error.response ? error.response.data.message : 'An error occurred');
+      setError(
+        error.response ? error.response.data.message : 'An error occurred'
+      );
     } finally {
       setLoading(false);
     }
