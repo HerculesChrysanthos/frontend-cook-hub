@@ -19,7 +19,7 @@ const Register_handling = () => {
       setError(null);
 
       // Perform the registration request
-      const response = await axios.post('http://localhost:8080/api/users/register', {
+      const response = await axios.post('https://combative-jumper-pig.cyclic.app/api/users/register', {
         email,
         password,
       });
@@ -29,6 +29,9 @@ const Register_handling = () => {
     } catch (error) {
       // Registration error
       setError(error.response ? error.response.data.message : 'An error occurred');
+
+      // Rethrow the error to handle it at the calling site
+      throw error;
     } finally {
       setLoading(false);
     }
