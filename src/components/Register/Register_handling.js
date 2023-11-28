@@ -44,10 +44,11 @@ const Register_handling = () => {
   
       // Registration success
       setSuccessMessage(response.data.message);
-    } catch (error) {
+    } 
+    catch (error) {
       // Registration error
       console.error('Registration error:', error);
-  
+    
       if (error.response) {
         const statusCode = error.response.status;
         console.log('HTTP status code:', statusCode);
@@ -55,7 +56,29 @@ const Register_handling = () => {
         if (statusCode === 409) {
           setError("Email already exists");
         } else if (statusCode === 422) {
-          setError("Password does not match");
+          // Handle validation errors
+          const responseText = error.response.responseText;
+  
+          console.log('Response Text:', responseText);
+  
+          try {
+            const responseJson = JSON.parse(responseText);
+            const validationErrors = responseJson.errors;
+  
+            console.log('Validation Errors:', validationErrors);
+  
+            if (validationErrors && Array.isArray(validationErrors)) {
+              const errorMessages = validationErrors.map(error => `${error.message} (${error.path})`);
+              console.log('Formatted Error Messages:', errorMessages);
+  
+              setError(errorMessages.join(', '));
+            } else {
+              setError('Validation error format is unexpected');
+            }
+          } catch (jsonError) {
+            console.error('Error parsing JSON from responseText:', jsonError);
+            setError('An error occurred while parsing the server response');
+          }
         } else {
           // For other errors, use a generic message
           setError(error.response.data.message || 'An error occurred');
@@ -64,12 +87,10 @@ const Register_handling = () => {
         // Handle non-response errors
         setError('An error occurred');
       }
-    
-      // Rethrow the error to handle it at the calling site
-    //  throw error;
-    } finally {
-      setLoading(false);
     }
+    finally {
+      setLoading(false);
+    }    
   };
   
   return (

@@ -19,7 +19,7 @@ const RegisterForm = ({ onSubmit, loading, error, successMessage }) => {
         </label>
         <label>
           Surname:
-          <input type="text" value={surname} onChange={(e) => setSurname(e.target.value)}  required  />
+          <input type="text" value={surname} onChange={(e) => setSurname(e.target.value)}   />
         </label>
         <label>
           Email:
