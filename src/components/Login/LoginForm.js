@@ -3,16 +3,11 @@ import { useNavigate } from 'react-router-dom';
 
 const LoginForm =  ({ onSubmit, loading, error, successMessage }) => {
   const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
+  const [password, setPass] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(email);
-  };
-
   const handleRegisterClick = () => {
-    // Use history.push to navigate to the registration page
+    // navigation to Register page if no account created
     navigate("/Register");
   };
 
@@ -21,7 +16,7 @@ const LoginForm =  ({ onSubmit, loading, error, successMessage }) => {
       <h2>User Login</h2>
       {error && <div className="error">{error}</div>}
       {successMessage && <div className="success">{successMessage}</div>}
-      <form className="login-form" onSubmit={onSubmit}>
+      <form className="login-form" onSubmit={(e) => onSubmit(e, { email, password, })}>
         <label htmlFor="email">email</label>
         <input
           value={email}
@@ -33,7 +28,7 @@ const LoginForm =  ({ onSubmit, loading, error, successMessage }) => {
         />
         <label htmlFor="password">password</label>
         <input
-          value={pass}
+          value={password}
           onChange={(e) => setPass(e.target.value)}
           type="password"
           placeholder="********"
@@ -48,11 +43,12 @@ const LoginForm =  ({ onSubmit, loading, error, successMessage }) => {
       <button className="link-btn" onClick={handleRegisterClick}>
         Don't have an account? Register here.
       </button>
-      <button className="link-btn" onClick={() => test }>
+      {/* <button className="link-btn" onClick={() => test }>
         Forgot your passrword?
-      </button>
+      </button> */}
     </div>
   );
 };
 
 export default LoginForm;
+
