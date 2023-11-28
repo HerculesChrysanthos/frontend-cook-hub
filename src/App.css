@@ -130,10 +130,11 @@ nav a:hover {
 .register-container {
   max-width: 400px;
   padding: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin: 100px auto; /* Updated margin for centering */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin: 100px auto;
+  background-color: #fff;
 }
 
 .register-container h1 {
@@ -147,15 +148,31 @@ nav a:hover {
   align-items: center;
 }
 
+/* Center-align content in each form group */
+.register-container .form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .register-container label {
   margin: 10px 0;
+  color: #555;
+  text-align: center; /* Center-align label text */
 }
 
 .register-container input {
   padding: 12px;
   margin-bottom: 10px;
-  width: 100%;
+  width: 130%;
   box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.register-container input:focus {
+  outline: none;
+  border-color: #4caf50; /* Change color on focus */
 }
 
 .register-container button {
@@ -172,12 +189,16 @@ nav a:hover {
   cursor: not-allowed;
 }
 
-.register-container .error {
-  color: red;
+.register-container .error
+{
+  color: #db0c0c;
+  text-align: center; /* Center-align error and success messages */
+  margin-top: 10px;
 }
-
 .register-container .success {
-  color: green;
+  color:  #4caf50;
+  text-align: center; /* Center-align error and success messages */
+  margin-top: 10px;
 }
 /*registration form ends */
 

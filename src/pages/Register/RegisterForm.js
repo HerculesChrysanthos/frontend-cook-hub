@@ -9,40 +9,60 @@ const RegisterForm = ({ onSubmit, loading, error, successMessage }) => {
 
   return (
     <div className="register-container">
-      <h1>User Registration</h1>
+      <h1>Registration</h1>
       {error && <div className="error">{error}</div>}
       {successMessage && <div className="success">{successMessage}</div>}
       <form onSubmit={(e) => onSubmit(e, { name, surname, email, password, passwordConfirmation })}>
-        <label>
-          Name:
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
-        </label>
-        <label>
-          Surname:
-          <input type="text" value={surname} onChange={(e) => setSurname(e.target.value)}  required />
-        </label>
-        <label>
-          Email:
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        </label>
-        <label>
-          Password:
+        <div className="form-group">
+          <label htmlFor="name">Name:</label>
+          <input
+            type="text"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="surname">Surname:</label>
+          <input
+            type="text"
+            id="surname"
+            value={surname}
+            onChange={(e) => setSurname(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
           <input
             type="password"
+            id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </label>
-        <label>
-          Confirm Password:
+        </div>
+        <div className="form-group">
+          <label htmlFor="passwordConfirmation">Confirm Password:</label>
           <input
             type="password"
+            id="passwordConfirmation"
             value={passwordConfirmation}
             onChange={(e) => setPasswordConfirmation(e.target.value)}
             required
           />
-        </label>
+        </div>
         <button type="submit" disabled={loading}>
           {loading ? 'Registering...' : 'Register'}
         </button>

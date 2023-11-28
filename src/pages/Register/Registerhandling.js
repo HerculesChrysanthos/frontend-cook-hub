@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import RegisterForm from './RegisterForm';
 
-const Register_handling = () => {
+const Registerhandling = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
@@ -109,4 +109,4 @@ const Register_handling = () => {
   );
 };
 
-export default Register_handling;
+export default Registerhandling;
