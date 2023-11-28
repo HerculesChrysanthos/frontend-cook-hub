@@ -11,6 +11,11 @@ const LoginForm =  ({ onSubmit, loading, error, successMessage }) => {
     navigate("/Register");
   };
 
+  const handleEmailChange = () => {
+    // navigation to Forgot your password page
+    navigate("/forgot-password");
+  };
+
   return (
     <div className="login-form-container">
       <h2>User Login</h2>
@@ -43,9 +48,9 @@ const LoginForm =  ({ onSubmit, loading, error, successMessage }) => {
       <button className="link-btn" onClick={handleRegisterClick}>
         Don't have an account? Register here.
       </button>
-      {/* <button className="link-btn" onClick={() => test }>
+      <button className="link-btn" onClick={handleEmailChange}>
         Forgot your passrword?
-      </button> */}
+      </button>
     </div>
   );
 };
