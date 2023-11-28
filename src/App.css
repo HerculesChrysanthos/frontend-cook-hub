@@ -126,6 +126,7 @@ nav a:hover {
   color: #ffc107; /* Change color on hover to yellow */
 }
 
+/*registration form begins */
 .register-container {
   max-width: 400px;
   padding: 20px;
@@ -178,6 +179,7 @@ nav a:hover {
 .register-container .success {
   color: green;
 }
+/*registration form ends */
 
 .login-form {
   display: flex;
