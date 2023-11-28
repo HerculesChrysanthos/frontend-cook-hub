@@ -12,15 +12,15 @@ const Register_handling = () => {
   
     const { name, surname, email, password, passwordConfirmation } = formData;
 
-        // Define headers
-        const headers = {
-          'Content-Type': 'application/json',
-          'Accept': '*/*',
-         'Cache-Control': 'no-cache',      
-         'Accept-Encoding': 'gzip, deflate, br',
-         'Connection': 'keep-alive'
-        };
-    
+    // Define headers
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': '*/*',
+      'Cache-Control': 'no-cache',      
+      'Accept-Encoding': 'gzip, deflate, br',
+      'Connection': 'keep-alive'
+    };
+
     try {
       setLoading(true);
       setError(null);
@@ -37,18 +37,17 @@ const Register_handling = () => {
           password,
           passwordConfirmation
         },
-        headers
+        { headers }
       );
 
       console.log(response);
   
       // Registration success
       setSuccessMessage(response.data.message);
-    } 
-    catch (error) {
+    } catch (error) {
       // Registration error
       console.error('Registration error:', error);
-    
+
       if (error.response) {
         const statusCode = error.response.status;
         console.log('HTTP status code:', statusCode);
@@ -57,20 +56,27 @@ const Register_handling = () => {
           setError("Email already exists");
         } else if (statusCode === 422) {
           // Handle validation errors
-          const responseText = error.response.responseText;
-  
+          const responseText = error.response.data; // Use 'data' instead of 'responseText'
+
           console.log('Response Text:', responseText);
-  
+    
           try {
-            const responseJson = JSON.parse(responseText);
+            const responseJson = responseText;
             const validationErrors = responseJson.errors;
-  
+    
             console.log('Validation Errors:', validationErrors);
-  
+            console.log('here', validationErrors);
+    
             if (validationErrors && Array.isArray(validationErrors)) {
-              const errorMessages = validationErrors.map(error => `${error.message} (${error.path})`);
+              const errorMessages = validationErrors.map(error => {
+                if (error.path === 'body.passwordConfirmation' && error.message === 'does not match') {
+                  return 'Password confirmation does not match';
+                }
+                return `${error.message} (${error.path})`;
+              });
+    
               console.log('Formatted Error Messages:', errorMessages);
-  
+    
               setError(errorMessages.join(', '));
             } else {
               setError('Validation error format is unexpected');
@@ -87,8 +93,7 @@ const Register_handling = () => {
         // Handle non-response errors
         setError('An error occurred');
       }
-    }
-    finally {
+    } finally {
       setLoading(false);
     }    
   };
