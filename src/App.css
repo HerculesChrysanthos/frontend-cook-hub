@@ -176,6 +176,24 @@ nav a:hover {
 }
 /* ImageSlider.css */
 
+/* Card.css */
+.card-columns-wrapper {
+  column-count: 3; /* Adjust the number of columns as needed */
+  column-gap: 20px; /* Adjust the gap between columns as needed */
+  margin: 20px; /* Add margin for spacing */
+}
+
+.card {
+  width: 18rem; /* Adjust the card width as needed */
+  margin-bottom: 20px;
+}
+
+.card-img-top {
+  height: 200px; /* Adjust the image height as needed */
+  object-fit: cover;
+}
+/* Card.css */
+
 /*registration form begins */
 .register-container {
   max-width: 400px;

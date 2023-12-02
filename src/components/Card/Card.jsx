@@ -1,0 +1,17 @@
+import React from 'react';
+
+
+const Card = ({ card_image,title, description }) => {
+  return (
+    <div className="card">
+      <img src={card_image} className="card-img-top" alt="Card" />
+      <div className="card-body">
+        <h5 className="card-title">{title}</h5>
+        <p className="card-text">{description}</p>
+        {/* Add any additional content or features as needed */}
+      </div>
+    </div>
+  );
+};
+
+export default Card;
