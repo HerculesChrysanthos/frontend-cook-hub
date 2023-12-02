@@ -152,6 +152,30 @@ nav a:hover {
   color: black; /* Set the color of the magnifying glass icon to black */
 }
 
+
+
+/* ImageSlider.css */
+.slick-slider {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.slick-prev,
+.slick-next {
+  font-size: 1.5em;
+  color: #333;
+}
+
+.slick-dots {
+  bottom: 10px;
+}
+
+.slick-dots li button:before {
+  font-size: 12px;
+  color: #333;
+}
+/* ImageSlider.css */
+
 /*registration form begins */
 .register-container {
   max-width: 400px;

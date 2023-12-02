@@ -1,12 +1,14 @@
 import React from 'react';
 import Header from '../components/Header/Header';
+import ImageSlider from '../components/ImageSlider/ImageSlider';
 
 
 const MainPage = () => {
   return (
     <div>
       <Header />
-    </div>
+      <ImageSlider />
+    </div>     
   );
 };
 
