@@ -126,6 +126,32 @@ nav a:hover {
   color: #ffc107; /* Change color on hover to yellow */
 }
 
+.search-container {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid black; /* Black bold line */
+  padding-bottom: 5px; /* Add some padding for better appearance */
+}
+
+.search-container input {
+  flex: 1; /* Take up remaining space in the container */
+  background-color: #bfc3a5;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  text-align: center; 
+}
+
+.magnify {
+  cursor: pointer;
+  margin-left: 10px; /* Adjust the margin as needed */
+}
+
+/* Style the magnify class */
+.magnify i {
+  color: black; /* Set the color of the magnifying glass icon to black */
+}
+
 /*registration form begins */
 .register-container {
   max-width: 400px;
