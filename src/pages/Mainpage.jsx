@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../components/Header/Header';
+import Footer from '../components/Footer/Footer'; 
 import ImageSlider from '../components/ImageSlider/ImageSlider';
 import card_image from '../images/image.jpg';
 import card_image_2 from '../images/image_1.jpg';
@@ -27,6 +28,7 @@ const MainPage = () => {
               card_image={card_image_2}
             />
         </div>
+        <Footer />
     </div>     
   );
 };
