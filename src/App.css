@@ -28,7 +28,7 @@
 
 /* Header.css */
 header {
-  background-color: #bfc3a5;
+  background-color: #46a2d1;
   padding: 10px;
   display: flex;
   justify-content: space-between;
@@ -126,7 +126,103 @@ nav a:hover {
   color: #ffc107; /* Change color on hover to yellow */
 }
 
+/*Search container */
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid black; /* Black bold line */
+  padding-bottom: 5px; /* Add some padding for better appearance */
+  max-width: 400px;
+  margin: auto;
+  margin-top: 5px;;
+  margin-bottom: 5px;
+  ;
+}
+
+.search-container input {
+  flex: 1; /* Take up remaining space in the container */
+  background-color: white;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  text-align: center; 
+}
+
+.magnify {
+  cursor: pointer;
+  margin-left: 10px; /* Adjust the margin as needed */
+}
+
+/* Style the magnify class */
+.magnify i {
+  color: black; /* Set the color of the magnifying glass icon to black */
+}
+/*Search container */
+
+
 /*registration form begins */
+.register-container {
+  max-width: 400px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin: 100px auto;
+  background-color: #fff;
+}
+
+.register-container h1 {
+  text-align: center;
+  color: #333;
+}
+
+.register-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register-container label {
+  margin: 10px 0;
+  color: #555;
+  text-align: center; /* Center-align label text */
+}
+
+.register-container input {
+  padding: 12px;
+  margin-bottom: 10px;
+  width: 130%;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.register-container button {
+  padding: 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.register-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.register-container .error
+{
+  color: #db0c0c;
+  text-align: center; /* Center-align error and success messages */
+  margin-top: 10px;
+}
+.register-container .success {
+  color:  #4caf50;
+  text-align: center; /* Center-align error and success messages */
+  margin-top: 10px;
+}/*registration form begins */
 .register-container {
   max-width: 400px;
   padding: 20px;
@@ -179,8 +275,7 @@ nav a:hover {
 .register-container .success {
   color: green;
 }
-/*registration form ends */
-
+/*registration form ends *//*Login form starts */
 .login-form {
   display: flex;
   flex-direction: column;
@@ -202,28 +297,52 @@ nav a:hover {
 }
 
 .login-form-container label {
-  text-align: left;
+  margin: 10px 0;
+  text-align: center;
   padding: 4px ;
 }
 
-input {
+.login-form-container input {
   margin: 1 px;
   padding: 1rem;
   border: none;
   border-radius: 10px;
 }
 
-button {
-  border : none;
-  background-color: rgb(178, 150, 150);
-  padding: 20px;
-  border-radius: 10px;
+.login-form-container button {
+  padding: 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.link-btn {
+.login-form-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.login-form-container .error {
+  color: red;
+  text-align: center; /* Center-align error and success messages */
+  margin-top: 10px;
+}
+
+.login-form-container .success {
+  color: green;
+  text-align: center; /* Center-align error and success messages */
+  margin-top: 10px;
+}
+
+.login-form-container .link-btn {
   background: none;
-  color: rgb(172, 111, 111);
+  color: rgb(164, 122, 122);
   text-decoration: underline;
   align-items:  center;
-
+  margin-top: 20px;
 }
+
+/*Login form ends */
+
+/*Image slider starts*/

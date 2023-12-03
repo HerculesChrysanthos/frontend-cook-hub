@@ -11,9 +11,8 @@ const Header = () => {
         </div>
       <nav>
         <ul className="header-nav">
-          <li><a href="/">Home</a></li>
-          <li><a href="/">Recipes</a></li>
           <li><a href="/">Category</a></li>
+          <li><a href="/my-recipes">My Recipes</a></li>
           <li className="magnify"><a href="/search">Search</a></li>
           <li><a href="/login">Login</a></li>
           <li><a href="/Register">Register</a></li>
