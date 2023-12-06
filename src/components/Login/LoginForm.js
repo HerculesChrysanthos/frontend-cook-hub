@@ -56,4 +56,3 @@ const LoginForm =  ({ onSubmit, loading, error, successMessage }) => {
 };
 
 export default LoginForm;
-

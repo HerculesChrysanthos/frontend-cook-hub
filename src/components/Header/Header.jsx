@@ -6,7 +6,16 @@ import { useAuth } from "../AuthContext";
 
 const Header = () => {
   const navigate = useNavigate();
-  const { isLoggedIn, userObject } = useAuth();
+  const { isLoggedIn, logout } = useAuth();
+
+  const handleLogout = (event) => {
+    event.preventDefault(); // Prevent the default link behavior
+    // Call the logout function from the useAuth hook
+    logout();
+
+    // Redirect to the login page or any other page after logout
+    navigate("/");
+  };
 
   return (
     <header>
@@ -18,14 +27,28 @@ const Header = () => {
           <li>
             <a href="/">Category</a>
           </li>
-          <li>
-            <a href="/my-recipes">My Recipes</a>
-          </li>
-          <li className="magnify">
+
+          {/* <li className="magnify">
             <a href="/search">Search</a>
-          </li>
+          </li> */}
+          {isLoggedIn && ( //is logged in false then - conditional rendering
+            <>
+              {" "}
+              {/* react fragment to have one parent*/}
+              <li>
+                <a href="/my-recipes">My Recipes</a>
+              </li>
+              <li>
+                <a href="/" onClick={handleLogout}>
+                  Logout
+                </a>
+              </li>
+            </>
+          )}
           {!isLoggedIn && ( //is logged in true then - conditional rendering
             <>
+              {" "}
+              {/* react fragment to have one parent*/}
               <li>
                 <a href="/login">Login</a>
               </li>
