@@ -6,6 +6,7 @@ import Register_handling from './components/Register/Register_handling';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import LoginPage from './pages/Login'
 import { AuthProvider } from './components/AuthContext';
+import RecipeDetails from './components/Recipe/RecipeDetails';
 
 
 function App() {
@@ -17,7 +18,8 @@ function App() {
           <Route path="/Register" element={<Register_handling />} />
           <Route path="/Login" element={< LoginPage/>} />
           <Route path="/forgot-password" element={< ForgotPassword/>} />
-          <Route path="/recipe:id" element={< Reci/>} />
+          <Route path="/recipes/:id" element={< RecipeDetails/>} />
+          {/* <Route path="/recipes" element={< RecipeDetails/>} /> */}
         </Routes>
       </AuthProvider>
     </Router>
