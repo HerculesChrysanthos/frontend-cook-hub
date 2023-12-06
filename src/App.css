@@ -345,4 +345,53 @@ nav a:hover {
 
 /*Login form ends */
 
-/*Image slider starts*/
+/* Footer.css starts*/
+
+.footer {
+  background-color: #46a2d1;
+  color: #fff;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+}
+
+.social-icons {
+  margin-left: -50px; /* Add margin to the left of the social icons */
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 800px; /* Adjust the maximum width as needed */
+  margin: 0 auto; /* Center the content within the footer */
+}
+
+.social-icons a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+  margin: 0 10px; /* Add margin between social icons */
+}
+
+.footer-text {
+  text-align: center; /* Center the text */
+}
+
+.footer-text p {
+  margin: 5px 0; /* Add margin between paragraphs */
+  font-size: 14px;
+}
+
+.footer-text a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px; /* Add margin between links */
+}
+
+/* Style links on hover */
+.footer-text a:hover {
+  text-decoration: underline;
+}
+/* Footer.css ends */ 

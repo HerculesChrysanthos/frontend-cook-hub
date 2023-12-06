@@ -8,6 +8,7 @@ const RecipePage = () => {
     <div>
       <Header />
         {/* <RecipeDetails  /> */}
+        <Footer />
     </div>
   );
 };
