@@ -48,6 +48,7 @@ const LoginHandling = () => {
       if (setSuccessMessage) {
         // Navigate to the main page or any other page after successful login
         navigate("/");
+        setLoggedInUser(response.data.user.name, response.data.user.surname);
       }
 
 
