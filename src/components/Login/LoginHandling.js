@@ -8,7 +8,7 @@ const LoginHandling = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
-  const { isLoggedIn, userObject ,setLoggedInUser} = useAuth();
+  const { setLoggedInUser} = useAuth();
   const navigate = useNavigate();
 
 
