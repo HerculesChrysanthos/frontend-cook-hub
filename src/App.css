@@ -395,3 +395,46 @@ nav a:hover {
   text-decoration: underline;
 }
 /* Footer.css ends */ 
+
+
+.create-recipe {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+form {
+  width: 45%; /* Adjust the width as needed */
+}
+
+.ingredients-container {
+  width: 45%; /* Adjust the width as needed */
+}
+
+label {
+  margin-top: 10px;
+  display: block;
+}
+
+input,
+textarea,
+button {
+  margin-bottom: 15px;
+  padding: 8px;
+  font-size: 16px;
+  width: 100%;
+}
+
+button {
+  background-color: #4caf50;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #45a049;
+}

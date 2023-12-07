@@ -7,6 +7,7 @@ import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import LoginPage from './pages/Login'
 import { AuthProvider } from './components/AuthContext';
 import RecipeDetails from './components/Recipe/RecipeDetails';
+import CreateRecipePage from './pages/CreateRecipe';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/Login" element={< LoginPage/>} />
           <Route path="/forgot-password" element={< ForgotPassword/>} />
           <Route path="/recipes/:id" element={< RecipeDetails/>} />
+          <Route path="/recipes/new" element={< CreateRecipePage/>} />
           {/* <Route path="/recipes" element={< RecipeDetails/>} /> */}
         </Routes>
       </AuthProvider>

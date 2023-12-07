@@ -7,7 +7,7 @@ const RecipePage = () => {
   return (
     <div>
       <Header />
-        {/* <RecipeDetails  /> */}
+        <RecipeDetails  />
         <Footer />
     </div>
   );
