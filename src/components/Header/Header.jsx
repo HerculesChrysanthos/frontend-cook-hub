@@ -39,7 +39,7 @@ const Header = () => {
                 <a href="/my-recipes">My Recipes</a>
               </li>
               <li>
-                <a href="/create-recipe">Create Recipe</a>
+                <a href="/create-recipe">Create</a>
               </li>
               <li>
                 <a href="/" onClick={handleLogout}>
