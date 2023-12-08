@@ -8,12 +8,15 @@ const CreateRecipe = () => {
   const userID = useGetUserID();
   const [cookies, _] = useCookies(["access_token"]);
   const [recipe, setRecipe] = useState({
-    name: "",
+    title: "",
     description: "",
     ingredients: [],
     instructions: "",
     imageUrl: "",
+    preparationTime: 0,
     cookingTime: 0,
+    categories: [],
+    subcategories: [],
     userOwner: userID,
   });
 
@@ -40,7 +43,7 @@ const CreateRecipe = () => {
     event.preventDefault();
     try {
       await axios.post(
-        "http://localhost:3001/recipes",
+        "/api/recipes",
         { ...recipe },
         {
           headers: { authorization: cookies.access_token },
@@ -57,8 +60,8 @@ const CreateRecipe = () => {
   return (
     <div className="create-recipe">
       <h2>Create Recipe</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name</label>
+      <form onSubmit={handleSubmit} className="recipe-form">
+        <label htmlFor="name">Όνομα Συνταγής</label>
         <input
           type="text"
           id="name"
@@ -66,14 +69,14 @@ const CreateRecipe = () => {
           value={recipe.name}
           onChange={handleChange}
         />
-        <label htmlFor="description">Description</label>
+        <label htmlFor="description">Περιγραφή</label>
         <textarea
           id="description"
           name="description"
           value={recipe.description}
           onChange={handleChange}
         ></textarea>
-        <label htmlFor="ingredients">Ingredients</label>
+        <label htmlFor="ingredients">Συστατικά</label>
         {recipe.ingredients.map((ingredient, index) => (
           <input
             key={index}
@@ -84,24 +87,32 @@ const CreateRecipe = () => {
           />
         ))}
         <button type="button" onClick={handleAddIngredient}>
-          Add Ingredient
+          Προσθήκη Συστατικού
         </button>
-        <label htmlFor="instructions">Instructions</label>
+        <label htmlFor="instructions">Οδηγίες</label>
         <textarea
           id="instructions"
           name="instructions"
           value={recipe.instructions}
           onChange={handleChange}
         ></textarea>
-        <label htmlFor="imageUrl">Image URL</label>
+        <label htmlFor="image">Προσθήκη Εικόνας </label>
         <input
-          type="text"
-          id="imageUrl"
-          name="imageUrl"
-          value={recipe.imageUrl}
+          type="file"
+          id="image"
+          name="image"
+          accept="image/jpeg"
+          required
+        />
+                <label htmlFor="cookingTime">Χρόνος Προετοιμασίας (λεπτά)</label>
+        <input
+          type="number"
+          id="preparationTime"
+          name="preparationTime"
+          value={recipe.cookingTime}
           onChange={handleChange}
         />
-        <label htmlFor="cookingTime">Cooking Time (minutes)</label>
+        <label htmlFor="cookingTime">Χρόνος Μαγειρέματος (λεπτά)</label>
         <input
           type="number"
           id="cookingTime"
@@ -109,7 +120,7 @@ const CreateRecipe = () => {
           value={recipe.cookingTime}
           onChange={handleChange}
         />
-        <button type="submit">Create Recipe</button>
+        <button type="submit">Υποβολή</button>
       </form>
     </div>
   );
