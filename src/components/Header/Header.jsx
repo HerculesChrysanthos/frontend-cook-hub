@@ -25,7 +25,7 @@ const Header = () => {
       <nav>
         <ul className="header-nav">
           <li>
-            <a href="/">Category</a>
+            <a href="/">Κατηγορίες</a>
           </li>
 
           {/* <li className="magnify">
@@ -36,14 +36,14 @@ const Header = () => {
               {" "}
               {/* react fragment to have one parent*/}
               <li>
-                <a href="/my-recipes">My Recipes</a>
+                <a href="/my-recipes">Συνταγές μου</a>
               </li>
               <li>
-                <a href="/create-recipe">Create</a>
+                <a href="/create-recipe">Δημιουργία Συνταγής</a>
               </li>
               <li>
                 <a href="/" onClick={handleLogout}>
-                  Logout
+                  Αποσύνδεση
                 </a>
               </li>
             </>
@@ -53,10 +53,10 @@ const Header = () => {
               {" "}
               {/* react fragment to have one parent*/}
               <li>
-                <a href="/login">Login</a>
+                <a href="/login">Σύνδεση</a>
               </li>
               <li>
-                <a href="/Register">Register</a>
+                <a href="/Register">Εγγραφή</a>
               </li>
             </>
           )}

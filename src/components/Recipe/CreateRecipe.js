@@ -59,7 +59,7 @@ const CreateRecipe = () => {
 
   return (
     <div className="create-recipe">
-      <h2>Create Recipe</h2>
+      <h2> Δημιουργία Συνταγής </h2>
       <form onSubmit={handleSubmit} className="recipe-form">
         <label htmlFor="name">Όνομα Συνταγής</label>
         <input
