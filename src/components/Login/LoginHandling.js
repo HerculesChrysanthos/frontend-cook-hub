@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import axios from "axios";
 import LoginForm from "./LoginForm";
 import { useAuth } from "../AuthContext";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 const LoginHandling = () => {
+  const [_, setCookies] = useCookies(["access_token"]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
-  const { setLoggedInUser} = useAuth();
+  const { setLoggedInUser } = useAuth();
   const navigate = useNavigate();
 
-
   //TODO SET USER ON CONTEXT
-
 
   const handleLogin = async (e, formData) => {
     e.preventDefault();
@@ -38,20 +38,30 @@ const LoginHandling = () => {
       );
       //TODO ANALOGOS TO RESPONSE FTIAKSE ANALOGO INITIAL STATE
 
-
-      console.log(response.data)
+      console.log(response.data);
 
       // Login success
       setSuccessMessage(response.data.message);
       setLoggedInUser(response.data.user.name, response.data.user.surname);
-      
+
       if (setSuccessMessage) {
+        // Store the token in cookies (or other secure storage)
+        setCookies("access_token", response.data.token);
+        // Store other user-related information in local storage if needed
+        // window.localStorage.setItem("userID", response.data.user.name); to check what to store, ideally the userid
+
+        // Set the user in the authentication context
+        setLoggedInUser(response.data.user.name, response.data.user.surname);
         // Navigate to the main page or any other page after successful login
         navigate("/");
-        setLoggedInUser(response.data.user.name, response.data.user.surname);
       }
 
-
+      // Log local storage
+      const localStorageKeys = Object.keys(localStorage);
+      localStorageKeys.forEach((key) => {
+        const value = localStorage.getItem(key);
+        console.log(`${key}: ${value}`);
+      });
     } catch (error) {
       console.log(error);
       // Handle specific HTTP status codes
@@ -75,7 +85,6 @@ const LoginHandling = () => {
             // For other errors, use a generic messa
             setError(error.response.data.message || "An error occurred");
         }
-        
       } else {
         // Handle non-response errors
         setError("An error occurred");

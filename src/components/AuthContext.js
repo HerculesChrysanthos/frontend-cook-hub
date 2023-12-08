@@ -11,6 +11,7 @@ export const AuthProvider = ({ children }) => {
   const setLoggedInUser = (user) => {
     setLoggedIn(true);
     setUserObject(user);
+    console.log(userObject)
   };
 
   const logout = () => {
