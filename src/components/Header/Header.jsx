@@ -3,6 +3,7 @@ import React from "react";
 import logoImage from "../../images/Group 2.svg";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
+import CreateRecipe from "../Recipe/CreateRecipe";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ const Header = () => {
                 <a href="/my-recipes">Συνταγές μου</a>
               </li>
               <li>
-                <a href="/create-recipe">Δημιουργία Συνταγής</a>
+                <a href="/recipes/new"onClick={() => navigate(CreateRecipe)}>Δημιουργία Συνταγής </a>
               </li>
               <li>
                 <a href="/" onClick={handleLogout}>

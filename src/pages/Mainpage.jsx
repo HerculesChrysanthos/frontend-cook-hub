@@ -10,7 +10,7 @@ const MainPage = () => {
   return (
     <div>
       <Header />
-      <SubHeader />
+      {/* <SubHeader /> */}
       <ImageSlider />
        {/* Card Columns Wrapper */}
        {/* <div className="card-columns-wrapper">
