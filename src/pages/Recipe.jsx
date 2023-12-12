@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import Header from './Header'; // Assuming you have a Header component
-import RecipeDetails from './RecipeDetails'; // Create a RecipeDetails component for displaying recipe details
+import Header from "../components/Header/Header"; 
+import RecipeDetails from '../components/Recipe/RecipeDetails'; 
+import Footer from "../components/Footer/Footer";
 
-const RecipePage = () => {
+const RecipeDetailPage = () => {
   return (
     <div>
       <Header />
@@ -13,4 +13,4 @@ const RecipePage = () => {
   );
 };
 
-export default RecipePage;
+export default RecipeDetailPage;

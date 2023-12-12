@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Pagination from "../Pagination/Pagination";
 
 const MyRecipes = () => {
   const [recipes, setRecipes] = useState([]);
@@ -11,7 +12,7 @@ const MyRecipes = () => {
     const fetchRecipes = async () => {
       try {
         const response = await axios.get(
-          `api/recipes?user=${userId}`
+          `api/recipes/my-recipes`
         );
         const { data, totalPages } = response.data;
         setRecipes(data);

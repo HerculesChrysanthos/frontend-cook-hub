@@ -1,16 +1,16 @@
 import React from "react";
 import Header from "../components/Header/Header";
-import MyRecipes from "../components/MyRecipes/MyRecipes";
+import RecipeListPage from "../components/Recipe/RecipeList";
 import Pagination from "../components/Pagination/Pagination";
 
-const MyRecipesPage = () => {
+const RecipesPage = () => {
   return (
     <div>
         <Header />
-        <MyRecipes />
+        <RecipeListPage />
         <Pagination />
     </div>
   );
 };
 
-export default MyRecipesPage;
+export default RecipesPage;

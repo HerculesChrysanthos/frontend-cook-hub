@@ -1,23 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Pagination from "../Pagination/Pagination";
 
 const RecipeListPage = () => {
   const [recipes, setRecipes] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
+  const [totalRecipes, setTotalRecipes] = useState(null);
 
   useEffect(() => {
     // Function to fetch recipes with pagination
     const fetchRecipes = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/recipes?page=${currentPage}`
+          `api/recipes?page=${Number(currentPage)}`
         );
-        const { data, totalPages } = response.data;
-        setRecipes(data);
+        const { recipes: recipesData, totalRecipes, totalPages } = response.data;
+
+        console.log(recipesData);
+        setRecipes(recipesData);
+        setTotalRecipes(totalRecipes);
         setTotalPages(totalPages);
+        // const { data, totalPages } = response.data;
+        // console.log(data);
+        // setRecipes(data);
+        // setTotalPages(totalPages);
       } catch (error) {
-        console.error('Error fetching recipes:', error);
+        console.error("Error fetching recipes:", error);
       }
     };
 
@@ -30,13 +39,12 @@ const RecipeListPage = () => {
 
   return (
     <div>
-      <h2>Your Recipes</h2>
+      <h2>All Recipes</h2>
       {recipes.map((recipe) => (
         <div key={recipe.id}>
           {/* Display recipe details */}
           <p>{recipe.name}</p>
           <p>{recipe.description}</p>
-          {/* Add more details as needed */}
         </div>
       ))}
       <div>

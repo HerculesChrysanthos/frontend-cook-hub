@@ -488,3 +488,48 @@ nav a:hover {
 }
 
 /*create recipe ends */
+
+/*x RecipeDetails.css */
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.recipe-details {
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.recipe-details img {
+  max-width: 100%;
+  min-height:  800px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.recipe-details h2 {
+  color: #333;
+}
+
+.recipe-details p {
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.recipe-details ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.recipe-details li {
+  margin-bottom: 5px;
+}
+
+.recipe-details h3 {
+  color: #444;
+}
+
