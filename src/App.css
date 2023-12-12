@@ -25,6 +25,39 @@
   color: white;
 }
 */
+/* Categories.css */
+.categories-container {
+  position: relative;
+}
+
+.categories-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  min-width: 200px;
+}
+
+.categories-dropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.categories-dropdown li {
+  margin-bottom: 5px; 
+}
+
+.categories-dropdown li:hover {
+  background-color: #f1f1f1;
+}
+/* Categories.css end*/
 
 /* Header.css */
 header {
@@ -155,6 +188,9 @@ nav a:hover {
   color: black; /* Set the color of the magnifying glass icon to black */
 }
 /*Search container */
+
+/*categories_start */
+/*categories_end */
 
 /*registration form begins */
 .register-container {
@@ -488,3 +524,5 @@ nav a:hover {
 }
 
 /*create recipe ends */
+
+
