@@ -10,11 +10,20 @@ const Categories = ({ handleCategoryClick }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("/api/categories/?include=subcategories");
-        setCategories(response.data);
+        // Check if categories are stored in localStorage
+        const storedCategories = localStorage.getItem("categories");
+        if (storedCategories) {
+          setCategories(JSON.parse(storedCategories));
+          setLoading(false);
+        } else {
+          const response = await axios.get("/api/categories/?include=subcategories");
+          setCategories(response.data);
+          // Update localStorage with the fetched categories
+          localStorage.setItem("categories", JSON.stringify(response.data));
+          setLoading(false);
+        }
       } catch (error) {
         console.error("Error fetching categories:", error);
-      } finally {
         setLoading(false);
       }
     };
@@ -28,6 +37,11 @@ const Categories = ({ handleCategoryClick }) => {
 
   const handleMouseLeave = () => {
     setShowSubcategories(null);
+  };
+
+  const handleNewCategoryClick = (subcategory) => {
+    // Update localStorage and handle the click
+    handleCategoryClick(subcategory);
   };
 
   return (
@@ -46,7 +60,7 @@ const Categories = ({ handleCategoryClick }) => {
                 {showSubcategories === index && category.subcategories && category.subcategories.length > 0 && (
                   <ul>
                     {category.subcategories.map((subcategory) => (
-                      <li key={subcategory._id} onClick={() => handleCategoryClick(subcategory)}>
+                      <li key={subcategory._id} onClick={() => handleNewCategoryClick(subcategory)}>
                         <span style={{ display: 'block' }}>{subcategory.name}</span>
                       </li>
                     ))}
