@@ -37,10 +37,10 @@ const Header = () => {
               {" "}
               {/* react fragment to have one parent*/}
               <li>
-                <a href="/my-recipes">Συνταγές μου</a>
+                <a href="/recipes/my-recipes">Συνταγές μου</a>
               </li>
               <li>
-                <a href="/recipes/new"onClick={() => navigate(CreateRecipe)}>Δημιουργία Συνταγής </a>
+                <a href="/recipes/new">Δημιουργία Συνταγής</a>
               </li>
               <li>
                 <a href="/" onClick={handleLogout}>

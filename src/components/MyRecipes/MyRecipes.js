@@ -1,24 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Pagination from "../Pagination/Pagination";
 
 const MyRecipes = () => {
   const [recipes, setRecipes] = useState([]);
+  const token = localStorage.getItem("token");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  };
 
   useEffect(() => {
     // Function to fetch recipes with pagination
     const fetchRecipes = async () => {
       try {
-        const response = await axios.get(
-          `api/recipes/my-recipes`
-        );
+        const response = await axios.get(`api/recipes/my-recipes`, headers);
         const { data, totalPages } = response.data;
         setRecipes(data);
         setTotalPages(totalPages);
       } catch (error) {
-        console.error('Error fetching recipes:', error);
+        console.error("Error fetching recipes:", error);
       }
     };
 
@@ -31,7 +35,7 @@ const MyRecipes = () => {
 
   return (
     <div>
-      <h2>Your Recipes</h2>
+      <h2>Οι συνταγές μου</h2>
       {recipes.map((recipe) => (
         <div key={recipe.id}>
           {/* Display recipe details */}

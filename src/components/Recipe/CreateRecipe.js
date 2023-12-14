@@ -6,7 +6,7 @@ import { useCookies } from "react-cookie";
 
 const CreateRecipe = () => {
   const userID = useGetUserID();
-  const [cookies, _] = useCookies(["access_token"]);
+  const token = localStorage.getItem('token');
   const [recipe, setRecipe] = useState({
     title: "",
     description: "",
@@ -46,7 +46,7 @@ const CreateRecipe = () => {
         "/api/recipes",
         { ...recipe },
         {
-          headers: { authorization: cookies.access_token },
+          headers: { authorization: `Bearer ${token}` },
         }
       );
 
@@ -104,7 +104,7 @@ const CreateRecipe = () => {
           accept="image/jpeg"
           required
         />
-                <label htmlFor="cookingTime">Χρόνος Προετοιμασίας (λεπτά)</label>
+        <label htmlFor="cookingTime">Χρόνος Προετοιμασίας (λεπτά)</label>
         <input
           type="number"
           id="preparationTime"

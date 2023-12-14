@@ -45,15 +45,14 @@ const LoginHandling = () => {
       // setLoggedInUser(response.data.user._id, response.data.user.name, response.data.user.surname);
 
       if (setSuccessMessage) {
-        // Store the token in cookies (or other secure storage)
-        setCookies("access_token", response.data.token);
+        // Store the token in cookies / localstorage
+        // setCookies("access_token", response.data.token);
+        window.localStorage.setItem('token', response.data.token);
         // Store other user-related information in local storage if needed
         window.localStorage.setItem("userID", response.data.user._id); //to check what to store, ideally the userid
-        console.log('1')
 
         // Set the user in the authentication context
         setLoggedInUser(response.data.user._id, response.data.user.name, response.data.user.surname);
-        console.log('2')
         // Navigate to the main page or any other page after successful login
         navigate("/");
       }

@@ -7,7 +7,7 @@ import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import LoginPage from './pages/Login'
 import { AuthProvider } from './components/AuthContext';
 import RecipeDetailPage from './pages//Recipe'
-import CreateRecipePage from './pages/Recipe';
+import CreateRecipePage from './pages/CreateRecipe';
 import MyRecipesPage from './pages/MyRecipes';
 import RecipesPage from './pages/Recipes'
 
