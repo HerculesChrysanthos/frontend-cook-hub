@@ -10,23 +10,20 @@ const Categories = ({ handleCategoryClick }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        // Check if categories are stored in localStorage
-        const storedCategories = localStorage.getItem("categories");
-        if (storedCategories) {
-          setCategories(JSON.parse(storedCategories));
-          setLoading(false);
-        } else {
-          const response = await axios.get("/api/categories/?include=subcategories");
-          setCategories(response.data);
-          // Update localStorage with the fetched categories
-          localStorage.setItem("categories", JSON.stringify(response.data));
-          setLoading(false);
-        }
+        // Always fetch categories from the API
+        const response = await axios.get("/api/categories/?include=subcategories");
+        setCategories(response.data);
+        // Update localStorage with the fetched categories
+        localStorage.setItem("categories", JSON.stringify(response.data));
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching categories:", error);
         setLoading(false);
       }
     };
+
+    // Clear localStorage when the component mounts
+    localStorage.removeItem("categories");
 
     fetchCategories();
   }, []);
