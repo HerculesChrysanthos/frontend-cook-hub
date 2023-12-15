@@ -30,6 +30,18 @@
   position: relative;
 }
 
+
+.categories-dropdown .category-name {
+  display: block;
+  margin-bottom: 5px;  /* Add a margin for spacing between category names */
+}
+
+.categories-dropdown .subcategory-name {
+  display: block;
+  margin-left: 15px;  /* Add a margin for indentation of subcategories */
+}
+
+
 .categories-dropdown {
   position: absolute;
   top: 100%;

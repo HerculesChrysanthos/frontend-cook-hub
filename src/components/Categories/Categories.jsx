@@ -49,8 +49,8 @@ const Categories = ({ handleCategoryClick: onCategoryClick }) => {
             {categories.map((category) => (
               <li key={category.category._id}>
                 <span
-                  style={{ display: "block" }}
                   onClick={() => handleCategoryClick(category.category)}
+                  style={{ display: "block", marginBottom: "5px" }}
                 >
                   {category.category.name}
                 </span>
@@ -60,10 +60,9 @@ const Categories = ({ handleCategoryClick: onCategoryClick }) => {
                       <li
                         key={subcategory._id}
                         onClick={() => handleSubcategoryClick(subcategory)}
+                        style={{ display: "block", marginLeft: "15px" }}
                       >
-                        <span style={{ display: "block" }}>
-                          {subcategory.name}
-                        </span>
+                        <span>{subcategory.name}</span>
                       </li>
                     ))}
                   </ul>
@@ -74,7 +73,7 @@ const Categories = ({ handleCategoryClick: onCategoryClick }) => {
         )}
       </div>
     </div>
-  );
+  );  
 };
 
 export default Categories;
