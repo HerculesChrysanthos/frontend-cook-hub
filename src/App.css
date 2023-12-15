@@ -533,3 +533,50 @@ nav a:hover {
   color: #444;
 }
 
+/* Categories start */
+.categories-container {
+  position: relative;
+}
+
+
+.categories-dropdown .category-name {
+  display: block;
+  margin-bottom: 5px;  /* Add a margin for spacing between category names */
+}
+
+.categories-dropdown .subcategory-name {
+  display: block;
+  margin-left: 15px;  /* Add a margin for indentation of subcategories */
+}
+
+
+.categories-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  background-color: #4198c3;
+  border: 1px solid #4198c3;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  min-width: 200px;
+}
+
+.categories-dropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.categories-dropdown li {
+  margin-bottom: 2px;
+  color: white; /* Set text color to white */
+  font-size: 20px;
+}
+
+.categories-dropdown li:hover {
+  background-color: #4198c3;
+}
+/* Categories.css end*/

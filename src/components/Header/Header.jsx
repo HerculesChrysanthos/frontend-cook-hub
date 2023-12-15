@@ -1,13 +1,25 @@
 // Header.js
-import React from "react";
+import React, { useState, useRef } from "react";
 import logoImage from "../../images/Group 2.svg";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
 import CreateRecipe from "../Recipe/CreateRecipe";
+import Categories from '../Categories/Categories';
 
 const Header = () => {
   const navigate = useNavigate();
   const { isLoggedIn, logout } = useAuth();
+  const [showCategories, setShowCategories] = useState(false);
+  const headerRef = useRef(null);
+
+  const handleCategoriesClick = () => {
+    setShowCategories(!showCategories);
+  };
+
+  const handleCategoryClick = (category) => {
+    console.log("Selected category:", category);
+    // Handle the category click if needed
+  };
 
   const handleLogout = (event) => {
     event.preventDefault(); // Prevent the default link behavior
@@ -26,12 +38,19 @@ const Header = () => {
       <nav>
         <ul className="header-nav">
           <li>
-            <a href="/">Κατηγορίες</a>
+            <a
+              href="/Categories"
+              onClick={(e) => {
+                e.preventDefault();
+                handleCategoriesClick();
+              }}
+            >
+              Κατηγορίες
+            </a>
+            {showCategories && (
+              <Categories handleCategoryClick={handleCategoryClick} />
+            )}
           </li>
-
-          {/* <li className="magnify">
-            <a href="/search">Search</a>
-          </li> */}
           {isLoggedIn && ( //is logged in false then - conditional rendering
             <>
               {" "}
