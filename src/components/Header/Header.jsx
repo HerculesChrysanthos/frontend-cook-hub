@@ -1,4 +1,4 @@
-import React, { useState,  useRef } from "react";
+import React, { useState, useRef } from "react";
 import logoImage from "../../images/Group 2.svg";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
@@ -16,6 +16,7 @@ const Header = () => {
 
   const handleCategoryClick = (category) => {
     console.log("Selected category:", category);
+    // Handle the category click if needed
   };
 
   const handleLogout = (event) => {
@@ -24,28 +25,20 @@ const Header = () => {
     navigate("/");
   };
 
-  const handleMouseEnter = () => {
-    setShowCategories(true);
-  };
-
-  const handleMouseLeave = () => {
-    setShowCategories(false);
-  };
-
   return (
     <header ref={headerRef}>
       <div className="logo-container">
         <img src={logoImage} alt="Logo" onClick={() => navigate("/")} />
       </div>
       <nav>
-        <ul className="header-nav">
-          <li
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          >
+      <ul className="header-nav">
+          <li>
             <a
               href="/Categories"
-              onClick={handleCategoriesClick}
+              onClick={(e) => {
+                e.preventDefault();
+                handleCategoriesClick();
+              }}
             >
               Κατηγορίες
             </a>

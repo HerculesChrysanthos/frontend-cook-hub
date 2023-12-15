@@ -2,10 +2,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const Categories = ({ handleCategoryClick }) => {
+const Categories = ({ handleCategoryClick: onCategoryClick }) => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showSubcategories, setShowSubcategories] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -28,37 +28,42 @@ const Categories = ({ handleCategoryClick }) => {
     fetchCategories();
   }, []);
 
-  const handleMouseEnter = (index) => {
-    setShowSubcategories(index);
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+    // Notify the parent component about the selected category
+    onCategoryClick(category);
   };
 
-  const handleMouseLeave = () => {
-    setShowSubcategories(null);
-  };
-
-  const handleNewCategoryClick = (subcategory) => {
-    // Update localStorage and handle the click
-    handleCategoryClick(subcategory);
+  const handleSubcategoryClick = (subcategory) => {
+    // Notify the parent component about the selected subcategory
+    onCategoryClick(subcategory);
   };
 
   return (
-    <div className="categories-container" onMouseLeave={handleMouseLeave}>
+    <div className="categories-container">
       <div className="categories-dropdown">
         {loading ? (
           <div>Loading categories...</div>
         ) : (
           <ul>
-            {categories.map((category, index) => (
-              <li
-                key={category.category._id}
-                onMouseEnter={() => handleMouseEnter(index)}
-              >
-                <span style={{ display: 'block' }}>{category.category.name}</span>
-                {showSubcategories === index && category.subcategories && category.subcategories.length > 0 && (
+            {categories.map((category) => (
+              <li key={category.category._id}>
+                <span
+                  style={{ display: "block" }}
+                  onClick={() => handleCategoryClick(category.category)}
+                >
+                  {category.category.name}
+                </span>
+                {selectedCategory === category.category && category.subcategories && category.subcategories.length > 0 && (
                   <ul>
                     {category.subcategories.map((subcategory) => (
-                      <li key={subcategory._id} onClick={() => handleNewCategoryClick(subcategory)}>
-                        <span style={{ display: 'block' }}>{subcategory.name}</span>
+                      <li
+                        key={subcategory._id}
+                        onClick={() => handleSubcategoryClick(subcategory)}
+                      >
+                        <span style={{ display: "block" }}>
+                          {subcategory.name}
+                        </span>
                       </li>
                     ))}
                   </ul>
