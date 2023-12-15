@@ -30,11 +30,12 @@ const RecipeDetails = () => {
   }, [recipeId]);
 
   return (
-    <div className="container">
+    <div className="recipe-container">
       {recipeData ? (
         <div className="recipe-details">
           <h2>{recipeData.title}</h2>
           <p>{recipeData.description}</p>
+          <img src={recipeData.mainImage} alt={recipeData.title} className="recipe-image" />
           <p>Χρόνος προετοιμασίας: {recipeData.preparationTime} minutes</p>
           <p>Χρόνος μαγειρέματος: {recipeData.cookingTime} minutes</p>
           <p>Μερίδες: {recipeData.servings}</p>

@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useGetUserID } from "../../Hooks/useGetUserID";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 const CreateRecipe = () => {
-  const userID = useGetUserID();
   const token = localStorage.getItem("token");
+  console.log("token - ", token);
   const [recipe, setRecipe] = useState({
     title: "",
     description: "",
     ingredients: [],
-    instructions: "",
+    // instructions: "",
     imageUrl: "",
     preparationTime: 0,
     cookingTime: 0,
@@ -30,8 +29,8 @@ const CreateRecipe = () => {
     if (storedCategories) {
       // Parse the stored JSON data
       const parsedCategories = JSON.parse(storedCategories);
-      console.log("parsedCategories:", parsedCategories);
-      console.log("json:", storedCategories);
+      // console.log("parsedCategories:", parsedCategories);
+      // console.log("json:", storedCategories);
       // Set the retrieved categories to state
       setCategories(parsedCategories);
     }
@@ -78,15 +77,46 @@ const CreateRecipe = () => {
     setRecipe({ ...recipe, tags });
   };
 
+  const [imageFile, setImageFile] = useState(null);
+  const handleImageChange = (event) => {
+    const { files } = event.target;
+    setImageFile(files[0]);
+  };
+
+  const headers = {
+    "Content-Type": "multipart/form-data",
+    Authorization: `Bearer ${token}`,
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      const formData = new FormData();
+      formData.append("title", recipe.title);
+      formData.append("description", recipe.description);
+      formData.append("preparationTime", recipe.preparationTime);
+      formData.append("cookingTime", recipe.cookingTime);
+      formData.append("servings", recipe.servings);
+      formData.append("category", recipe.category);
+      formData.append("subcategory", recipe.subcategory);
+      formData.append("image", imageFile); // Append the file
+
+      // Append tags and ingredients
+      recipe.tags.forEach((tag, index) => {
+        formData.append(`tags[${index}]`, tag);
+      });
+
+      recipe.ingredients.forEach((ingredient, index) => {
+        formData.append(`ingredients[${index}]`, ingredient);
+      });
+      console.log("headers - ", headers);
+      // Perform the upload using axios
+      // try {
       await axios.post(
         "/api/recipes",
-        { ...recipe },
-        {
-          headers: { authorization: `Bearer ${token}` },
-        }
+        // { ...recipe },
+        formData,
+        headers
       );
 
       alert("Recipe Created");
@@ -100,12 +130,12 @@ const CreateRecipe = () => {
     <div className="create-recipe">
       <h2> Δημιουργία Συνταγής </h2>
       <form onSubmit={handleSubmit} className="recipe-form">
-        <label htmlFor="name">Όνομα Συνταγής</label>
+        <label htmlFor="title">Όνομα Συνταγής</label>
         <input
           type="text"
-          id="name"
-          name="name"
-          value={recipe.name}
+          id="title"
+          name="title"
+          value={recipe.title}
           onChange={handleChange}
         />
         <label htmlFor="description">Περιγραφή</label>
@@ -141,6 +171,7 @@ const CreateRecipe = () => {
           id="image"
           name="image"
           accept="image/jpeg, image/png"
+          onChange={handleImageChange}
           required
         />
         <label htmlFor="preparationTime">Χρόνος Προετοιμασίας (λεπτά)</label>
