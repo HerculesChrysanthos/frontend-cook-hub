@@ -21,8 +21,7 @@ const Footer = () => {
         <div className="footer-text">
           <h4>&copy; 2023 CookHub</h4>
           <p>
-            <a href="#">ΕΠΙΚΟΙΝΩΝΙΑ</a> | <a href="#">ΠΟΛΙΤΙΚΗ ΑΠΟΡΡΗΤΟΥ</a> | <a href="#">ΟΡΟΙ ΧΡΗΣΗΣ</a> |{' '}
-            <a href="#">ΠΟΛΙΤΙΚΗ COOKIES</a>
+            ΕΠΙΚΟΙΝΩΝΙΑ | ΠΟΛΙΤΙΚΗ ΑΠΟΡΡΗΤΟΥ | ΟΡΟΙ ΧΡΗΣΗΣ | ΠΟΛΙΤΙΚΗ COOKIES
           </p>
         </div>
       </div>
