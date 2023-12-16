@@ -13,18 +13,6 @@
   }
 }
 
-/*
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-*/
 
 /* Header.css */
 header {
@@ -410,25 +398,6 @@ nav a:hover {
   }
 }
 
-@media screen and (max-width: 768px) {
-  /* Adjustments for medium screens */
-
-  .header-nav {
-    justify-content: space-between; /* Change back to space-between for medium screens */
-    margin-right: 0; /* Remove margin for medium screens */
-  }
-
-  .header-nav li {
-    margin-left: 10px; /* Adjust margin for medium screens */
-  }
-}
-
-@media screen and (max-width: 1024px) {
-  /* Adjustments for large screens */
-
-  /* Add your specific adjustments for large screens here */
-}
-
 /* create recipe starts */
 .create-recipe {
   display: flex;
@@ -588,12 +557,17 @@ nav a:hover {
 }
 /* Categories.css end*/
 
-/*recipes list*/
+/*recipes list START*/
 .recipes-container {
   max-width: 1000px;
   margin: 0 auto;
   margin-top: 55px;
   margin-bottom: 55px;
+}
+.recipes-container h1{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
 }
 
 .recipes-list {
@@ -613,4 +587,65 @@ nav a:hover {
   width: 100%;
   border-radius: 4px;
   margin-top: 10px;
+}
+/*recipes list END*/
+
+/* Common styles for all screen sizes */
+
+@media screen and (max-width: 768px) {
+  /* Adjustments for medium screens */
+
+  .header-nav {
+    justify-content: space-between; /* Change back to space-between for medium screens */
+    margin-right: 0; /* Remove margin for medium screens */
+  }
+
+  .header-nav li {
+    margin-left: 10px; /* Adjust margin for medium screens */
+  }
+
+
+/* Adjustments for small screens */
+@media screen and (max-width: 600px) {
+  .create-recipe,
+  .recipe-form,
+  .categories-container,
+  .recipes-container
+  .footer-content {
+    max-width: 100%; /* Set the maximum width to 100% for small screens */
+    padding: 10px; /* Add some padding for better spacing on small screens */
+  }
+
+  .header-nav,
+  .header-nav li,
+  .register-container,
+  .login-form-container,
+  .search-container {
+    flex-direction: column; /* Adjust layout for better stacking on small screens */
+    align-items: center; /* Center items on small screens */
+    justify-content: center; /* Center items on small screens */
+  }
+
+  .header-nav li {
+    margin: 10px 0; /* Adjust margin for better spacing on small screens */
+  }
+
+  .recipe-form button,
+  .footer-text a,
+  .social-icons a {
+    max-width: 100%; /* Set the maximum width to 100% for small screens */
+  }
+
+  /* Additional responsive adjustments as needed */
+}
+
+/* Adjustments for medium screens */
+@media screen and (max-width: 768px) {
+  /* Add your specific adjustments for medium screens here */
+}
+
+/* Adjustments for large screens */
+@media screen and (min-width: 1024px) {
+  /* Add your specific adjustments for large screens here */
+}
 }

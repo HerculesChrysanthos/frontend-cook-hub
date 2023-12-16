@@ -5,9 +5,9 @@ import RecipeCard from "../RecipeCard/RecipeCard";
 
 const RecipeListPage = () => {
   const [recipes, setRecipes] = useState([]);
-    const [currentPage, setCurrentPage] = useState(0);
-    const [totalPages, setTotalPages] = useState(1);
-    const [totalRecipes, setTotalRecipes] = useState(null);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalRecipes, setTotalRecipes] = useState(null);
 
   useEffect(() => {
     // Function to fetch recipes with pagination
@@ -36,18 +36,17 @@ const RecipeListPage = () => {
 
   return (
     <div className="recipes-container">
-    <div className="recipes-list">
-      {recipes.map((recipe) => (
-        <RecipeCard key={recipe.id} recipe={recipe} />
-      ))}
-    </div>
+      <h1>Συνταγές</h1>
+      <div className="recipes-list">
+        {recipes.map((recipe) => (
+          <RecipeCard key={recipe.id} recipe={recipe} />
+        ))}
+      </div>
     </div>
   );
 };
 
 export default RecipeListPage;
-
-
 
 // import React, { useState, useEffect } from "react";
 // import axios from "axios";

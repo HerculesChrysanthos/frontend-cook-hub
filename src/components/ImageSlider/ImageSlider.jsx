@@ -4,7 +4,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import image_1 from "../../images/image_1.jpg";
 import image from "../../images/image.jpg";
-import image_2 from "../../images/image_3avif.avif";
 
 const ImageSlider = () => {
   const settings = {
@@ -21,16 +20,15 @@ const ImageSlider = () => {
   const sliderStyles = {
     width: '100%', // Set the desired width
     margin: 'auto', // Center the slider
-    maxHeight: '800px', // Set the desired maximum height
   };
 
    // Custom styles for each slide (image)
    const slideStyles = {
-    height: '90%', // Set the desired height
+    height: '70%', // Set the desired height
   };
 
   return (
-    <div style={sliderStyles}>
+    <div className="image-slider" style={sliderStyles}>
     <Slider {...settings}>
       {images.map((image, index) => (
         <div key={index} style={slideStyles}>
