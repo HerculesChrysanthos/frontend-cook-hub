@@ -1,16 +1,54 @@
 // Header.js
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import axios from "axios";
 import logoImage from "../../images/Group 2.svg";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
-import CreateRecipe from "../Recipe/CreateRecipe";
-import Categories from '../Categories/Categories';
+import Categories from "../Categories/Categories";
 
 const Header = () => {
   const navigate = useNavigate();
   const { isLoggedIn, logout } = useAuth();
   const [showCategories, setShowCategories] = useState(false);
   const headerRef = useRef(null);
+  const [tags, setTags] = useState([]);
+
+  useEffect(() => {
+    const storedCategories = localStorage.getItem("categories");
+    const storedTags = localStorage.getItem("tags");
+    // Fetch tags using Axios
+    if (storedTags === null) {
+      axios
+        .get("api/tags")
+        .then((response) => {
+          const data = response.data;
+          setTags(data);
+
+          // Store tags in local storage
+          localStorage.setItem("tags", JSON.stringify(data));
+        })
+        .catch((error) => {
+          // Handle any errors during the API request
+          console.error("Error fetching tags:", error);
+        });
+    }
+
+    if (storedCategories === null) {
+      axios
+        .get("/api/categories/?include=subcategories")
+        .then((response) => {
+          const data = response.data;
+          setTags(data);
+
+          // Store tags in local storage
+          localStorage.setItem("categories", JSON.stringify(data));
+        })
+        .catch((error) => {
+          // Handle any errors during the API request
+          console.error("Error fetching categories:", error);
+        });
+    }
+  }, []);
 
   const handleCategoriesClick = () => {
     setShowCategories(!showCategories);
@@ -18,6 +56,7 @@ const Header = () => {
 
   const handleCategoryClick = (category) => {
     console.log("Selected category:", category);
+    
     // Handle the category click if needed
   };
 
