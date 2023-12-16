@@ -6,8 +6,8 @@ import RecipeCard from "../RecipeCard/RecipeCard";
 const RecipeListPage = () => {
   const [recipes, setRecipes] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(1);
   const [totalRecipes, setTotalRecipes] = useState(null);
+  const [selectedCategoryId, setSelectedCategoryId] = useState(null); 
 
   useEffect(() => {
     // Function to fetch recipes with pagination
@@ -19,13 +19,13 @@ const RecipeListPage = () => {
         const {
           recipes: recipesData,
           totalRecipes,
-          totalPages,
+          // totalPages,
         } = response.data;
 
         console.log(recipesData);
         setRecipes(recipesData);
         setTotalRecipes(totalRecipes);
-        setTotalPages(totalPages);
+        // setTotalPages(totalPages);
       } catch (error) {
         console.error("Error fetching recipes:", error);
       }
@@ -36,6 +36,12 @@ const RecipeListPage = () => {
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
+  };
+
+  const handleCategoryChange = (categoryId) => {
+    // Set the selected category and reset the current page to 0
+    setSelectedCategoryId(categoryId);
+    setCurrentPage(0);
   };
 
   return (
@@ -50,7 +56,7 @@ const RecipeListPage = () => {
         {/* Pagination component */}{" "}
         <Pagination
           currentPage={currentPage}
-          totalPages={totalPages}
+          totalRecipes={totalRecipes}
           onPageChange={handlePageChange}
         />{" "}
       </div>
