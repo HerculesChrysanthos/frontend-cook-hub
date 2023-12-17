@@ -45,6 +45,15 @@ const Register_handling = () => {
       // Registration success
       setSuccessMessage('Registration successful!');
 
+      const greekTranslations = {
+        'length must be at least 8 characters long': 'το μήκος πρέπει να είναι τουλάχιστον 8 χαρακτήρες',
+        // Add more translations as needed
+      };
+    
+      const translateError = (englishError) => {
+        return greekTranslations[englishError] || englishError;
+      };
+
     } catch (error) {
       // Registration error
       console.error('Registration error:', error);
@@ -54,7 +63,7 @@ const Register_handling = () => {
         console.log('HTTP status code:', statusCode);
 
         if (statusCode === 409) {
-          setError("Email already exists");
+          setError("Yπάρχει ήδη χρήστης με αυτό το email");
         } else if (statusCode === 422) {
           // Handle validation errors
           const responseText = error.response.data; // Use 'data' instead of 'responseText'
@@ -71,7 +80,7 @@ const Register_handling = () => {
             if (validationErrors && Array.isArray(validationErrors)) {
               const errorMessages = validationErrors.map(error => {
                 if (error.path === 'body.passwordConfirmation' && error.message === 'does not match') {
-                  return 'Password confirmation does not match';
+                  return 'Οί κωδικοί δεν ταιριάζουν';
                 }
                 return `${error.message}`;
               });
@@ -79,6 +88,11 @@ const Register_handling = () => {
               console.log('Formatted Error Messages:', errorMessages);
 
               setError(errorMessages.join(', '));
+              const errorMessageval=errorMessages.join(', ');
+              if (errorMessageval==='length must be at least 8 characters long')
+              {
+                setError('το μηκος του κωδικου πρεπει να ειναι 8 χαρακτήρες');
+              }
             } else {
               setError('Validation error format is unexpected');
             }

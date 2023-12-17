@@ -73,14 +73,14 @@ const LoginHandling = () => {
         switch (statusCode) {
           case 401:
             setError(
-              "Invalid credentials. Please check your email and password."
+              "Mη έγκυρα διαπιστευτήρια. Ελέγξτε το email και τον κωδικό πρόσβασής σας."
             );
             break;
           case 404:
-            setError("User not found. Please check your email.");
+            setError("Ο χρήστης δεν βρέθηκε. Παρακαλώ ελέγξτε το email σας.");
             break;
           case 422:
-            setError("Password length must be at least 8 characters long");
+            setError("το μηκος του κωδικου πρεπει να ειναι 8 χαρακτήρες");
             break;
           default:
             // For other errors, use a generic messa
