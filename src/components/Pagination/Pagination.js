@@ -13,10 +13,10 @@ const Pagination = ({ currentPage, totalRecipes, onPageChange }) => {
   return (
     <div>
       <span>
-        Page {currentPage+1} of {totalPages}
+        Page {currentPage + 1} of {totalPages}
       </span>
       <button
-        disabled={currentPage === 1}
+        disabled={currentPage === 0}
         onClick={() => onPageChange(currentPage - 1)}
       >
         Previous
@@ -24,14 +24,14 @@ const Pagination = ({ currentPage, totalRecipes, onPageChange }) => {
       {pageNumbers.map((page) => (
         <button
           key={page}
-          onClick={() => onPageChange(page)}
+          onClick={() => onPageChange(page - 1)}
           style={{ fontWeight: currentPage === page ? "bold" : "normal" }}
         >
           {page}
         </button>
       ))}
       <button
-        disabled={currentPage === totalPages}
+        disabled={currentPage === totalPages - 1}
         onClick={() => onPageChange(currentPage + 1)}
       >
         Next

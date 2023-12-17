@@ -1,27 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Select from "react-select";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 const CreateRecipe = () => {
   const token = localStorage.getItem("token");
-  console.log("token - ", token);
+  const navigate = useNavigate();
+
   const [recipe, setRecipe] = useState({
     title: "",
     description: "",
-    ingredients: [],
-    // instructions: "",
+    ingredients: [""], 
+    instructions: "",
     imageUrl: "",
     preparationTime: 0,
     cookingTime: 0,
+    servings: 0,
     category: "",
     subcategory: "",
-    // user: userID,
     tags: [],
   });
 
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
+  const [tags, setTags] = useState([]);
 
   useEffect(() => {
     // Retrieve categories from local storage on component mount
@@ -29,28 +31,63 @@ const CreateRecipe = () => {
     if (storedCategories) {
       // Parse the stored JSON data
       const parsedCategories = JSON.parse(storedCategories);
-      // console.log("parsedCategories:", parsedCategories);
-      // console.log("json:", storedCategories);
-      // Set the retrieved categories to state
       setCategories(parsedCategories);
+    }
+
+    const storedTags = localStorage.getItem("tags");
+    if (storedTags) {
+      // Parse the stored JSON data
+      const parsedTags = JSON.parse(storedTags);
+      setTags(parsedTags);
     }
   }, []);
 
-  const navigate = useNavigate();
+  const [tagsOptions, setTagsOptions] = useState([]);
 
-  const handleChange = (event) => {
+  useEffect(() => {
+    // Update tagsOptions whenever tags change
+    setTagsOptions(tags.map(tag => ({ value: tag._id, label: tag.name })));
+  }, [tags]);
+
+
+  const handleTagsChange = (selectedOptions) => {
+    const selectedTagIds = selectedOptions.map(option => option.value);
+    setRecipe({ ...recipe, tags: selectedTagIds });
+  };
+
+  const handleInputChange = (event) => {
     const { name, value } = event.target;
-    if (name === "category") {
-      // Update subcategories based on the selected category
-      const selectedCategory = categories.find(
-        (cat) => cat.category.name === value
-      );
-      const selectedSubcategories = selectedCategory
-        ? selectedCategory.subcategories
-        : [];
-      setSubcategories(selectedSubcategories);
-    }
     setRecipe({ ...recipe, [name]: value });
+  };
+
+  const handleCategoryChange = (event) => {
+    const { value } = event.target;
+    const selectedCategory = categories.find(
+      (cat) => cat.category.name === value
+    );
+    const selectedSubcategories = selectedCategory
+      ? selectedCategory.subcategories
+      : [];
+    const categoryId = selectedCategory ? selectedCategory.category._id : "";
+
+    setRecipe({
+      ...recipe,
+      category: categoryId,
+      subcategory: "",
+    });
+
+    setSubcategories(selectedSubcategories);
+  };
+
+  const handleSubcategoryChange = (event) => {
+    const { value } = event.target;
+    //  Set the subcategory ID in the recipe state
+    const selectedSubcategory = subcategories.find(
+      (subcat) => subcat.name === value
+    );
+    const subcategoryId = selectedSubcategory ? selectedSubcategory._id : "";
+    setRecipe({ ...recipe, subcategory: subcategoryId });
+    console.log("selectedSubcategory", selectedSubcategory);
   };
 
   const handleIngredientChange = (event, index) => {
@@ -65,59 +102,37 @@ const CreateRecipe = () => {
     setRecipe({ ...recipe, ingredients });
   };
 
-  const handleTagChange = (event, index) => {
-    const { value } = event.target;
-    const tags = [...recipe.tags];
-    tags[index] = value;
-    setRecipe({ ...recipe, tags });
-  };
-
-  const handleAddTag = () => {
-    const tags = [...recipe.tags, ""];
-    setRecipe({ ...recipe, tags });
-  };
-
-  const [imageFile, setImageFile] = useState(null);
   const handleImageChange = (event) => {
     const { files } = event.target;
-    setImageFile(files[0]);
-  };
-
-  const headers = {
-    "Content-Type": "multipart/form-data",
-    Authorization: `Bearer ${token}`,
+    setRecipe({ ...recipe, imageUrl: files[0] });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const formData = new FormData();
-      formData.append("title", recipe.title);
-      formData.append("description", recipe.description);
-      formData.append("preparationTime", recipe.preparationTime);
-      formData.append("cookingTime", recipe.cookingTime);
-      formData.append("servings", recipe.servings);
-      formData.append("category", recipe.category);
-      formData.append("subcategory", recipe.subcategory);
-      formData.append("image", imageFile); // Append the file
-
-      // Append tags and ingredients
-      recipe.tags.forEach((tag, index) => {
-        formData.append(`tags[${index}]`, tag);
+      Object.entries(recipe).forEach(([key, value]) => {
+        if (key === "imageUrl") {
+          formData.append("image", value);
+        } else if (key === "tags") {
+          recipe.tags.forEach((tagId, index) => {
+            formData.append(`tags[${index}]`, tagId);
+          });
+        } else if (key === "ingredients") {
+          recipe.ingredients.forEach((ingredient, index) => {
+            formData.append(`ingredients[${index}]`, ingredient);
+          });
+        } else {
+          formData.append(key, value);
+        }
       });
 
-      recipe.ingredients.forEach((ingredient, index) => {
-        formData.append(`ingredients[${index}]`, ingredient);
+      await axios.post("/api/recipes", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
       });
-      console.log("headers - ", headers);
-      // Perform the upload using axios
-      // try {
-      await axios.post(
-        "/api/recipes",
-        // { ...recipe },
-        formData,
-        headers
-      );
 
       alert("Recipe Created");
       navigate("/");
@@ -128,22 +143,23 @@ const CreateRecipe = () => {
 
   return (
     <div className="create-recipe">
-      <h2> Δημιουργία Συνταγής </h2>
+      <h2>Δημιουργία Συνταγής</h2>
       <form onSubmit={handleSubmit} className="recipe-form">
+        {/* ... other form fields ... */}
         <label htmlFor="title">Όνομα Συνταγής</label>
         <input
           type="text"
           id="title"
           name="title"
           value={recipe.title}
-          onChange={handleChange}
+          onChange={handleInputChange}
         />
         <label htmlFor="description">Περιγραφή</label>
         <textarea
           id="description"
           name="description"
           value={recipe.description}
-          onChange={handleChange}
+          onChange={handleInputChange}
         ></textarea>
         <label htmlFor="ingredients">Συστατικά</label>
         {recipe.ingredients.map((ingredient, index) => (
@@ -163,7 +179,7 @@ const CreateRecipe = () => {
           id="instructions"
           name="instructions"
           value={recipe.instructions}
-          onChange={handleChange}
+          onChange={handleInputChange}
         ></textarea>
         <label htmlFor="image">Προσθήκη Εικόνας </label>
         <input
@@ -180,7 +196,7 @@ const CreateRecipe = () => {
           id="preparationTime"
           name="preparationTime"
           value={recipe.preparationTime}
-          onChange={handleChange}
+          onChange={handleInputChange}
         />
         <label htmlFor="cookingTime">Χρόνος Μαγειρέματος (λεπτά)</label>
         <input
@@ -188,24 +204,24 @@ const CreateRecipe = () => {
           id="cookingTime"
           name="cookingTime"
           value={recipe.cookingTime}
-          onChange={handleChange}
+          onChange={handleInputChange}
         />
-        <label htmlFor="servings">Μερίδες (λεπτά)</label>
+        <label htmlFor="servings">Μερίδες</label>
         <input
           type="number"
           id="servings"
           name="servings"
           value={recipe.servings}
-          onChange={handleChange}
+          onChange={handleInputChange}
         />
         <label htmlFor="category">Κατηγορία</label>
         <select
           id="category"
           name="category"
-          value={recipe.category}
-          onChange={handleChange}
+          // value={recipe.category}
+          onChange={handleCategoryChange}
         >
-          <option value="">Διάλεξε Κατηγορία</option>
+          <option id = 'cat-option' value="">Διάλεξε Κατηγορία</option>
           {categories.map((category) => (
             <option key={category.category._id} value={category.category.name}>
               {category.category.name}
@@ -216,8 +232,8 @@ const CreateRecipe = () => {
         <select
           id="subcategory"
           name="subcategory"
-          value={recipe.subcategory}
-          onChange={handleChange}
+          // value={recipe.subcategory}
+          onChange={handleSubcategoryChange}
         >
           <option value="">Διάλεξε Υποκατηγορία</option>
           {subcategories.map((subcategory) => (
@@ -227,18 +243,14 @@ const CreateRecipe = () => {
           ))}
         </select>
         <label htmlFor="tags">Tags</label>
-        {recipe.tags.map((tag, index) => (
-          <input
-            key={index}
-            type="text"
-            name="tags"
-            value={tag}
-            onChange={(event) => handleTagChange(event, index)}
-          />
-        ))}
-        <button type="button" onClick={handleAddTag}>
-          Προσθήκη Tag
-        </button>
+        <Select
+          id="tags"
+          name="tags"
+          isMulti
+          options={tagsOptions}
+          value={tagsOptions.filter((tag) => recipe.tags.includes(tag.value))}
+          onChange={handleTagsChange}
+        />
         <button type="submit">Υποβολή</button>
       </form>
     </div>
