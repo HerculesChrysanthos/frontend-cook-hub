@@ -94,7 +94,7 @@ const Register_handling = () => {
                 setError('το μηκος του κωδικου πρεπει να ειναι 8 χαρακτήρες');
               }
             } else {
-              setError('Validation error format is unexpected');
+              setError('Ωχ κάτι πήγε στραβά ανανεώστε την σελίδα σας και προσπαθήστε ξανά');
             }
           } catch (jsonError) {
             console.error('Error parsing JSON from responseText:', jsonError);
@@ -106,7 +106,7 @@ const Register_handling = () => {
         }
       } else {
         // Handle non-response errors
-        setError('An error occurred');
+        setError('Ωχ κάτι πήγε στραβά ανανεώστε την σελίδα σας και προσπαθήστε ξανά');
       }
     } finally {
       setLoading(false);

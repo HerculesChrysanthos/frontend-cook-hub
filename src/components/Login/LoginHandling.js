@@ -88,7 +88,7 @@ const LoginHandling = () => {
         }
       } else {
         // Handle non-response errors
-        setError("An error occurred");
+        setError("Ωχ κάτι πήγε στραβά ανανεώστε την σελίδα σας και προσπαθήστε ξανά");
       }
     } finally {
       setLoading(false);
