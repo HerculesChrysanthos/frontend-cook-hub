@@ -10,6 +10,7 @@ import RecipeDetailPage from './pages//Recipe'
 import CreateRecipePage from './pages/CreateRecipe';
 import MyRecipesPage from './pages/MyRecipes';
 import RecipesPage from './pages/Recipes'
+import RecipeByIDPage from './pages/RecipeByIDPage'
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path="/recipes/new" element={< CreateRecipePage/>} />
           <Route path="/recipes/my-recipes" element={< MyRecipesPage/>} />
           <Route path="/recipes/" element={< RecipesPage/>} />
+          <Route path="/recipesbyid/" element={< RecipeByIDPage/>} />
         </Routes>
       </AuthProvider>
     </Router>

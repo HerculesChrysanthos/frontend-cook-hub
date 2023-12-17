@@ -101,6 +101,9 @@ const Header = () => {
                 <a href="/recipes/new">Δημιουργία Συνταγής</a>
               </li>
               <li>
+                <a href="/recipesbyid">Συνταγές Aνά Κατηγορία</a>
+              </li>
+              <li>
                 <a href="/" onClick={handleLogout}>
                   Αποσύνδεση
                 </a>

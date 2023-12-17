@@ -21,7 +21,7 @@ const Footer = () => {
         <div className="footer-text">
           <h4>&copy; 2023 CookHub</h4>
           <p>
-            ΕΠΙΚΟΙΝΩΝΙΑ | ΠΟΛΙΤΙΚΗ ΑΠΟΡΡΗΤΟΥ | ΟΡΟΙ ΧΡΗΣΗΣ | ΠΟΛΙΤΙΚΗ COOKIES
+            ΕΠΙΚΟΙΝΩΝΙΑ |  ΠΟΛΙΤΙΚΗ ΑΠΟΡΡΗΤΟΥ |  ΟΡΟΙ ΧΡΗΣΗΣ |  ΠΟΛΙΤΙΚΗ COOKIES
           </p>
         </div>
       </div>

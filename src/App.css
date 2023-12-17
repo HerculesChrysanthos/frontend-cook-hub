@@ -592,6 +592,18 @@ nav a:hover {
 
 /* Common styles for all screen sizes */
 
+.burger-menu {
+  display: none;
+  cursor: pointer;
+  padding: 10px;
+  background-color: #4198c3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+
 @media screen and (max-width: 768px) {
   /* Adjustments for medium screens */
 
@@ -636,16 +648,32 @@ nav a:hover {
     max-width: 100%; /* Set the maximum width to 100% for small screens */
   }
 
+  .burger-menu {
+    display: block;
+  }
+  
+
   /* Additional responsive adjustments as needed */
 }
+
+
 
 /* Adjustments for medium screens */
 @media screen and (max-width: 768px) {
   /* Add your specific adjustments for medium screens here */
+  .burger-menu {
+    display: block;
+  }
+  
 }
 
 /* Adjustments for large screens */
 @media screen and (min-width: 1024px) {
   /* Add your specific adjustments for large screens here */
+  .burger-menu {
+    display: block;
+  }
+  
 }
+
 }
