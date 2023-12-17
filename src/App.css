@@ -439,6 +439,7 @@ nav a:hover {
   display: flex;
   justify-content: center; /* Center items horizontally */
   align-items: center; /* Center items vertically */
+  margin-top: 500px;
 }
 
 .social-icons {

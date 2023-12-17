@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import RegisterForm from './RegisterForm';
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 const Register_handling = () => {
   const [loading, setLoading] = useState(false);
@@ -114,12 +116,16 @@ const Register_handling = () => {
   };
 
   return (
+    <div> 
+    <Header />
     <RegisterForm
       onSubmit={handleRegister}
       loading={loading}
       error={error}
       successMessage={successMessage}
     />
+    <Footer />
+    </div>
   );
 };
 
