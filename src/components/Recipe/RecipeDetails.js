@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const RecipeDetails = () => {
   const { recipeId } = useParams();
@@ -18,7 +18,7 @@ const RecipeDetails = () => {
 
         setRecipeData(data);
       } catch (error) {
-        console.error('Error fetching recipe data:', error);
+        console.error("Error fetching recipe data:", error);
       }
     };
 
@@ -31,16 +31,18 @@ const RecipeDetails = () => {
         <div className="recipe-details">
           <h2>{recipeData.title}</h2>
           <p>{recipeData.description}</p>
-          <img src={recipeData.mainImage} alt={recipeData.title} className="recipe-image" />
+          <img
+            src={recipeData.mainImage}
+            alt={recipeData.title}
+            className="recipe-image"
+          />
           <p>Χρόνος προετοιμασίας: {recipeData.preparationTime} minutes</p>
           <p>Χρόνος μαγειρέματος: {recipeData.cookingTime} minutes</p>
           <p>Μερίδες: {recipeData.servings}</p>
           <h3>Συστατικά:</h3>
           <ul>
-            {recipeData.ingredients.map((ingredient) => (
-              <li key={ingredient._id}>
-                {ingredient.quantity} {ingredient.measurement} {ingredient.name}
-              </li>
+            {recipeData.ingredients.map((ingredient, index) => (
+              <li key={index}>{ingredient}</li>
             ))}
           </ul>
           <h3>Εκτέλεση:</h3>

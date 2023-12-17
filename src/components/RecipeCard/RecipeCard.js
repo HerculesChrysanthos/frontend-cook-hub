@@ -14,7 +14,7 @@ const RecipeCard = ({ recipe }) => {
   return (
     <div className="recipe-card" onClick={handleRecipeClick} style={{ cursor: 'pointer' }}>
       <h2>{recipe.title}</h2>
-      <img src={recipe.mainImage} alt={recipe.title} className="recipe-image" />
+      <img src={recipe.previewImage} alt={recipe.title} className="recipe-image" />
       <p>{recipe.description}</p>
     </div>
   );
