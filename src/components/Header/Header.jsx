@@ -115,11 +115,14 @@ const Header = () => {
               {" "}
               {/* react fragment to have one parent*/}
               <li>
+                <a href="/recipesbyid">Συνταγές Aνά Κατηγορία</a>
+              </li>
+              <li>
                 <a href="/login">Σύνδεση</a>
               </li>
               <li>
                 <a href="/Register">Εγγραφή</a>
-              </li>
+              </li> 
             </>
           )}
         </ul>

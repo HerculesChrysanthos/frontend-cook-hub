@@ -16,7 +16,6 @@ const RecipeByID = () => {
       try {
         const response = await axios.get('/api/categories');
         setCategories(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error('Error fetching categories:', error);
       }
@@ -57,9 +56,9 @@ const RecipeByID = () => {
   };
 
   return (
-    <div className="recipes-container">
+    <div className="recipe-by-id-container">
       <h1>Συνταγές</h1>
-      <div className="category-dropdown">
+      <div className="recipe-by-id-container-dropdown">
         {/* Dropdown for categories */}
         <label htmlFor="category">Select Category: </label>
         <select
@@ -81,7 +80,6 @@ const RecipeByID = () => {
         ))}
       </div>
       <div>
-        {/* Pagination component */}
         <Pagination
           currentPage={currentPage}
           totalRecipes={totalRecipes}
