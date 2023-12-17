@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import mongoose from 'mongoose';
 
 const RecipeDetails = () => {
   const { recipeId } = useParams();
@@ -12,10 +11,7 @@ const RecipeDetails = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Instantiate mongoose using the 'new' keyword
-        const objectIdRecipeId = new mongoose.Types.ObjectId(recipeId);
-
-        const response = await axios.get(`/api/recipes/${objectIdRecipeId}`);
+        const response = await axios.get(`/api/recipes/${recipeId}`);
         const data = response.data;
 
         console.log(data);
@@ -47,8 +43,8 @@ const RecipeDetails = () => {
               </li>
             ))}
           </ul>
-          {/* <p>Category: {recipeData.category.name}</p> */}
-          {/* <p>Subcategory: {recipeData.subcategory.name}</p> */}
+          <h3>Εκτέλεση:</h3>
+          <p>{recipeData.instructions}</p>
         </div>
       ) : (
         <p>Loading...</p>
