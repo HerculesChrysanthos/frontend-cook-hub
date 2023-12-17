@@ -3,10 +3,9 @@ import axios from "axios";
 import LoginForm from "./LoginForm";
 import { useAuth } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
 
 const LoginHandling = () => {
-  const [_, setCookies] = useCookies(["access_token"]);
+  // const [_, setCookies] = useCookies(["access_token"]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
@@ -52,7 +51,11 @@ const LoginHandling = () => {
         window.localStorage.setItem("userID", response.data.user._id); //to check what to store, ideally the userid
 
         // Set the user in the authentication context
-        setLoggedInUser(response.data.user._id, response.data.user.name, response.data.user.surname);
+        setLoggedInUser({
+          id: response.data.user._id,
+          name: response.data.user.name,
+          surname: response.data.user.surname
+        });
         // Navigate to the main page or any other page after successful login
         navigate("/");
       }
