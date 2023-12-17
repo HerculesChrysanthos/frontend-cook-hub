@@ -6,24 +6,38 @@ import RecipeCard from "../RecipeCard/RecipeCard";
 const MyRecipes = () => {
   const [recipes, setRecipes] = useState([]);
   const token = localStorage.getItem("token");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
 
-  const headers = {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
-  };
+  console.log('token', token);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalRecipes, setTotalRecipes] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
     // Function to fetch recipes with pagination
     const fetchRecipes = async () => {
       try {
-        const response = await axios.get(`api/recipes/my-recipes`, headers);
-        const { data, totalPages } = response.data;
-        setRecipes(data);
-        setTotalPages(totalPages);
+        const response = await axios.get(`/api/recipes/my-recipes?page=${Number(currentPage)}`,{
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const { recipes: recipesData, totalRecipes } = response.data;
+        setRecipes(recipesData);
+        setTotalRecipes(totalRecipes);
+        setErrorMessage(null);
       } catch (error) {
-        console.error("Error fetching recipes:", error);
+        if (error.response && error.response.status === 404) {
+          // Recipe not found
+          setRecipes([]);
+          setTotalRecipes(0);
+          setErrorMessage("Δεν έχετε δημοσιευμένες συνταγές ακόμη.");
+        } else if (error.response && (error.response.status === 401 || error.response.status === 403)){
+          //user not connecter or token expiration
+          setErrorMessage("Πρέπει να συνδεθείτε για να δείτε τις συνταγές σας.");
+        } else {
+          console.error("Error fetching recipes:", error);
+          setErrorMessage("Error fetching recipes.");
+        }
       }
     };
 
@@ -37,35 +51,25 @@ const MyRecipes = () => {
   return (
     <div className="recipes-container">
       <h2>Οι συνταγές μου</h2>
-    <div className="recipes-list">
-      {recipes.map((recipe) => (
-        <RecipeCard key={recipe.id} recipe={recipe} />
-      ))}
-    </div>
+      {errorMessage ? (
+        <p>{errorMessage}</p>
+      ) : (
+        <div>
+          <div className="recipes-list">
+            {recipes.map((recipe) => (
+              <RecipeCard key={recipe.id} recipe={recipe} />
+            ))}
+          </div>
+          {/* Pagination component */}
+          <Pagination
+            currentPage={currentPage}
+            totalRecipes={totalRecipes}
+            onPageChange={handlePageChange}
+          />
+        </div>
+      )}
     </div>
   );
-
-//   return (
-//     <div>
-//       <h2>Οι συνταγές μου</h2>
-//       {recipes.map((recipe) => (
-//         <div key={recipe.id}>
-//           {/* Display recipe details */}
-//           <p>{recipe.name}</p>
-//           <p>{recipe.description}</p>
-//           {/* Add more details as needed */}
-//         </div>
-//       ))}
-//       <div>
-//         {/* Pagination component */}
-//         <Pagination
-//           currentPage={currentPage}
-//           totalPages={totalPages}
-//           onPageChange={handlePageChange}
-//         />
-//       </div>
-//     </div>
-//   );
 };
 
 export default MyRecipes;
