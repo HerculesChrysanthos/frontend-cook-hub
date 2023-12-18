@@ -9,7 +9,7 @@ import Tag from "../components/RecipeByTag/Tag";
 const RecipeByTagPage = () => {
   return (
     <div>
-      <Tag />
+      <RecipeByTag />
     </div>
   );
 };
