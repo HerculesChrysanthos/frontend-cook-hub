@@ -5,9 +5,7 @@ import RecipeListPage from "../components/Recipe/RecipeList";
 const RecipesPage = () => {
   return (
     <div>
-        <Header />
-        <RecipeListPage />
-        {/* <Pagination /> */}
+      <RecipeListPage />
     </div>
   );
 };

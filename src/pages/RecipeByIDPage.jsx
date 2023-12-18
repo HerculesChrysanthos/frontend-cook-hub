@@ -6,9 +6,7 @@ import RecipeByID from "../components/RecipeByID/RecipeByID";
 const RecipeByIDPage = () => {
   return (
     <div>
-        <Header />
-        <RecipeByID />
-        <Footer />
+      <RecipeByID />
     </div>
   );
 };
