@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import RegisterForm from './RegisterForm';
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
 const Register_handling = () => {
   const [loading, setLoading] = useState(false);
@@ -13,14 +13,14 @@ const Register_handling = () => {
     e.preventDefault();
 
     setSuccessMessage(null);
-    
+
     const { name, surname, email, password, passwordConfirmation } = formData;
 
     // Define headers
     const headers = {
       'Content-Type': 'application/json',
-      'Accept': '*/*',
-      'Cache-Control': 'no-cache'
+      Accept: '*/*',
+      'Cache-Control': 'no-cache',
     };
 
     try {
@@ -37,7 +37,7 @@ const Register_handling = () => {
           surname,
           email,
           password,
-          passwordConfirmation
+          passwordConfirmation,
         },
         { headers }
       );
@@ -48,14 +48,14 @@ const Register_handling = () => {
       setSuccessMessage('Registration successful!');
 
       const greekTranslations = {
-        'length must be at least 8 characters long': 'το μήκος πρέπει να είναι τουλάχιστον 8 χαρακτήρες',
+        'length must be at least 8 characters long':
+          'το μήκος πρέπει να είναι τουλάχιστον 8 χαρακτήρες',
         // Add more translations as needed
       };
-    
+
       const translateError = (englishError) => {
         return greekTranslations[englishError] || englishError;
       };
-
     } catch (error) {
       // Registration error
       console.error('Registration error:', error);
@@ -65,7 +65,7 @@ const Register_handling = () => {
         console.log('HTTP status code:', statusCode);
 
         if (statusCode === 409) {
-          setError("Yπάρχει ήδη χρήστης με αυτό το email");
+          setError('Yπάρχει ήδη χρήστης με αυτό το email');
         } else if (statusCode === 422) {
           // Handle validation errors
           const responseText = error.response.data; // Use 'data' instead of 'responseText'
@@ -80,8 +80,11 @@ const Register_handling = () => {
             console.log('here', validationErrors);
 
             if (validationErrors && Array.isArray(validationErrors)) {
-              const errorMessages = validationErrors.map(error => {
-                if (error.path === 'body.passwordConfirmation' && error.message === 'does not match') {
+              const errorMessages = validationErrors.map((error) => {
+                if (
+                  error.path === 'body.passwordConfirmation' &&
+                  error.message === 'does not match'
+                ) {
                   return 'Οί κωδικοί δεν ταιριάζουν';
                 }
                 return `${error.message}`;
@@ -90,13 +93,16 @@ const Register_handling = () => {
               console.log('Formatted Error Messages:', errorMessages);
 
               setError(errorMessages.join(', '));
-              const errorMessageval=errorMessages.join(', ');
-              if (errorMessageval==='length must be at least 8 characters long')
-              {
+              const errorMessageval = errorMessages.join(', ');
+              if (
+                errorMessageval === 'length must be at least 8 characters long'
+              ) {
                 setError('το μηκος του κωδικου πρεπει να ειναι 8 χαρακτήρες');
               }
             } else {
-              setError('Ωχ κάτι πήγε στραβά ανανεώστε την σελίδα σας και προσπαθήστε ξανά');
+              setError(
+                'Ωχ κάτι πήγε στραβά ανανεώστε την σελίδα σας και προσπαθήστε ξανά'
+              );
             }
           } catch (jsonError) {
             console.error('Error parsing JSON from responseText:', jsonError);
@@ -108,7 +114,9 @@ const Register_handling = () => {
         }
       } else {
         // Handle non-response errors
-        setError('Ωχ κάτι πήγε στραβά ανανεώστε την σελίδα σας και προσπαθήστε ξανά');
+        setError(
+          'Ωχ κάτι πήγε στραβά ανανεώστε την σελίδα σας και προσπαθήστε ξανά'
+        );
       }
     } finally {
       setLoading(false);
@@ -116,15 +124,13 @@ const Register_handling = () => {
   };
 
   return (
-    <div> 
-    <Header />
-    <RegisterForm
-      onSubmit={handleRegister}
-      loading={loading}
-      error={error}
-      successMessage={successMessage}
-    />
-    <Footer />
+    <div>
+      <RegisterForm
+        onSubmit={handleRegister}
+        loading={loading}
+        error={error}
+        successMessage={successMessage}
+      />
     </div>
   );
 };

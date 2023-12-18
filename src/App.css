@@ -1,6 +1,8 @@
 :root {
   --blue: #4198c3;
   --white: #ffffff;
+  --box-shadow: 0 0 30px rgba($color: #555555, $alpha: 0.05);
+  --border: #e9e9e9;
 }
 
 .App {
@@ -44,6 +46,7 @@ li span {
   margin-bottom: 10px;
   color: #333; /* Text color for the label */
   font-weight: bold;
+  width: 80%;
 }
 
 .recipe-by-id-dropdown select {
@@ -294,6 +297,8 @@ nav a:hover {
   margin: 10px 0;
   color: #555;
   text-align: center; /* Center-align label text */
+  width: 80%;
+  text-align: left;
 }
 
 .register-container input {
@@ -303,6 +308,7 @@ nav a:hover {
   box-sizing: border-box;
   border: 1px solid #ddd;
   border-radius: 5px;
+  margin-top: 5px;
 }
 
 .register-container button {
@@ -332,9 +338,9 @@ nav a:hover {
 .register-container {
   max-width: 400px;
   padding: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border);
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
   margin: 100px auto; /* Updated margin for centering */
 }
 
@@ -391,9 +397,9 @@ nav a:hover {
 .login-form-container {
   max-width: 400px;
   padding: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border);
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
   margin: 100px auto; /* Updated margin for centering */
 }
 
@@ -404,15 +410,16 @@ nav a:hover {
 
 .login-form-container label {
   margin: 10px 0;
-  text-align: center;
-  padding: 4px;
+  text-align: left;
+  width: 80%;
 }
 
 .login-form-container input {
-  margin: 1 px;
+  margin-top: 5px;
   padding: 1rem;
-  border: none;
+  border: 1px solid var(--border);
   border-radius: 10px;
+  width: 100%;
 }
 
 .login-form-container button {
