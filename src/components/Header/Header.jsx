@@ -73,7 +73,7 @@ const Header = () => {
                 <a href="/recipes/new">Δημιουργία Συνταγής</a>
               </li>
               <li>
-                <a href="/recipesbyid">Συνταγές Aνά Κατηγορία</a>
+                <a href="/recipesbyid/:categoryId">Συνταγές Aνά Κατηγορία</a>
               </li>
               <li>
                 <a href="/" onClick={handleLogout}>
@@ -85,7 +85,7 @@ const Header = () => {
           {!isLoggedIn && (
             <>
               <li>
-                <a href="/recipesbyid">Συνταγές Aνά Κατηγορία</a>
+                <a href="/recipesbyid/:categoryId">Συνταγές Aνά Κατηγορία</a>
               </li>
               <li>
                 <Link to="/recipebytag/:tagId">Συνταγές Aνά ετικέτα</Link>

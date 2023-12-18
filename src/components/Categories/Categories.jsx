@@ -1,8 +1,15 @@
 // Categories.jsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Categories = ({ data }) => {
   const [hoveredCategory, setHoveredCategory] = useState(null);
+  const navigate = useNavigate();
+
+  const handleCategoryClick = (category) => {
+    // Update the URL and navigate to the "/recipesbyid/" route
+    navigate(`/recipesbyid/${category._id}`); //${category._id}
+  };
 
   const handleCategoryHover = (category) => {
     setHoveredCategory(category);
@@ -18,6 +25,7 @@ const Categories = ({ data }) => {
         <div
           key={category._id}
           className="category-item"
+          onClick={() => handleCategoryClick(category)}
           onMouseEnter={() => handleCategoryHover(category)}
           onMouseLeave={handleCategoryLeave}
         >

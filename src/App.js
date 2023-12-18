@@ -27,7 +27,7 @@ function App() {
           <Route path="/recipes/new" element={< CreateRecipePage/>} />
           <Route path="/recipes/my-recipes" element={< MyRecipesPage/>} />
           <Route path="/recipes/" element={< RecipesPage/>} />
-          <Route path="/recipesbyid/" element={< RecipeByIDPage/>} />
+          <Route path="/recipesbyid/:categoryId" element={< RecipeByIDPage/>} />
           <Route path="/recipebytag/:tagId" element={<RecipeByTagPage />} />
         </Routes>
       </AuthProvider>
