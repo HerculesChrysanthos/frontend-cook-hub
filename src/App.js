@@ -71,6 +71,46 @@ function App() {
           path: '/recipes/:catId/:subCat',
           element: <RecipeByID />,
         },
+        {
+          path: '/recipes/:recipeId',
+          element: <RecipeDetailPage />,
+        },
+        {
+          path: '/recipes/:catId/:subCat',
+          element: <RecipeByID />,
+        },
+        {
+          path: '/recipes/:catId/:subCat',
+          element: <RecipeByID />,
+        },
+        {
+          path: '/recipes/:catId/:subCat',
+          element: <RecipeByID />,
+        },
+        {
+          path: '/recipes/:catId/:subCat',
+          element: <RecipeByID />,
+        },
+        {
+          path: '/recipes/:catId/:subCat',
+          element: <RecipeByID />,
+        },
+        {
+          path: '/recipes/:catId/:subCat',
+          element: <RecipeByID />,
+        },
+        {
+          path: '/recipes/:catId/:subCat',
+          element: <RecipeByID />,
+        },
+        {
+          path: '/recipes/:catId/:subCat',
+          element: <RecipeByID />,
+        },
+        {
+          path: '/recipes/:catId/:subCat',
+          element: <RecipeByID />,
+        },
       ],
     },
   ]);

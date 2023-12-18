@@ -627,6 +627,7 @@ nav a:hover {
 .recipe-details p {
   color: #555;
   margin-bottom: 10px;
+  white-space: pre-line;
 }
 
 .recipe-details ul {

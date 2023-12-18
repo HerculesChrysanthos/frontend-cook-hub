@@ -7,7 +7,6 @@ const RecipeListPage = () => {
   const [recipes, setRecipes] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalRecipes, setTotalRecipes] = useState(null);
-  const [selectedCategoryId, setSelectedCategoryId] = useState(null); 
 
   useEffect(() => {
     // Function to fetch recipes with pagination
@@ -19,7 +18,6 @@ const RecipeListPage = () => {
         const {
           recipes: recipesData,
           totalRecipes,
-          // totalPages,
         } = response.data;
 
         console.log(recipesData);
@@ -36,12 +34,6 @@ const RecipeListPage = () => {
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
-  };
-
-  const handleCategoryChange = (categoryId) => {
-    // Set the selected category and reset the current page to 0
-    setSelectedCategoryId(categoryId);
-    setCurrentPage(0);
   };
 
   return (
