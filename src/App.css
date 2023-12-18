@@ -13,6 +13,12 @@
   }
 }
 
+
+li span {
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+}
 /* RecipeByID.css */
 
 .recipe-by-id-container {
@@ -616,8 +622,13 @@ nav a:hover {
 /* Categories start */
 /* Categories.css */
 .categories-container {
+  top: 100%; 
+  left: 0;
   display: flex;
+  padding: 10px; /* Adjust padding as needed */
+  z-index: 1;
   flex-direction: column;
+  color: white;
 }
 
 .category-item {
@@ -631,8 +642,8 @@ nav a:hover {
   top: 0;
   left: 100%;
   min-width: 150px;
-  background-color: #fff;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  background-color:  #4198c3;
+  box-shadow: 0 0 5px white;
   padding: 8px;
   z-index: 1;
 }
@@ -640,7 +651,7 @@ nav a:hover {
 .subcategory-item {
   padding: 8px;
   cursor: pointer;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid  #4198c3;
 }
 
 .subcategory-item:last-child {

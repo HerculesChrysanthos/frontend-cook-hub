@@ -61,7 +61,6 @@ const Header = () => {
       <nav>
         <ul className="header-nav">
           <li>
-                {/* Categories dropdown */}
                 <span onClick={handleCategoriesClick}>Κατηγορίες</span>
                 {isCategoriesDropdownOpen && <Categories data={categoriesData} />}
           </li>
