@@ -11,12 +11,27 @@ import Tag from "../RecipeByTag/Tag";
 const Header = () => {
   const navigate = useNavigate();
   const { isLoggedIn, logout } = useAuth();
-  const headerRef = useRef(null);
   const [isCategoriesDropdownOpen, setIsCategoriesDropdownOpen] =
     useState(false);
   const [categoriesData, setCategoriesData] = useState([]);
+  const [tags, setTags] = useState([]);
 
   useEffect(() => {
+    // Fetch tags using Axios
+      axios
+        .get("/api/tags")
+        .then((response) => {
+          const data = response.data;
+          setTags(data);
+
+          // Store tags in local storage
+          localStorage.setItem("tags", JSON.stringify(data));
+        })
+        .catch((error) => {
+          // Handle any errors during the API request
+          console.error("Error fetching tags:", error);
+        });
+
     // Fetch categories data always when the component mounts
     axios
       .get("/api/categories/?include=subcategories")
@@ -30,16 +45,12 @@ const Header = () => {
       .catch((error) => {
         console.error("Error fetching categories:", error);
       });
+
+      
   }, []); // The empty dependency array ensures that this effect runs only once when the component mounts
 
   const handleCategoriesClick = () => {
     setIsCategoriesDropdownOpen(!isCategoriesDropdownOpen);
-  };
-
-  const handleCategoryClick = (category) => {
-    console.log("Selected category:", category);
-
-    // Handle the category click if needed add user ref to close
   };
 
   const handleLogout = (event) => {

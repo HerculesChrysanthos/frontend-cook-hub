@@ -95,17 +95,17 @@ const CreateRecipe = ({ isUpdate, editedRecipe }) => {
 
   const handleCategoryChange = (event) => {
     const { value } = event.target;
-    const selectedCategory = categories.find((cat) => cat.name === value);
+    const selectedCategory = value;
     console.log("selectedCategory", selectedCategory);
     const selectedSubcategories = selectedCategory
       ? selectedCategory.subcategories
       : [];
     console.log("selectedSubcategories", selectedSubcategories);
-    const categoryId = selectedCategory ? selectedCategory._id : "";
+    // const categoryId = selectedCategory ? selectedCategory._id : "";
 
     setRecipe({
       ...recipe,
-      category: categoryId,
+      category: selectedCategory,
       subcategory: "",
     });
 
@@ -116,10 +116,10 @@ const CreateRecipe = ({ isUpdate, editedRecipe }) => {
     const { value } = event.target;
     //  Set the subcategory ID in the recipe state
     const selectedSubcategory = subcategories.find(
-      (subcat) => subcat.name === value
+      (subcat) => subcat._id === value
     );
-    const subcategoryId = selectedSubcategory ? selectedSubcategory._id : "";
-    setRecipe({ ...recipe, subcategory: subcategoryId });
+    // const subcategoryId = selectedSubcategory ? selectedSubcategory._id : "";
+    setRecipe({ ...recipe, subcategory: selectedSubcategory });
     console.log("selectedSubcategory", selectedSubcategory);
   };
 
@@ -287,7 +287,7 @@ const CreateRecipe = ({ isUpdate, editedRecipe }) => {
             {isUpdate ? ` ${editedRecipe.category.name}` : "Διάλεξε Κατηγορία"}
           </option>
           {categories.map((category) => (
-            <option key={category._id} value={category.name}>
+            <option key={category._id} value={category._id}>
               {category.name}
             </option>
           ))}
@@ -305,7 +305,7 @@ const CreateRecipe = ({ isUpdate, editedRecipe }) => {
               : "Διάλεξε Υποκατηγορία"}
           </option>
           {subcategories.map((subcategory) => (
-            <option key={subcategory._id} value={subcategory.name}>
+            <option key={subcategory._id} value={subcategory._id}>
               {subcategory.name}
             </option>
           ))}
