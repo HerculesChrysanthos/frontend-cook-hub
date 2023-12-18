@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 //import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import {
   createBrowserRouter,
@@ -6,23 +6,23 @@ import {
   Route,
   Link,
   Outlet,
-} from 'react-router-dom';
-import './App.css';
-import Mainpage from './pages/Mainpage';
-import Register_handling from './components/Register/Register_handling';
-import ForgotPassword from './components/ForgotPassword/ForgotPassword';
-import LoginPage from './pages/Login';
-import { AuthProvider } from './components/AuthContext';
-import RecipeDetailPage from './pages//Recipe';
-import CreateRecipePage from './pages/CreateRecipe';
-import MyRecipesPage from './pages/MyRecipes';
-import RecipesPage from './pages/Recipes';
-import RecipeByIDPage from './pages/RecipeByIDPage';
-import RecipeByTagPage from './pages/RecipeByTagPage';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
-import HeaderMobile from './components/Header/HeaderMobile';
-import RecipeByID from './components/RecipeByID/RecipeByID';
+} from "react-router-dom";
+import "./App.css";
+import Mainpage from "./pages/Mainpage";
+import Register_handling from "./components/Register/Register_handling";
+import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
+import LoginPage from "./pages/Login";
+import { AuthProvider } from "./components/AuthContext";
+import RecipeDetailPage from "./pages//Recipe";
+import CreateRecipePage from "./pages/CreateRecipe";
+import MyRecipesPage from "./pages/MyRecipes";
+import RecipesPage from "./pages/Recipes";
+import RecipeByIDPage from "./pages/RecipeByIDPage";
+import RecipeByTagPage from "./pages/RecipeByTagPage";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import HeaderMobile from "./components/Header/HeaderMobile";
+import RecipeByID from "./components/RecipeByID/RecipeByID";
 
 function App() {
   const ProtectedRoutes = () => {
@@ -40,76 +40,44 @@ function App() {
 
   const router = createBrowserRouter([
     {
-      path: '/',
+      path: "/",
       element: <ProtectedRoutes />,
       children: [
         {
-          path: '/',
+          path: "/",
           element: <Mainpage />,
         },
         {
-          path: '/Register',
+          path: "/Register",
           element: <Register_handling />,
         },
         {
-          path: '/Login',
+          path: "/Login",
           element: <LoginPage />,
         },
         {
-          path: '/forgot-password',
+          path: "/forgot-password",
           element: <ForgotPassword />,
         },
         {
-          path: '/recipy/:recipeId',
+          path: "/recipy/:recipeId",
           element: <RecipeDetailPage />,
         },
         {
-          path: '/recipes/:categoryId',
+          path: "/recipes/:categoryId",
           element: <RecipeByIDPage />,
         },
         {
-          path: '/recipes/:catId/:subCat',
+          path: "/recipes/:catId/:subCat",
           element: <RecipeByID />,
         },
         {
-          path: '/recipes/:recipeId',
-          element: <RecipeDetailPage />,
+          path: "/recipes/my-recipes",
+          element: <MyRecipesPage />,
         },
         {
-          path: '/recipes/:catId/:subCat',
-          element: <RecipeByID />,
-        },
-        {
-          path: '/recipes/:catId/:subCat',
-          element: <RecipeByID />,
-        },
-        {
-          path: '/recipes/:catId/:subCat',
-          element: <RecipeByID />,
-        },
-        {
-          path: '/recipes/:catId/:subCat',
-          element: <RecipeByID />,
-        },
-        {
-          path: '/recipes/:catId/:subCat',
-          element: <RecipeByID />,
-        },
-        {
-          path: '/recipes/:catId/:subCat',
-          element: <RecipeByID />,
-        },
-        {
-          path: '/recipes/:catId/:subCat',
-          element: <RecipeByID />,
-        },
-        {
-          path: '/recipes/:catId/:subCat',
-          element: <RecipeByID />,
-        },
-        {
-          path: '/recipes/:catId/:subCat',
-          element: <RecipeByID />,
+          path: "/recipes/new",
+          element: <CreateRecipePage />,
         },
       ],
     },

@@ -12,9 +12,9 @@ const Header = () => {
   const navigate = useNavigate();
   const { isLoggedIn, logout } = useAuth();
   const headerRef = useRef(null);
-  const [isCategoriesDropdownOpen, setIsCategoriesDropdownOpen] = useState(false);
+  const [isCategoriesDropdownOpen, setIsCategoriesDropdownOpen] =
+    useState(false);
   const [categoriesData, setCategoriesData] = useState([]);
-
 
   useEffect(() => {
     // Fetch categories data always when the component mounts
@@ -57,22 +57,27 @@ const Header = () => {
   return (
     <header>
       <nav>
-      <div className="logo-container">
-        <img src={logoImage} alt="Logo" onClick={() => navigate("/")} />
-      </div>
+        <div className="logo-container">
+          <img src={logoImage} alt="Logo" onClick={() => navigate("/")} />
+        </div>
         <ul className="header-nav">
           <li className="categories-li">
-                <span onClick={handleCategoriesClick}>Κατηγορίες</span>
-                {isCategoriesDropdownOpen && <Categories data={categoriesData} />}
+            <span onClick={handleCategoriesClick}>Κατηγορίες</span>
+            {isCategoriesDropdownOpen && <Categories data={categoriesData} />}
           </li>
           <li className="categories-li">
-                <span onClick={handleTagDropdownToggle}>Ετικέτες</span>
-                {isTagDropdownOpen && <Tag />}
+            <span onClick={handleTagDropdownToggle}>Ετικέτες</span>
+            {isTagDropdownOpen && <Tag />}
           </li>
           {isLoggedIn && (
             <>
               <li>
-                <a href="/recipes/my-recipes">Συνταγές μου</a>
+                <span
+                  className="header-link"
+                  onClick={() => navigate("/recipes/my-recipes")}
+                >
+                  Συνταγές μου
+                </span>
               </li>
               <li>
                 <a href="/recipes/new">Δημιουργία Συνταγής</a>
@@ -83,14 +88,24 @@ const Header = () => {
                 </a>
               </li>
             </>
-          )} 
-          { !isLoggedIn && (
+          )}
+          {!isLoggedIn && (
             <>
               <li>
-                <span className="header-link" onClick={() => navigate('/login')}>Σύνδεση</span>
+                <span
+                  className="header-link"
+                  onClick={() => navigate("/login")}
+                >
+                  Σύνδεση
+                </span>
               </li>
               <li>
-              <span className="header-link" onClick={() => navigate('/Register')}>Εγγραφή</span>
+                <span
+                  className="header-link"
+                  onClick={() => navigate("/Register")}
+                >
+                  Εγγραφή
+                </span>
               </li>
             </>
           )}

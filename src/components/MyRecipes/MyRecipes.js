@@ -7,7 +7,7 @@ const MyRecipes = () => {
   const [recipes, setRecipes] = useState([]);
   const token = localStorage.getItem("token");
 
-  console.log('token', token);
+  console.log("token", token);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalRecipes, setTotalRecipes] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -16,11 +16,14 @@ const MyRecipes = () => {
     // Function to fetch recipes with pagination
     const fetchRecipes = async () => {
       try {
-        const response = await axios.get(`/api/recipes/my-recipes?page=${Number(currentPage)}`,{
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          `/api/recipes/my-recipes?page=${Number(currentPage)}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         const { recipes: recipesData, totalRecipes } = response.data;
         setRecipes(recipesData);
         setTotalRecipes(totalRecipes);
@@ -31,9 +34,14 @@ const MyRecipes = () => {
           setRecipes([]);
           setTotalRecipes(0);
           setErrorMessage("Δεν έχετε δημοσιευμένες συνταγές ακόμη.");
-        } else if (error.response && (error.response.status === 401 || error.response.status === 403)){
+        } else if (
+          error.response &&
+          (error.response.status === 401 || error.response.status === 403)
+        ) {
           //user not connecter or token expiration
-          setErrorMessage("Πρέπει να συνδεθείτε για να δείτε τις συνταγές σας.");
+          setErrorMessage(
+            "Πρέπει να συνδεθείτε για να δείτε τις συνταγές σας."
+          );
         } else {
           console.error("Error fetching recipes:", error);
           setErrorMessage("Error fetching recipes.");
@@ -56,9 +64,13 @@ const MyRecipes = () => {
       ) : (
         <div>
           <div className="recipes-list">
-            {recipes.map((recipe) => (
-              <RecipeCard key={recipe.id} recipe={recipe} />
-            ))}
+            {recipes.length > 0 ? (
+              recipes.map((recipe) => (
+                <RecipeCard key={recipe.id} recipe={recipe} />
+              ))
+            ) : (
+              <div>Δεν έχετε δημοσιευμένες συνταγές ακόμη.</div>
+            )}
           </div>
           {/* Pagination component */}
           <Pagination

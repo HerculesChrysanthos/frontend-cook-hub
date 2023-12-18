@@ -5,8 +5,7 @@ import MyRecipes from "../components/MyRecipes/MyRecipes";
 const MyRecipesPage = () => {
   return (
     <div>
-        <Header />
-        <MyRecipes />
+      <MyRecipes />
     </div>
   );
 };

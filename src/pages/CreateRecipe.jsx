@@ -5,8 +5,7 @@ import CreateRecipe from "../components/Recipe/CreateRecipe";
 const CreateRecipePage = () => {
   return (
     <div>
-        <Header />
-        <CreateRecipe />
+      <CreateRecipe />
     </div>
   );
 };

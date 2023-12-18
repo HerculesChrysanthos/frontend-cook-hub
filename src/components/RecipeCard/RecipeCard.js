@@ -8,13 +8,21 @@ const RecipeCard = ({ recipe }) => {
   const handleRecipeClick = () => {
     // Redirect to the recipe page
     console.log("Selected recipe:", recipe.name);
-    navigate(`/recipes/${recipe._id}`);
-  }
+    navigate(`/recipy/${recipe._id}`);
+  };
 
   return (
-    <div className="recipe-card" onClick={handleRecipeClick} style={{ cursor: 'pointer' }}>
+    <div
+      className="recipe-card"
+      onClick={handleRecipeClick}
+      style={{ cursor: "pointer" }}
+    >
       <h2>{recipe.title}</h2>
-      <img src={recipe.previewImage} alt={recipe.title} className="recipe-image" />
+      <img
+        src={recipe.previewImage}
+        alt={recipe.title}
+        className="recipe-image"
+      />
       <p>{recipe.description}</p>
     </div>
   );
