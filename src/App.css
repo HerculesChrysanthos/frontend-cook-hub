@@ -180,7 +180,7 @@ nav {
 
 /* Style the magnify class */
 .magnify a::before {
-  content: "\1F50D"; /* Unicode character for a magnifying glass */
+  content: '\1F50D'; /* Unicode character for a magnifying glass */
   margin-right: 5px;
   color: #ffcc00; /* Set the color of the magnifying glass icon to a yellowish color */
 }
@@ -207,7 +207,7 @@ nav {
 }
 
 body {
-  font-family: "Arial", sans-serif;
+  font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -787,7 +787,6 @@ nav a:hover {
 
 .mobile-menu {
   background-color: var(--blue);
-  overflow-y: scroll;
 }
 
 .mobile-menu .close-menu {
@@ -821,6 +820,7 @@ nav a:hover {
   z-index: 5;
 
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 20px;
