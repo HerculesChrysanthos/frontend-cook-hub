@@ -5,68 +5,52 @@ import logoImage from "../../images/Group 2.svg";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
 import Categories from "../Categories/Categories";
+import { Link } from "react-router-dom";
+import Tag from "../RecipeByTag/Tag";
 
 const Header = () => {
   const navigate = useNavigate();
   const { isLoggedIn, logout } = useAuth();
-  const [showCategories, setShowCategories] = useState(false);
   const headerRef = useRef(null);
-  const [tags, setTags] = useState([]);
+  const [isCategoriesDropdownOpen, setIsCategoriesDropdownOpen] = useState(false);
+  const [categoriesData, setCategoriesData] = useState([]);
 
   useEffect(() => {
-    const storedCategories = localStorage.getItem("categories");
-    const storedTags = localStorage.getItem("tags");
-    // Fetch tags using Axios
-    if (storedTags === null) {
-      axios
-        .get("api/tags")
-        .then((response) => {
-          const data = response.data;
-          setTags(data);
+    // Fetch categories data always when the component mounts
+    axios
+      .get("/api/categories/?include=subcategories")
+      .then((response) => {
+        const data = response.data;
+        setCategoriesData(data);
 
-          // Store tags in local storage
-          localStorage.setItem("tags", JSON.stringify(data));
-        })
-        .catch((error) => {
-          // Handle any errors during the API request
-          console.error("Error fetching tags:", error);
-        });
-    }
-
-    if (storedCategories === null) {
-      axios
-        .get("/api/categories/?include=subcategories")
-        .then((response) => {
-          const data = response.data;
-          setTags(data);
-
-          // Store tags in local storage
-          localStorage.setItem("categories", JSON.stringify(data));
-        })
-        .catch((error) => {
-          // Handle any errors during the API request
-          console.error("Error fetching categories:", error);
-        });
-    }
-  }, []);
+        // Store categories in local storage
+        localStorage.setItem("categories", JSON.stringify(data));
+      })
+      .catch((error) => {
+        console.error("Error fetching categories:", error);
+      });
+  }, []); // The empty dependency array ensures that this effect runs only once when the component mounts
 
   const handleCategoriesClick = () => {
-    setShowCategories(!showCategories);
+    setIsCategoriesDropdownOpen(!isCategoriesDropdownOpen);
   };
 
   const handleCategoryClick = (category) => {
     console.log("Selected category:", category);
-    
+
     // Handle the category click if needed
   };
 
   const handleLogout = (event) => {
-    event.preventDefault(); // Prevent the default link behavior
-    // Call the logout function from the useAuth hook
+    event.preventDefault();
     logout();
-
-    // Redirect to the login page or any other page after logout
     navigate("/");
+  };
+
+  const [isTagDropdownOpen, setIsTagDropdownOpen] = useState(false);
+
+  const handleTagDropdownToggle = () => {
+    setIsTagDropdownOpen(!isTagDropdownOpen);
   };
 
   return (
@@ -77,23 +61,12 @@ const Header = () => {
       <nav>
         <ul className="header-nav">
           <li>
-            <a
-              href="/Categories"
-              onClick={(e) => {
-                e.preventDefault();
-                handleCategoriesClick();
-              }}
-            >
-              Κατηγορίες
-            </a>
-            {showCategories && (
-              <Categories handleCategoryClick={handleCategoryClick} />
-            )}
+                {/* Categories dropdown */}
+                <span onClick={handleCategoriesClick}>Κατηγορίες</span>
+                {isCategoriesDropdownOpen && <Categories data={categoriesData} />}
           </li>
-          {isLoggedIn && ( //is logged in false then - conditional rendering
+          {isLoggedIn && (
             <>
-              {" "}
-              {/* react fragment to have one parent*/}
               <li>
                 <a href="/recipes/my-recipes">Συνταγές μου</a>
               </li>
@@ -110,19 +83,20 @@ const Header = () => {
               </li>
             </>
           )}
-          {!isLoggedIn && ( //is logged in true then - conditional rendering
+          {!isLoggedIn && (
             <>
-              {" "}
-              {/* react fragment to have one parent*/}
               <li>
                 <a href="/recipesbyid">Συνταγές Aνά Κατηγορία</a>
+              </li>
+              <li>
+                <Link to="/recipebytag/:tagId">Συνταγές Aνά ετικέτα</Link>
               </li>
               <li>
                 <a href="/login">Σύνδεση</a>
               </li>
               <li>
                 <a href="/Register">Εγγραφή</a>
-              </li> 
+              </li>
             </>
           )}
         </ul>

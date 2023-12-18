@@ -614,51 +614,39 @@ nav a:hover {
 }
 
 /* Categories start */
+/* Categories.css */
 .categories-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.category-item {
   position: relative;
+  padding: 8px;
+  cursor: pointer;
 }
 
-
-.categories-dropdown .category-name {
-  display: block;
-  margin-bottom: 5px;  /* Add a margin for spacing between category names */
-}
-
-.categories-dropdown .subcategory-name {
-  display: block;
-  margin-left: 15px;  /* Add a margin for indentation of subcategories */
-}
-
-
-.categories-dropdown {
+.subcategories-menu {
   position: absolute;
-  top: 100%;
-  left: 0;
+  top: 0;
+  left: 100%;
+  min-width: 150px;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  padding: 8px;
   z-index: 1;
-  background-color: #4198c3;
-  border: 1px solid #4198c3;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  min-width: 200px;
 }
 
-.categories-dropdown ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.subcategory-item {
+  padding: 8px;
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
 }
 
-.categories-dropdown li {
-  margin-bottom: 2px;
-  color: white; /* Set text color to white */
-  font-size: 20px;
+.subcategory-item:last-child {
+  border-bottom: none;
 }
 
-.categories-dropdown li:hover {
-  background-color: #4198c3;
-}
 /* Categories.css end*/
 
 /*recipes list START*/

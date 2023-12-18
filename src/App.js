@@ -11,6 +11,7 @@ import CreateRecipePage from './pages/CreateRecipe';
 import MyRecipesPage from './pages/MyRecipes';
 import RecipesPage from './pages/Recipes'
 import RecipeByIDPage from './pages/RecipeByIDPage'
+import RecipeByTagPage from './pages/RecipeByTagPage';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route path="/recipes/my-recipes" element={< MyRecipesPage/>} />
           <Route path="/recipes/" element={< RecipesPage/>} />
           <Route path="/recipesbyid/" element={< RecipeByIDPage/>} />
+          <Route path="/recipebytag/:tagId" element={<RecipeByTagPage />} />
         </Routes>
       </AuthProvider>
     </Router>
