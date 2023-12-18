@@ -6,11 +6,6 @@ const Categories = ({ data }) => {
   const [hoveredCategory, setHoveredCategory] = useState(null);
   const navigate = useNavigate();
 
-  const handleCategoryClick = (category) => {
-    // Update the URL and navigate to the "/recipesbyid/" route
-    navigate(`/recipesbyid/${category._id}`); //${category._id}
-  };
-
   const handleCategoryHover = (category) => {
     setHoveredCategory(category);
   };
@@ -25,12 +20,12 @@ const Categories = ({ data }) => {
         <div
           key={category._id}
           className="category-item"
-          onClick={() => handleCategoryClick(category)}
+          onClick={() =>  navigate(`/recipesbyid/${category._id}`)}
           onMouseEnter={() => handleCategoryHover(category)}
           onMouseLeave={handleCategoryLeave}
         >
           {category.name}
-          {hoveredCategory === category && (
+          {hoveredCategory === category && category.subcategories.length>0 &&  (
             <div className="subcategories-menu">
               {category.subcategories.map((subcategory) => (
                 <div key={subcategory._id} className="subcategory-item">

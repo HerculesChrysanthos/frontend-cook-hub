@@ -10,6 +10,7 @@ const RecipeByID = () => {
   const [totalRecipes, setTotalRecipes] = useState(null);
   const [categories, setCategories] = useState([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
+  const [categoryName, setCategoryName] = useState(null);
 
   // Use the useParams hook to get the category ID from the URL
   const { categoryId } = useParams();
@@ -23,10 +24,11 @@ const RecipeByID = () => {
           }`
         );
 
-        const { recipes: recipesData, totalRecipes } = response.data;
-
+        const { recipes: recipesData, totalRecipes,categoryName } = response.data;
+        console.log( response.data);
         setRecipes(recipesData);
         setTotalRecipes(totalRecipes);
+        setCategoryName(categoryName );
       } catch (error) {
         console.error('Error fetching recipes:', error);
       }
@@ -46,7 +48,7 @@ const RecipeByID = () => {
 
   return (
     <div className="recipe-by-id-container">
-      <h1>Συνταγές</h1>
+      <h1>Συνταγές {categoryName}</h1>
       <div className="recipes-list">
         {recipes.map((recipe) => (
           <RecipeCard key={recipe.id} recipe={recipe} />

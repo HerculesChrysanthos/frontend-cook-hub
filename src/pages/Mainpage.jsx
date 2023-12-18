@@ -8,7 +8,6 @@ import RecipeListPage from '../components/Recipe/RecipeList';
 const MainPage = () => {
   return (
     <div>
-      <Header />
       {/* <SubHeader /> */}
       <ImageSlider />
       <RecipeListPage />
@@ -20,7 +19,6 @@ const MainPage = () => {
               card_image={card_image}
             />
         </div> */}
-        <Footer />
     </div>     
   );
 };

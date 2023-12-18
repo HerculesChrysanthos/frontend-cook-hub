@@ -1,5 +1,19 @@
+:root {
+  --blue: #4198c3;
+  --white: #ffffff;
+}
+
 .App {
   text-align: center;
+}
+
+#root {
+  overflow-x: hidden;
+}
+
+main {
+  padding: 0;
+  margin: 0;
 }
 
 .App-logo {
@@ -12,7 +26,6 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
 
 li span {
   color: white;
@@ -112,7 +125,6 @@ li span {
   background-color: #4198c3; /* Darker green on hover */
 }
 
-
 /* Responsive adjustments for RecipeByID component */
 @media screen and (max-width: 600px) {
   .recipe-by-id-dropdown {
@@ -121,20 +133,18 @@ li span {
   }
 }
 
-
-
 /* Header.css */
 header {
   background-color: #4198c3;
+}
+
+nav {
+  margin-inline: auto;
+  max-width: 80%;
   padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-nav {
-  max-width: 960px;
-  margin: 0 auto;
 }
 
 .header-nav {
@@ -154,8 +164,17 @@ nav {
   font-size: 16px;
   transition: color 0.3s ease-in-out;
 }
-
+.header-link {
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  transition: color 0.3s ease-in-out;
+  cursor: pointer;
+}
 .header-nav a:hover {
+  color: #ffcc00; /* Change the color on hover */
+}
+.header-link:hover {
   color: #ffcc00; /* Change the color on hover */
 }
 
@@ -167,7 +186,7 @@ nav {
 }
 
 .logo-container {
-  text-align: left;
+  cursor: pointer;
 }
 
 .logo-container img {
@@ -191,10 +210,6 @@ body {
   font-family: "Arial", sans-serif;
   margin: 0;
   padding: 0;
-}
-
-main {
-  padding: 20px;
 }
 
 nav ul {
@@ -488,8 +503,6 @@ nav a:hover {
 }
 /* Footer.css ends */
 
-
-
 /* Responsive adjustments */
 @media screen and (max-width: 600px) {
   /* Adjustments for small screens */
@@ -527,7 +540,10 @@ nav a:hover {
 
 .recipe-form {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns */
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(300px, 1fr)
+  ); /* Responsive columns */
   grid-gap: 20px;
   max-width: 800px; /* Adjust the max-width for better responsiveness */
 }
@@ -553,7 +569,7 @@ nav a:hover {
   grid-column: span 2; /* Make the button span two columns */
   padding: 10px;
   color: white;
-  background-color:  #899296;
+  background-color: #899296;
   border-radius: 5px;
   cursor: pointer;
   border: none;
@@ -622,13 +638,23 @@ nav a:hover {
 /* Categories start */
 /* Categories.css */
 .categories-container {
-  top: 100%; 
-  left: 0;
+  top: 20px;
   display: flex;
   padding: 10px; /* Adjust padding as needed */
   z-index: 1;
   flex-direction: column;
   color: white;
+  position: absolute;
+  background-color: #4198c3;
+}
+
+.categories-li {
+  position: relative;
+  cursor: pointer;
+}
+
+.categories-li span:hover {
+  color: #ffcc00;
 }
 
 .category-item {
@@ -640,18 +666,20 @@ nav a:hover {
 .subcategories-menu {
   position: absolute;
   top: 0;
-  left: 100%;
+  left: calc(100% + 10px);
   min-width: 150px;
-  background-color:  #4198c3;
+  background-color: #4198c3;
   box-shadow: 0 0 5px white;
+  color: white;
   padding: 8px;
   z-index: 1;
+  cursor: pointer;
 }
 
 .subcategory-item {
   padding: 8px;
   cursor: pointer;
-  border-bottom: 1px solid  #4198c3;
+  border-bottom: 1px solid #4198c3;
 }
 
 .subcategory-item:last-child {
@@ -667,7 +695,7 @@ nav a:hover {
   margin-top: 55px;
   margin-bottom: 55px;
 }
-.recipes-container h1{
+.recipes-container h1 {
   display: flex;
   justify-content: center;
   margin-bottom: 40px;
@@ -695,21 +723,7 @@ nav a:hover {
 
 /* Common styles for all screen sizes */
 
-.burger-menu {
-  display: none;
-  cursor: pointer;
-  padding: 10px;
-  background-color: #4198c3;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  margin-right: 10px;
-}
-
-
 @media screen and (max-width: 768px) {
-  /* Adjustments for medium screens */
-
   .header-nav {
     justify-content: space-between; /* Change back to space-between for medium screens */
     margin-right: 0; /* Remove margin for medium screens */
@@ -718,15 +732,14 @@ nav a:hover {
   .header-nav li {
     margin-left: 10px; /* Adjust margin for medium screens */
   }
-
+}
 
 /* Adjustments for small screens */
 @media screen and (max-width: 600px) {
   .create-recipe,
   .recipe-form,
   .categories-container,
-  .recipes-container
-  .footer-content {
+  .recipes-container .footer-content {
     max-width: 100%; /* Set the maximum width to 100% for small screens */
     padding: 10px; /* Add some padding for better spacing on small screens */
   }
@@ -751,23 +764,17 @@ nav a:hover {
     max-width: 100%; /* Set the maximum width to 100% for small screens */
   }
 
-  .burger-menu {
-    display: block;
-  }
-  
-
   /* Additional responsive adjustments as needed */
 }
 
-
-
-/* Adjustments for medium screens */
-@media screen and (max-width: 768px) {
-  /* Add your specific adjustments for medium screens here */
-  .burger-menu {
-    display: block;
-  }
-  
+.burger-menu {
+  cursor: pointer;
+  padding: 10px;
+  background-color: #4198c3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
 }
 
 /* Adjustments for large screens */
@@ -776,7 +783,64 @@ nav a:hover {
   .burger-menu {
     display: block;
   }
-  
 }
 
+.mobile-menu {
+  background-color: var(--blue);
+  overflow-y: scroll;
+}
+
+.mobile-menu .close-menu {
+  position: fixed;
+  top: 52px;
+  right: 50px;
+  z-index: 20;
+}
+
+.mobile-menu .categories-container {
+  position: unset;
+}
+
+.show-sub-category {
+  width: 30%;
+  margin-left: 30px;
+}
+
+.mobile-menu .subcategories-menu {
+  position: unset;
+}
+
+.mobile-menu .header-nav {
+  position: fixed;
+  left: -100%;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--blue);
+  color: #fff;
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  transition: all 0.5s ease-in;
+}
+
+.mobile-menu .header-nav.active {
+  left: 0;
+  z-index: 5;
+}
+
+@media screen and (max-width: 1024px) {
+  header {
+    display: none !important;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  /* Mobile Menu */
+  .mobile-menu {
+    display: none !important;
+  }
 }
