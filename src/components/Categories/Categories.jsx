@@ -15,25 +15,33 @@ const Categories = ({ data }) => {
   };
 
   return (
-    <div className="categories-container">
+    <div className='categories-container'>
       {data.map((category) => (
         <div
           key={category._id}
-          className="category-item"
-          onClick={() =>  navigate(`/recipesbyid/${category._id}`)}
+          className='category-item'
           onMouseEnter={() => handleCategoryHover(category)}
           onMouseLeave={handleCategoryLeave}
         >
-          {category.name}
-          {hoveredCategory === category && category.subcategories.length>0 &&  (
-            <div className="subcategories-menu">
-              {category.subcategories.map((subcategory) => (
-                <div key={subcategory._id} className="subcategory-item">
-                  {subcategory.name}
-                </div>
-              ))}
-            </div>
-          )}
+          <span onClick={() => navigate(`/recipes/${category._id}`)}>
+            {category.name}
+          </span>
+          {hoveredCategory === category &&
+            category.subcategories.length > 0 && (
+              <div className='subcategories-menu'>
+                {category.subcategories.map((subcategory) => (
+                  <div
+                    key={subcategory._id}
+                    className='subcategory-item'
+                    onClick={() =>
+                      navigate(`/recipes/${category._id}/${subcategory._id}`)
+                    }
+                  >
+                    {subcategory.name}
+                  </div>
+                ))}
+              </div>
+            )}
         </div>
       ))}
     </div>

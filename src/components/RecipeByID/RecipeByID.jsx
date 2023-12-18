@@ -24,11 +24,15 @@ const RecipeByID = () => {
           }`
         );
 
-        const { recipes: recipesData, totalRecipes,categoryName } = response.data;
-        console.log( response.data);
+        const {
+          recipes: recipesData,
+          totalRecipes,
+          categoryName,
+        } = response.data;
+        console.log(response.data);
         setRecipes(recipesData);
         setTotalRecipes(totalRecipes);
-        setCategoryName(categoryName );
+        setCategoryName(categoryName);
       } catch (error) {
         console.error('Error fetching recipes:', error);
       }
@@ -47,9 +51,9 @@ const RecipeByID = () => {
   };
 
   return (
-    <div className="recipe-by-id-container">
+    <div className='recipe-by-id-container'>
       <h1>Συνταγές {categoryName}</h1>
-      <div className="recipes-list">
+      <div className='recipes-list'>
         {recipes.map((recipe) => (
           <RecipeCard key={recipe.id} recipe={recipe} />
         ))}
