@@ -1,11 +1,10 @@
 // Header.js
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import logoImage from "../../images/Group 2.svg";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
 import Categories from "../Categories/Categories";
-import { Link } from "react-router-dom";
 import Tag from "../RecipeByTag/Tag";
 
 const Header = () => {
@@ -16,21 +15,31 @@ const Header = () => {
   const [categoriesData, setCategoriesData] = useState([]);
   const [tags, setTags] = useState([]);
 
+  // Function to handle clicks outside the "Κατηγορίες" dropdown
+  const closeDropdownOnOutsideClick = (event) => {
+    if (
+      isCategoriesDropdownOpen &&
+      !event.target.closest(".categories-li") // Check if the clicked element is not inside the "Κατηγορίες" dropdown
+    ) {
+      setIsCategoriesDropdownOpen(false);
+    }
+  };
+
   useEffect(() => {
     // Fetch tags using Axios
-      axios
-        .get("/api/tags")
-        .then((response) => {
-          const data = response.data;
-          setTags(data);
+    axios
+      .get("/api/tags")
+      .then((response) => {
+        const data = response.data;
+        setTags(data);
 
-          // Store tags in local storage
-          localStorage.setItem("tags", JSON.stringify(data));
-        })
-        .catch((error) => {
-          // Handle any errors during the API request
-          console.error("Error fetching tags:", error);
-        });
+        // Store tags in local storage
+        localStorage.setItem("tags", JSON.stringify(data));
+      })
+      .catch((error) => {
+        // Handle any errors during the API request
+        console.error("Error fetching tags:", error);
+      });
 
     // Fetch categories data always when the component mounts
     axios
@@ -46,8 +55,13 @@ const Header = () => {
         console.error("Error fetching categories:", error);
       });
 
-      
-  }, []); // The empty dependency array ensures that this effect runs only once when the component mounts
+    document.body.addEventListener("click", closeDropdownOnOutsideClick);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      document.body.removeEventListener("click", closeDropdownOnOutsideClick);
+    };
+  }, [isCategoriesDropdownOpen]); // Include isCategoriesDropdownOpen in the dependency array
 
   const handleCategoriesClick = () => {
     setIsCategoriesDropdownOpen(!isCategoriesDropdownOpen);
@@ -65,6 +79,14 @@ const Header = () => {
     setIsTagDropdownOpen(!isTagDropdownOpen);
   };
 
+  const closeDropdownOnMouseLeave = () => {
+    setIsCategoriesDropdownOpen(false);
+  };
+
+  const closeDropdowTagnOnMouseLeave = () => {
+    setIsTagDropdownOpen(false);
+  };
+
   return (
     <header>
       <nav>
@@ -72,11 +94,17 @@ const Header = () => {
           <img src={logoImage} alt="Logo" onClick={() => navigate("/")} />
         </div>
         <ul className="header-nav">
-          <li className="categories-li">
+          <li
+            className="categories-li"
+            onMouseLeave={closeDropdownOnMouseLeave}
+          >
             <span onClick={handleCategoriesClick}>Κατηγορίες</span>
             {isCategoriesDropdownOpen && <Categories data={categoriesData} />}
           </li>
-          <li className="categories-li">
+          <li
+            className="categories-li"
+            onMouseLeave={closeDropdowTagnOnMouseLeave}
+          >
             <span onClick={handleTagDropdownToggle}>Ετικέτες</span>
             {isTagDropdownOpen && <Tag />}
           </li>
