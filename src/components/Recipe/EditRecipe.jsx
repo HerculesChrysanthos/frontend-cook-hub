@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-const EditRecipe = ({editedRecipe}) => {
+const EditRecipe = ({ editedRecipe }) => {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const [recipe, setRecipe] = useState({
@@ -22,9 +22,8 @@ const EditRecipe = ({editedRecipe}) => {
     tags: [],
   });
 
- 
   useEffect(() => {
-    if (editedRecipe.data) {
+    if (editedRecipe) {
       // Assuming that editedRecipe.data has the same structure as your recipe state
       setRecipe({
         user: editedRecipe.user._id || "",
@@ -37,15 +36,15 @@ const EditRecipe = ({editedRecipe}) => {
         cookingTime: editedRecipe.cookingTime || 0,
         servings: editedRecipe.servings || 0,
         category: editedRecipe.category._id || "",
-        subcategory: editedRecipe.subcategory._id  || "",
-        tags: editedRecipe.tags.map(tag => tag._id),
+        subcategory: editedRecipe.subcategory._id || "",
+        tags: editedRecipe.tags || [""],
       });
     }
   }, [editedRecipe]);
 
   console.log("editedRecipe in recipe update", editedRecipe);
   console.log("id in recipe update", editedRecipe._id);
-//   console.log("id in recipe update", editRecipe._id);
+  //   console.log("id in recipe update", editRecipe._id);
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
   const [tags, setTags] = useState([]);
@@ -132,7 +131,7 @@ const EditRecipe = ({editedRecipe}) => {
   const handleDeleteImage = () => {
     delete recipe.previewImage;
     delete recipe.mainImage;
-    console.log(recipe)
+    console.log(recipe);
   };
 
   const handleImageChange = (event) => {
@@ -169,23 +168,23 @@ const EditRecipe = ({editedRecipe}) => {
         // });
 
         Object.entries(recipe).forEach(([key, value]) => {
-            if (key === 'category' || key === 'subcategory') {
-              formData.append(key, value._id); // Assuming you want to append the _id property
-            } else if (key === 'imageUrl') {
-              formData.append('image', value);
-            } else if (key === 'tags') {
-              recipe.tags.forEach((tagId, index) => {
-                formData.append('tags[]', tagId);
-              });
-            } else if (key === 'ingredients') {
-              recipe.ingredients.forEach((ingredient, index) => {
-                formData.append('ingredients[]', ingredient);
-              });
-            } else {
-              formData.append(key, value);
-            }
-          });
-          
+          if (key === "category" || key === "subcategory") {
+            formData.append(key, value._id); // Assuming you want to append the _id property
+          } else if (key === "imageUrl") {
+            formData.append("image", value);
+          } else if (key === "tags") {
+            recipe.tags.forEach((tagId, index) => {
+              formData.append("tags[]", tagId);
+            });
+          } else if (key === "ingredients") {
+            recipe.ingredients.forEach((ingredient, index) => {
+              formData.append("ingredients[]", ingredient);
+            });
+          } else {
+            formData.append(key, value);
+          }
+        });
+
         console.log("formData", formData);
 
         // If it's an update, make a PUT request
@@ -243,7 +242,7 @@ const EditRecipe = ({editedRecipe}) => {
           value={recipe.instructions}
           onChange={handleInputChange}
         ></textarea>
-         <label> Εικόνα </label>
+        <label> Εικόνα </label>
         <div>
           <img
             src={recipe.previewImage}
@@ -251,7 +250,7 @@ const EditRecipe = ({editedRecipe}) => {
             alt="Preview"
           />
           <button type="button" onClick={handleDeleteImage}>
-          <FontAwesomeIcon icon={faTrash} />
+            <FontAwesomeIcon icon={faTrash} />
           </button>
         </div>
         <label htmlFor="image">Προσθήκη Εικόνας </label>
@@ -322,10 +321,11 @@ const EditRecipe = ({editedRecipe}) => {
           name="tags"
           isMulti
           options={tagsOptions}
-          value={editedRecipe.tags.map((tag) => ({
-            value: tag.name,
-            label: tag.name,
-          }))}
+          // value={editedRecipe.tags.map((tag) => ({
+          //   value: tag.name,
+          //   label: tag.name,
+          // }))}
+          value={tagsOptions.filter((tag) => recipe.tags.includes(tag.value))}
           onChange={handleTagsChange}
         />
         <button type="submit">Υποβολή</button>

@@ -26,12 +26,12 @@ export const AuthProvider = ({ children }) => {
     setLoggedIn(false);
     setUserObject(initialUserState);
     localStorage.clear()
-          // Log local storage
-          const localStorageKeys = Object.keys(localStorage);
-          localStorageKeys.forEach((key) => {
-            const value = localStorage.getItem(key);
-            console.log(`${key}: ${value}`);
-          });
+          // // Log local storage
+          // const localStorageKeys = Object.keys(localStorage);
+          // localStorageKeys.forEach((key) => {
+          //   const value = localStorage.getItem(key);
+          //   console.log(`${key}: ${value}`);
+          // });
   };
 
   return (
