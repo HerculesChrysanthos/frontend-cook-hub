@@ -91,7 +91,12 @@ const Header = () => {
                 </span>
               </li>
               <li>
-                <a href="/recipes/new">Δημιουργία Συνταγής</a>
+                <span
+                  className="header-link"
+                  onClick={() => navigate("/recipes/new")}
+                >
+                  Δημιουργία Συνταγής
+                </span>
               </li>
               <li>
                 <a href="/" onClick={handleLogout}>

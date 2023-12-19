@@ -2,16 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
-import CreateRecipe from "./CreateRecipe";
-// import UpdateRecipe from "./UpdateRecipe";
+import EditRecipe from "./EditRecipe";
 
 const RecipeDetails = () => {
   const { recipeId } = useParams();
 
   console.log(recipeId);
-
   const [isEditing, setIsEditing] = useState(false);
-  // const [editedRecipeData, setEditedRecipeData] = useState(null);
 
   // retrieve userObject stored in login
   const { userObject } = useAuth();
@@ -28,8 +25,6 @@ const RecipeDetails = () => {
       try {
         const response = await axios.get(`/api/recipes/${recipeId}`);
         const data = response.data;
-
-        console.log('data1',data);
 
         setRecipeData(data);
       } catch (error) {
@@ -66,26 +61,20 @@ const RecipeDetails = () => {
           navigate("/recipes");
         } catch (error) {
           console.error("Error deleting recipe:", error);
-          // 
+          //
         }
       }
     }
   };
 
-
-  const handleEdit = (data) => {
-    // Set the state to enable edit mode
+  const handleUpdade = () => {
     setIsEditing(true);
-    console.log('data', data)
   };
 
   return (
     <div className="recipe-container">
       {isEditing ? (
-        <CreateRecipe
-          isUpdate={isEditing}
-          editedRecipe={recipeData}
-        />
+        <EditRecipe isUpdate={isEditing} editedRecipe={recipeData} />
       ) : (
         <>
           {recipeData ? (
@@ -100,7 +89,7 @@ const RecipeDetails = () => {
               <div>
                 {userObject.id === recipeData.user._id && (
                   <>
-                    <button onClick={handleEdit}>Επεξεργασία</button>
+                    <button onClick={handleUpdade}>Επεξεργασία</button>
                     <button onClick={handleDelete}>Διαγραφή</button>
                   </>
                 )}
@@ -124,58 +113,5 @@ const RecipeDetails = () => {
       )}
     </div>
   );
-  };
-  export default RecipeDetails;
-//   return (
-//     <div className="recipe-container">
-//       {/* {!isLoggedIn */}
-//       {isEditing ? (
-//         <CreateRecipe
-//           isUpdate={isEditing}
-//           editedRecipe={editedRecipeData}
-//           // onCancel={handleCancelEdit}
-//           // onSave={handleSaveEdit}
-//         />
-//       ) : (
-//         <></>
-//       {recipeData ? (
-//         <div className="recipe-details">
-//           <h2>{recipeData.title}</h2>
-//           <p>{recipeData.description}</p>
-//           <img
-//             src={recipeData.mainImage}
-//             alt={recipeData.title}
-//             className="recipe-image"
-//           />
-//           <div>
-//             {/* <button onClick={handleLike}>Like</button>
-//             <span>{likes} Likes</span> */}
-//             {userObject.id === recipeData.user._id && (
-//               <>
-//                 <button onClick={handleEdit}>Επεξεργασία</button>
-//                 <button onClick={handleDelete}>Διαγραφή</button>
-//               </>
-//             )}
-//           </div>
-//           <p>Χρόνος προετοιμασίας: {recipeData.preparationTime} minutes</p>
-//           <p>Χρόνος μαγειρέματος: {recipeData.cookingTime} minutes</p>
-//           <p>Μερίδες: {recipeData.servings}</p>
-//           <h3>Συστατικά:</h3>
-//           <ul>
-//             {recipeData.ingredients.map((ingredient, index) => (
-//               <li key={index}>{ingredient}</li>
-//             ))}
-//           </ul>
-//           <h3>Εκτέλεση:</h3>
-//           <p>{recipeData.instructions}</p>
-//         </div>
-//       ) : (
-//         <p>{errorMessage}</p>
-//         )}
-//         </>
-//       )}
-//     </div>
-//   );
-// };
-
-
+};
+export default RecipeDetails;
