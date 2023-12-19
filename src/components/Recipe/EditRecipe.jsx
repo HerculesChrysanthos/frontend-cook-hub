@@ -9,40 +9,46 @@ const EditRecipe = ({ editedRecipe }) => {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const [recipe, setRecipe] = useState({
-    title: "",
-    description: "",
-    ingredients: [""],
-    instructions: "",
-    imageUrl: "",
-    preparationTime: 0,
-    cookingTime: 0,
-    servings: 0,
-    category: "",
-    subcategory: "",
-    tags: [],
+    user: editedRecipe.user._id || "",
+    title: editedRecipe.title || "",
+    description: editedRecipe.description || "",
+    ingredients: editedRecipe.ingredients || [""],
+    instructions: editedRecipe.instructions || "",
+    imageUrl: editedRecipe.imageUrl || "",
+    preparationTime: editedRecipe.preparationTime || 0,
+    cookingTime: editedRecipe.cookingTime || 0,
+    servings: editedRecipe.servings || 0,
+    category: editedRecipe.category._id || "",
+    subcategory: editedRecipe.subcategory._id || "",
+    tags: editedRecipe.tags || [""],
   });
+  // useEffect(() => {
+  //   if (editedRecipe) {
+  //     // Assuming that editedRecipe.data has the same structure as your recipe state
+  //     setRecipe({
+  //       user: editedRecipe.user._id || "",
+  //       title: editedRecipe.title || "",
+  //       description: editedRecipe.description || "",
+  //       ingredients: editedRecipe.ingredients || [""],
+  //       instructions: editedRecipe.instructions || "",
+  //       imageUrl: editedRecipe.imageUrl || "",
+  //       preparationTime: editedRecipe.preparationTime || 0,
+  //       cookingTime: editedRecipe.cookingTime || 0,
+  //       servings: editedRecipe.servings || 0,
+  //       category: editedRecipe.category._id || "",
+  //       subcategory: editedRecipe.subcategory._id || "",
+  //       tags: editedRecipe.tags || [""],
+  //     });
+  //   }
+  // }, [editedRecipe]);
 
-  useEffect(() => {
-    if (editedRecipe) {
-      // Assuming that editedRecipe.data has the same structure as your recipe state
-      setRecipe({
-        user: editedRecipe.user._id || "",
-        title: editedRecipe.title || "",
-        description: editedRecipe.description || "",
-        ingredients: editedRecipe.ingredients || [""],
-        instructions: editedRecipe.instructions || "",
-        imageUrl: editedRecipe.imageUrl || "",
-        preparationTime: editedRecipe.preparationTime || 0,
-        cookingTime: editedRecipe.cookingTime || 0,
-        servings: editedRecipe.servings || 0,
-        category: editedRecipe.category._id || "",
-        subcategory: editedRecipe.subcategory._id || "",
-        tags: editedRecipe.tags || [""],
-      });
-    }
-  }, [editedRecipe]);
-
-  console.log("editedRecipe in recipe update", editedRecipe);
+  
+  console.log("cayegory", recipe.category);
+  console.log("editedRecipe tags", editedRecipe.tags);
+  console.log("tags previes", editedRecipe.tags.map((tag) => ({
+    value: tag.name,
+    label: tag.name,
+  })));
   console.log("id in recipe update", editedRecipe._id);
   //   console.log("id in recipe update", editRecipe._id);
   const [categories, setCategories] = useState([]);
@@ -291,10 +297,10 @@ const EditRecipe = ({ editedRecipe }) => {
         <select
           id="category"
           name="category"
-          // value={recipe.category}
+          defaultValue={recipe.category}
           onChange={handleCategoryChange}
         >
-          <option value="">{editedRecipe.category.name}</option>
+          <option value="">{recipe.category._id}</option>
           {categories.map((category) => (
             <option key={category._id} value={category._id}>
               {category.name}
@@ -305,10 +311,9 @@ const EditRecipe = ({ editedRecipe }) => {
         <select
           id="subcategory"
           name="subcategory"
-          // value={recipe.subcategory}
+          defaultValue={recipe.subcategory._id}
           onChange={handleSubcategoryChange}
         >
-          <option value="">{editedRecipe.subcategory.name}</option>
           {subcategories.map((subcategory) => (
             <option key={subcategory._id} value={subcategory._id}>
               {subcategory.name}
@@ -321,11 +326,11 @@ const EditRecipe = ({ editedRecipe }) => {
           name="tags"
           isMulti
           options={tagsOptions}
-          // value={editedRecipe.tags.map((tag) => ({
-          //   value: tag.name,
-          //   label: tag.name,
-          // }))}
-          value={tagsOptions.filter((tag) => recipe.tags.includes(tag.value))}
+          defaultValue={[recipe?.tags?.map((tag) => ({
+            value: tag._id,
+            label: tag.name,
+          }))]}
+          // value={recipe.tags.filter((tag) => recipe.tags.includes(tag.value))}
           onChange={handleTagsChange}
         />
         <button type="submit">Υποβολή</button>

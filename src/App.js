@@ -24,7 +24,7 @@ import Footer from "./components/Footer/Footer";
 import HeaderMobile from "./components/Header/HeaderMobile";
 import RecipeByID from "./components/RecipeByID/RecipeByID";
 import RecipeBySubId from "./pages/RecipeBySubId";
-// import EditRecipePage from "./pages/EditRecipe";
+import EditRecipePage from "./pages/EditRecipe";
 
 function App() {
   const ProtectedRoutes = () => {
@@ -89,10 +89,10 @@ function App() {
           path: "/recipestagId/:tagId",
           element: <RecipeByTagPage />,
         },
-        // {
-        //   path: "/recipes/:recipeId/edit",
-        //   element: <EditRecipePage />,
-        // },
+        {
+          path: "/recipes/edit/:recipeId",
+          element: <EditRecipePage />,
+        },
       ],
     },
   ]);
