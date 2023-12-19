@@ -1,5 +1,3 @@
-// RecipeByTag.jsx
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Pagination from "../Pagination/Pagination";
@@ -10,6 +8,7 @@ const RecipeByTag = () => {
   const [recipes, setRecipes] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalRecipes, setTotalRecipes] = useState(null);
+  const [tagNames, setTagNames] = useState([]); // New state for storing tag names
   const { tagId } = useParams();
 
   useEffect(() => {
@@ -30,9 +29,16 @@ const RecipeByTag = () => {
 
         const { recipes: recipesData, totalRecipes } = response.data;
 
+        // Extract tag names from the first recipe (assuming all recipes have the same tags)
+        const tagNamesFromRecipe =
+          recipesData.length > 0
+            ? recipesData[0].tags.map((tag) => tag.name)
+            : [];
+
         console.log(recipesData);
         setRecipes(recipesData);
         setTotalRecipes(totalRecipes);
+        setTagNames(tagNamesFromRecipe);
       } catch (error) {
         console.error("Error fetching recipes:", error);
       }
@@ -47,7 +53,8 @@ const RecipeByTag = () => {
 
   return (
     <div className="recipes-container">
-      <h1>Συνταγές ανά Ετικέτα</h1>
+      {/* Display tag names in the heading */}
+      <h1>Συνταγές {tagNames.join(", ")}</h1>
 
       <div className="recipes-list">
         {recipes.map((recipe) => (
