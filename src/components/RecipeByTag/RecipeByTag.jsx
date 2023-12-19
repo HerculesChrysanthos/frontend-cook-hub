@@ -15,7 +15,7 @@ const RecipeByTag = () => {
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        let apiUrl = `api/recipes`;
+        let apiUrl = `/api/recipes`;
 
         // If a tag is selected, add the tagId to the API endpoint
         if (tagId) {
@@ -47,7 +47,7 @@ const RecipeByTag = () => {
 
   return (
     <div className="recipes-container">
-      <h1>Συνταγές</h1>
+      <h1>Συνταγές ανά Ετικέτα</h1>
 
       <div className="recipes-list">
         {recipes.map((recipe) => (
