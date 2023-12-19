@@ -15,10 +15,7 @@ const RecipeListPage = () => {
         const response = await axios.get(
           `/api/recipes?page=${Number(currentPage)}`
         );
-        const {
-          recipes: recipesData,
-          totalRecipes,
-        } = response.data;
+        const { recipes: recipesData, totalRecipes } = response.data;
 
         console.log(recipesData);
         setRecipes(recipesData);
@@ -31,6 +28,8 @@ const RecipeListPage = () => {
 
     fetchRecipes();
   }, [currentPage]);
+
+  console.log(recipes);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
@@ -57,6 +56,3 @@ const RecipeListPage = () => {
 };
 
 export default RecipeListPage;
-
-
-

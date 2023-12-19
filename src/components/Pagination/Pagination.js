@@ -1,4 +1,6 @@
 import React from "react";
+import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowBack } from "react-icons/io";
 
 const Pagination = ({ currentPage, totalRecipes, onPageChange }) => {
   const pageSize = 9;
@@ -7,25 +9,25 @@ const Pagination = ({ currentPage, totalRecipes, onPageChange }) => {
     { length: totalPages },
     (_, index) => index + 1
   );
-  console.log('totalPages',totalPages )
-  console.log('currentPage',currentPage )
+  console.log("totalPages", totalPages);
+  console.log("currentPage", currentPage);
 
   return (
-    <div>
-      <span>
+    <div className="pagination">
+      {/* <span>
         Page {currentPage + 1} of {totalPages}
-      </span>
+      </span> */}
       <button
         disabled={currentPage === 0}
         onClick={() => onPageChange(currentPage - 1)}
       >
-        Previous
+        <IoIosArrowBack />
       </button>
       {pageNumbers.map((page) => (
         <button
           key={page}
           onClick={() => onPageChange(page - 1)}
-          style={{ fontWeight: currentPage === page ? "bold" : "normal" }}
+          className={currentPage + 1 === page && "pagination-selected"}
         >
           {page}
         </button>
@@ -34,7 +36,7 @@ const Pagination = ({ currentPage, totalRecipes, onPageChange }) => {
         disabled={currentPage === totalPages - 1}
         onClick={() => onPageChange(currentPage + 1)}
       >
-        Next
+        <IoIosArrowForward />
       </button>
     </div>
   );

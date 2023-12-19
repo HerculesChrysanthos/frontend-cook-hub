@@ -32,7 +32,7 @@ const Categories = ({ data }) => {
           <span onClick={() => navigate(`/recipes/${category._id}`)}>
             {category.name}
           </span>
-          {(hoveredCategory === category || hoveredSubcategory) &&
+          {hoveredCategory === category &&
             category.subcategories.length > 0 && (
               <div className="subcategories-menu">
                 {category.subcategories.map((subcategory) => (

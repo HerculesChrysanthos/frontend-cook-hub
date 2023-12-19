@@ -73,7 +73,7 @@ const HeaderMobile = () => {
           )}
         </div>
         <ul className={openMenu ? "header-nav active" : "header-nav"}>
-          <span className="close-menu">
+          <span className={openMenu && "close-menu"}>
             {openMenu && (
               <AiOutlineClose
                 size={25}

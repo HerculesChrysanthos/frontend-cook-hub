@@ -1,6 +1,7 @@
 // RecipeCard.js
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import logoImage from "../../images/Group 2.svg";
 
 const RecipeCard = ({ recipe }) => {
   const navigate = useNavigate();
@@ -17,12 +18,12 @@ const RecipeCard = ({ recipe }) => {
       onClick={handleRecipeClick}
       style={{ cursor: "pointer" }}
     >
-      <h2>{recipe.title}</h2>
       <img
-        src={recipe.previewImage}
+        src={recipe.previewImage ? recipe.previewImage : logoImage}
         alt={recipe.title}
         className="recipe-image"
       />
+      <h2>{recipe.title}</h2>
       <p>{recipe.description}</p>
     </div>
   );

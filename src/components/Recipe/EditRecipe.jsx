@@ -20,8 +20,14 @@ const EditRecipe = ({ editedRecipe }) => {
     servings: editedRecipe.servings || 0,
     category: editedRecipe.category._id || "",
     subcategory: editedRecipe.subcategory._id || "",
-    tags: editedRecipe.tags || [""],
+    tags:
+      editedRecipe.tags.map((tag) => ({
+        value: tag._id,
+        label: tag.name,
+      })) || [],
   });
+
+  console.log(recipe.category);
   // useEffect(() => {
   //   if (editedRecipe) {
   //     // Assuming that editedRecipe.data has the same structure as your recipe state
@@ -42,13 +48,15 @@ const EditRecipe = ({ editedRecipe }) => {
   //   }
   // }, [editedRecipe]);
 
-  
   console.log("cayegory", recipe.category);
   console.log("editedRecipe tags", editedRecipe.tags);
-  console.log("tags previes", editedRecipe.tags.map((tag) => ({
-    value: tag.name,
-    label: tag.name,
-  })));
+  console.log(
+    "tags previes",
+    editedRecipe.tags.map((tag) => ({
+      value: tag.name,
+      label: tag.name,
+    }))
+  );
   console.log("id in recipe update", editedRecipe._id);
   //   console.log("id in recipe update", editRecipe._id);
   const [categories, setCategories] = useState([]);
@@ -60,13 +68,35 @@ const EditRecipe = ({ editedRecipe }) => {
     // Retrieve categories from local storage on component mount
     const storedCategories = localStorage.getItem("categories");
 
+    let parsedCategories;
+
     console.log("storedCategories", storedCategories);
     if (storedCategories) {
       // Parse the stored JSON data
-      const parsedCategories = JSON.parse(storedCategories);
+      parsedCategories = JSON.parse(storedCategories);
       console.log("parsedCategories", parsedCategories);
       setCategories(parsedCategories);
     }
+
+    // add subcategories to select
+    const selectedCategory = parsedCategories.find(
+      (cat) => cat._id === recipe.category
+    );
+    console.log("selectedCategory", selectedCategory);
+    const selectedSubcategories = selectedCategory
+      ? selectedCategory.subcategories
+      : [];
+
+    console.log("selectedSubcategories", selectedSubcategories);
+
+    setRecipe({
+      ...recipe,
+      category: selectedCategory._id,
+      subcategory: selectedSubcategories[0]._id,
+    });
+
+    // allagi dunamika sti lista subcategories analoga me to category pou dialekse
+    setSubcategories(selectedSubcategories);
 
     const storedTags = localStorage.getItem("tags");
     if (storedTags) {
@@ -112,8 +142,12 @@ const EditRecipe = ({ editedRecipe }) => {
     const selectedSubcategory = subcategories.find(
       (subcat) => subcat._id === value
     );
+    console.log(selectedSubcategory._id);
     // const subcategoryId = selectedSubcategory ? selectedSubcategory._id : "";
-    setRecipe({ ...recipe, subcategory: selectedSubcategory._id });
+    setRecipe((prevState) => ({
+      ...prevState,
+      subcategory: selectedSubcategory._id,
+    }));
     console.log("selectedSubcategory", selectedSubcategory);
   };
 
@@ -153,6 +187,7 @@ const EditRecipe = ({ editedRecipe }) => {
     if (shouldProceed) {
       console.log("recipe", recipe);
       event.preventDefault();
+      console.log(recipe);
       try {
         const formData = new FormData();
         // Object.entries(recipe).forEach(([key, value]) => {
@@ -173,28 +208,58 @@ const EditRecipe = ({ editedRecipe }) => {
         //   }
         // });
 
-        Object.entries(recipe).forEach(([key, value]) => {
-          if (key === "category" || key === "subcategory") {
-            formData.append(key, value._id); // Assuming you want to append the _id property
-          } else if (key === "imageUrl") {
-            formData.append("image", value);
-          } else if (key === "tags") {
-            recipe.tags.forEach((tagId, index) => {
-              formData.append("tags[]", tagId);
-            });
-          } else if (key === "ingredients") {
-            recipe.ingredients.forEach((ingredient, index) => {
-              formData.append("ingredients[]", ingredient);
-            });
-          } else {
-            formData.append(key, value);
-          }
-        });
+        // Object.entries(recipe).forEach(([key, value]) => {
+        //   if (key === "category" || key === "subcategory") {
+        //     formData.append(key, value._id); // Assuming you want to append the _id property
+        //   } else if (key === "imageUrl") {
+        //     formData.append("image", value);
+        //   } else if (key === "tags") {
+        //     recipe.tags.forEach((tagId, index) => {
+        //       formData.append("tags[]", tagId);
+        //     });
+        //   } else if (key === "ingredients") {
+        //     recipe.ingredients.forEach((ingredient, index) => {
+        //       formData.append("ingredients[]", ingredient);
+        //     });
+        //   } else {
+        //     formData.append(key, value);
+        //   }
+        // });
 
-        console.log("formData", formData);
+        const {
+          user,
+          title,
+          description,
+          ingredients,
+          instructions,
+          imageUrl,
+          preparationTime,
+          cookingTime,
+          servings,
+          category,
+          subcategory,
+          tags,
+        } = recipe;
+
+        console.log(tags);
+
+        formData.append("user", user);
+        formData.append("title", title);
+        formData.append("description", description);
+        formData.append("ingredients", ingredients);
+        formData.append("instructions", instructions);
+        formData.append("imageUrl", imageUrl);
+        formData.append("preparationTime", preparationTime);
+        formData.append("cookingTime", cookingTime);
+        formData.append("servings", servings);
+        formData.append("category", category);
+        formData.append("subcategory", subcategory);
+        formData.append("tags", tags);
+
+        console.log("formData", imageUrl);
 
         // If it's an update, make a PUT request
-        await axios.put(`/api/recipes/${recipe._id}`, formData, {
+        await axios.put(`/api/recipes/${editedRecipe._id}`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,
@@ -229,15 +294,22 @@ const EditRecipe = ({ editedRecipe }) => {
           onChange={handleInputChange}
         ></textarea>
         <label htmlFor="ingredients">Συστατικά</label>
-        {recipe.ingredients.map((ingredient, index) => (
-          <input
-            key={index}
-            type="text"
-            name="ingredients"
-            value={ingredient}
-            onChange={(event) => handleIngredientChange(event, index)}
-          />
-        ))}
+        <div className="display-ingridients">
+          {recipe.ingredients.map((ingredient, index) => (
+            <div className="ingridients-row">
+              <div className="ingridients-row">
+                <span>Συστατικό</span> <span>{index}</span>
+              </div>
+              <input
+                key={index}
+                type="text"
+                name="ingredients"
+                value={ingredient}
+                onChange={(event) => handleIngredientChange(event, index)}
+              />
+            </div>
+          ))}
+        </div>
         <button type="button" onClick={handleAddIngredient}>
           Προσθήκη Συστατικού
         </button>
@@ -250,11 +322,7 @@ const EditRecipe = ({ editedRecipe }) => {
         ></textarea>
         <label> Εικόνα </label>
         <div>
-          <img
-            src={recipe.previewImage}
-            className="recipe-image"
-            alt="Preview"
-          />
+          <img src={recipe.imageUrl} className="recipe-image" alt="Preview" />
           <button type="button" onClick={handleDeleteImage}>
             <FontAwesomeIcon icon={faTrash} />
           </button>
@@ -266,7 +334,7 @@ const EditRecipe = ({ editedRecipe }) => {
           name="image"
           accept="image/jpeg, image/png"
           onChange={handleImageChange}
-          required
+          // required
         />
         <label htmlFor="preparationTime">Χρόνος Προετοιμασίας (λεπτά)</label>
         <input
@@ -298,9 +366,9 @@ const EditRecipe = ({ editedRecipe }) => {
           id="category"
           name="category"
           defaultValue={recipe.category}
+          value={recipe.category}
           onChange={handleCategoryChange}
         >
-          <option value="">{recipe.category._id}</option>
           {categories.map((category) => (
             <option key={category._id} value={category._id}>
               {category.name}
@@ -311,7 +379,8 @@ const EditRecipe = ({ editedRecipe }) => {
         <select
           id="subcategory"
           name="subcategory"
-          defaultValue={recipe.subcategory._id}
+          defaultValue={recipe.subcategory}
+          value={recipe.subcategory}
           onChange={handleSubcategoryChange}
         >
           {subcategories.map((subcategory) => (
@@ -326,10 +395,7 @@ const EditRecipe = ({ editedRecipe }) => {
           name="tags"
           isMulti
           options={tagsOptions}
-          defaultValue={[recipe?.tags?.map((tag) => ({
-            value: tag._id,
-            label: tag.name,
-          }))]}
+          defaultValue={[...recipe.tags]}
           // value={recipe.tags.filter((tag) => recipe.tags.includes(tag.value))}
           onChange={handleTagsChange}
         />
