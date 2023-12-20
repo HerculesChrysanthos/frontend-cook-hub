@@ -5,7 +5,6 @@ import { useAuth } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const LoginHandling = () => {
-  // const [_, setCookies] = useCookies(["access_token"]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
@@ -41,14 +40,10 @@ const LoginHandling = () => {
 
       // Login success
       setSuccessMessage(response.data.message);
-      // setLoggedInUser(response.data.user._id, response.data.user.name, response.data.user.surname);
-
+      
       if (setSuccessMessage) {
         // Store the token in cookies / localstorage
-        // setCookies("access_token", response.data.token);
         window.localStorage.setItem('token', response.data.token);
-        // Store other user-related information in local storage if needed
-        window.localStorage.setItem("userID", response.data.user._id); //to check what to store, ideally the userid
 
         // Set the user in the authentication context
         setLoggedInUser({
