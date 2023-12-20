@@ -61,7 +61,7 @@ const RecipeByID = () => {
             <RecipeCard key={recipe.id} recipe={recipe} />
           ))
         ) : (
-          <div>Η κατηογορία είναι άδεια</div>
+          <div>Η κατηγορία είναι άδεια</div>
         )}
       </div>
       <div>
