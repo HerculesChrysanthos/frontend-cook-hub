@@ -54,7 +54,7 @@ const RecipeByTag = () => {
   return (
     <div className="recipes-container">
       {/* Display tag names in the heading */}
-      <h1>Συνταγές {tagNames.join(", ")}</h1>
+      <h1>Συνταγές</h1>
 
       <div className="recipes-list">
         {recipes.map((recipe) => (
