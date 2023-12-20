@@ -17,12 +17,12 @@ import RecipeDetailPage from "./pages//Recipe";
 import CreateRecipePage from "./pages/CreateRecipe";
 import MyRecipesPage from "./pages/MyRecipes";
 import RecipesPage from "./pages/Recipes";
-import RecipeByIDPage from "./pages/RecipeByIDPage";
+import RecipeByCategoryIDPage from "./pages/RecipeByCategoryIDPage";
 import RecipeByTagPage from "./pages/RecipeByTagPage";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import HeaderMobile from "./components/Header/HeaderMobile";
-import RecipeByID from "./components/RecipeByID/RecipeByID";
+import RecipeByID from "./components/RecipeByID/RecipeByCategoryID";
 import RecipeBySubId from "./pages/RecipeBySubId";
 import EditRecipePage from "./pages/EditRecipe";
 
@@ -79,10 +79,10 @@ function App() {
         },
         {
           path: "/recipes/:categoryId",
-          element: <RecipeByIDPage />,
+          element: <RecipeByCategoryIDPage />,
         },
         {
-          path: "/recipes/:categoryId/:subCatId",
+          path: "/recipesub/:subcategoryId",
           element: <RecipeBySubId />,
         },
         {

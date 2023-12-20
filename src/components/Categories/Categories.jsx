@@ -39,12 +39,13 @@ const Categories = ({ data }) => {
                   <div
                     key={subcategory._id}
                     className="subcategory-item"
-                    onClick={() =>
-                      navigate(`/recipes/${category._id}/${subcategory._id}`)
-                    }
                     onMouseEnter={() => handleSubcategoryHover(subcategory)}
                   >
-                    {subcategory.name}
+                    <span
+                      onClick={() => navigate(`/recipesub/${subcategory._id}`)}
+                    >
+                      {subcategory.name}
+                    </span>
                   </div>
                 ))}
               </div>

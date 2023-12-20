@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import RecipeCard from '../RecipeCard/RecipeCard';
-import Pagination from '../Pagination/Pagination';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import RecipeCard from "../RecipeCard/RecipeCard";
+import Pagination from "../Pagination/Pagination";
 
 const RecipeByID = () => {
   const [recipes, setRecipes] = useState([]);
@@ -14,13 +14,14 @@ const RecipeByID = () => {
 
   // Use the useParams hook to get the category ID from the URL
   const { categoryId } = useParams();
+  console.log({ categoryId });
 
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
         const response = await axios.get(
           `/api/recipes?page=${Number(currentPage)}${
-            categoryId ? `&categoryId=${categoryId}` : ''
+            categoryId ? `&categoryId=${categoryId}` : ""
           }`
         );
 
@@ -34,7 +35,7 @@ const RecipeByID = () => {
         setTotalRecipes(totalRecipes);
         setCategoryName(categoryName);
       } catch (error) {
-        console.error('Error fetching recipes:', error);
+        console.error("Error fetching recipes:", error);
       }
     };
 
@@ -51,9 +52,9 @@ const RecipeByID = () => {
   };
 
   return (
-    <div className='recipe-by-id-container'>
+    <div className="recipe-by-id-container">
       <h1>Συνταγές {categoryName}</h1>
-      <div className='recipes-list'>
+      <div className="recipes-list">
         {recipes.map((recipe) => (
           <RecipeCard key={recipe.id} recipe={recipe} />
         ))}

@@ -1,9 +1,9 @@
 import React from "react";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
-import RecipeByID from "../components/RecipeByID/RecipeByID";
+import RecipeByID from "../components/RecipeByID/RecipeByCategoryID";
 
-const RecipeByIDPage = () => {
+const RecipeByCategoryIDPage = () => {
   return (
     <div>
       <RecipeByID />
@@ -11,4 +11,4 @@ const RecipeByIDPage = () => {
   );
 };
 
-export default RecipeByIDPage;
+export default RecipeByCategoryIDPage;

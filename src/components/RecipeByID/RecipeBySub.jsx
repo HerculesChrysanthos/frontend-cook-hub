@@ -8,11 +8,12 @@ const RecipeBySub = () => {
   const [recipes, setRecipes] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalRecipes, setTotalRecipes] = useState(null);
-  const [categoryName, setCategoryName] = useState(null);
   const [selectedSubCategoryId, setselectedSubCategoryId] = useState(null);
+  const [subcategoryName, setSubcategoryName] = useState(null); // New state for subcategory name
 
   // Use the useParams hook to get the subcategory ID from the URL
   const { subcategoryId } = useParams();
+  console.log({ subcategoryId });
 
   useEffect(() => {
     const fetchRecipes = async () => {
@@ -23,15 +24,19 @@ const RecipeBySub = () => {
           }`
         );
 
-        const {
-          recipes: recipesData,
-          totalRecipes,
-          categoryName,
-        } = response.data;
-        console.log(response.data);
-        setRecipes(recipesData);
+        const { recipes: recipesData, totalRecipes } = response.data;
+
+        if (recipesData.length > 0) {
+          const { subcategory } = recipesData[0]; // Extract subcategory from the first recipe
+          setRecipes(
+            recipesData.filter(
+              (recipe) => recipe.subcategory?._id === subcategoryId
+            )
+          ); // Filter recipes based on subcategoryId
+          setSubcategoryName(subcategory ? subcategory.name : null); // Set subcategory name
+        }
+
         setTotalRecipes(totalRecipes);
-        setCategoryName(categoryName);
       } catch (error) {
         console.error("Error fetching recipes:", error);
       }
@@ -51,10 +56,11 @@ const RecipeBySub = () => {
 
   return (
     <div className="recipe-by-id-container">
-      <h1>Συνταγές {categoryName}</h1>
+      <h1>{subcategoryName}</h1>{" "}
+      {/* Display subcategory name if available, otherwise use categoryName */}
       <div className="recipes-list">
         {recipes.map((recipe) => (
-          <RecipeCard key={recipe.id} recipe={recipe} />
+          <RecipeCard key={recipe._id} recipe={recipe} />
         ))}
       </div>
       <div>
