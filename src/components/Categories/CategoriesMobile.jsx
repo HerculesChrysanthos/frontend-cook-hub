@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
-const CategoriesMobile = ({ data }) => {
+const CategoriesMobile = ({ data, setOpenMenu }) => {
   const [hoveredCategory, setHoveredCategory] = useState(null);
   const navigate = useNavigate();
 
@@ -11,7 +11,12 @@ const CategoriesMobile = ({ data }) => {
     <div className='categories-container categories-mobile'>
       {data.map((category) => (
         <div key={category._id} className='category-item'>
-          <span onClick={() => navigate(`/recipes/${category._id}`)}>
+          <span
+            onClick={() =>
+              setOpenMenu((prevState) => !prevState) &
+              navigate(`/recipes/${category._id}`)
+            }
+          >
             {category.name}
           </span>
           {category.subcategories.length > 0 && (
@@ -29,7 +34,10 @@ const CategoriesMobile = ({ data }) => {
                   <div
                     key={subcategory._id}
                     className='subcategory-item'
-                    onClick={() => navigate(`/recipesub/${subcategory._id}`)}
+                    onClick={() =>
+                      setOpenMenu((prevState) => !prevState) &
+                      navigate(`/recipesub/${subcategory._id}`)
+                    }
                   >
                     {subcategory.name}
                   </div>

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Tag = () => {
+const TagMobile = ({ setOpenMenu }) => {
   const [tags, setTags] = useState([]);
   const [hoveredTag, setHoveredTag] = useState(null);
   const navigate = useNavigate();
@@ -36,7 +36,10 @@ const Tag = () => {
           className='category-item'
           key={tag._id}
           onMouseEnter={() => handleTagHover(tag)}
-          onClick={() => navigate(`/recipestagId/${tag._id}`)}
+          onClick={() =>
+            setOpenMenu((prevState) => !prevState) &
+            navigate(`/recipestagId/${tag._id}`)
+          }
         >
           {tag.name}
         </li>
@@ -45,4 +48,4 @@ const Tag = () => {
   );
 };
 
-export default Tag;
+export default TagMobile;

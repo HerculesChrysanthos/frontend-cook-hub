@@ -507,21 +507,19 @@ nav a:hover {
   background-color: #46a2d1;
   color: #fff;
   padding: 20px 0;
-  display: flex;
-  justify-content: center; /* Center items horizontally */
-  align-items: center; /* Center items vertically */
   margin-top: 200px;
+  width: 100%;
 }
 
-.social-icons {
-  margin-left: -50px; /* Add margin to the left of the social icons */
-}
+/* .social-icons {
+  margin-left: -50px; 
+} */
 
 .footer-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 800px; /* Adjust the maximum width as needed */
+  max-width: 80%; /* Adjust the maximum width as needed */
   margin: 0 auto; /* Center the content within the footer */
 }
 
@@ -988,6 +986,11 @@ nav a:hover {
   .recipes-container {
     max-width: 80%;
     margin-inline: auto;
+  }
+
+  .footer-content {
+    display: flex;
+    flex-direction: column;
   }
 }
 

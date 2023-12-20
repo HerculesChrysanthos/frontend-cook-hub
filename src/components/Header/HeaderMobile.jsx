@@ -1,15 +1,16 @@
 // Header.js
-import React, { useState, useRef, useEffect } from "react";
-import axios from "axios";
-import logoImage from "../../images/Group 2.svg";
-import { Navigate, useNavigate } from "react-router-dom";
-import { useAuth } from "../AuthContext";
-import Categories from "../Categories/Categories";
-import { Link } from "react-router-dom";
-import Tag from "../RecipeByTag/Tag";
-import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
-import CategoriesMobile from "../Categories/CategoriesMobile";
-import { MdKeyboardArrowDown } from "react-icons/md";
+import React, { useState, useRef, useEffect } from 'react';
+import axios from 'axios';
+import logoImage from '../../images/Group 2.svg';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { useAuth } from '../AuthContext';
+import Categories from '../Categories/Categories';
+import { Link } from 'react-router-dom';
+import Tag from '../RecipeByTag/Tag';
+import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
+import CategoriesMobile from '../Categories/CategoriesMobile';
+import { MdKeyboardArrowDown } from 'react-icons/md';
+import TagMobile from '../RecipeByTag/TagMobile';
 
 const HeaderMobile = () => {
   const navigate = useNavigate();
@@ -23,16 +24,16 @@ const HeaderMobile = () => {
   useEffect(() => {
     // Fetch categories data always when the component mounts
     axios
-      .get("/api/categories/?include=subcategories")
+      .get('/api/categories/?include=subcategories')
       .then((response) => {
         const data = response.data;
         setCategoriesData(data);
 
         // Store categories in local storage
-        localStorage.setItem("categories", JSON.stringify(data));
+        localStorage.setItem('categories', JSON.stringify(data));
       })
       .catch((error) => {
-        console.error("Error fetching categories:", error);
+        console.error('Error fetching categories:', error);
       });
   }, []); // The empty dependency array ensures that this effect runs only once when the component mounts
 
@@ -41,7 +42,7 @@ const HeaderMobile = () => {
   };
 
   const handleCategoryClick = (category) => {
-    console.log("Selected category:", category);
+    console.log('Selected category:', category);
 
     // Handle the category click if needed add user ref to close
   };
@@ -49,7 +50,7 @@ const HeaderMobile = () => {
   const handleLogout = (event) => {
     event.preventDefault();
     logout();
-    navigate("/");
+    navigate('/');
   };
 
   const [isTagDropdownOpen, setIsTagDropdownOpen] = useState(false);
@@ -59,12 +60,12 @@ const HeaderMobile = () => {
   };
 
   return (
-    <div className="mobile-menu">
+    <div className='mobile-menu'>
       <nav>
-        <div className="logo-container">
-          <img src={logoImage} alt="Logo" onClick={() => navigate("/")} />
+        <div className='logo-container'>
+          <img src={logoImage} alt='Logo' onClick={() => navigate('/')} />
         </div>
-        <div className="burger-menu">
+        <div className='burger-menu'>
           {!openMenu && (
             <AiOutlineMenu
               size={25}
@@ -72,8 +73,8 @@ const HeaderMobile = () => {
             />
           )}
         </div>
-        <ul className={openMenu ? "header-nav active" : "header-nav"}>
-          <span className={openMenu && "close-menu"}>
+        <ul className={openMenu ? 'header-nav active' : 'header-nav'}>
+          <span className={openMenu && 'close-menu'}>
             {openMenu && (
               <AiOutlineClose
                 size={25}
@@ -81,28 +82,45 @@ const HeaderMobile = () => {
               />
             )}
           </span>
-          <li className="categories-li">
+          <li className='categories-li'>
             <span onClick={handleCategoriesClick}>
               Κατηγορίες <MdKeyboardArrowDown />
             </span>
             {isCategoriesDropdownOpen && (
-              <CategoriesMobile data={categoriesData} />
+              <CategoriesMobile
+                data={categoriesData}
+                setOpenMenu={setOpenMenu}
+              />
             )}
           </li>
-          <li className="categories-li">
+          <li className='categories-li'>
             <span onClick={handleTagDropdownToggle}>Ετικέτες</span>
-            {isTagDropdownOpen && <Tag />}
+            {isTagDropdownOpen && <TagMobile setOpenMenu={setOpenMenu} />}
           </li>
           {isLoggedIn && (
             <>
               <li>
-                <a href="/recipes/my-recipes">Συνταγές μου</a>
+                <span
+                  onClick={() =>
+                    setOpenMenu((prevState) => !prevState) &
+                    navigate('/recipes/my-recipes')
+                  }
+                >
+                  Συνταγές μου
+                </span>
               </li>
               <li>
-                <a href="/recipes/new">Δημιουργία Συνταγής</a>
+                <span
+                  onClick={() =>
+                    setOpenMenu((prevState) => !prevState) &
+                    navigate('/recipes/new')
+                  }
+                >
+                  Δημιουργία Συνταγής
+                </span>
               </li>
               <li>
-                <a href="/" onClick={handleLogout}>
+                <a href='/' onClick={handleLogout}>
                   Αποσύνδεση
                 </a>
               </li>
@@ -112,9 +130,9 @@ const HeaderMobile = () => {
             <>
               <li>
                 <span
-                  className="header-link"
+                  className='header-link'
                   onClick={() =>
-                    navigate("/login") & setOpenMenu((prevState) => !prevState)
+                    navigate('/login') & setOpenMenu((prevState) => !prevState)
                   }
                 >
                   Σύνδεση
@@ -122,9 +140,9 @@ const HeaderMobile = () => {
               </li>
               <li>
                 <span
-                  className="header-link"
+                  className='header-link'
                   onClick={() =>
-                    navigate("/Register") &
+                    navigate('/Register') &
                     setOpenMenu((prevState) => !prevState)
                   }
                 >
