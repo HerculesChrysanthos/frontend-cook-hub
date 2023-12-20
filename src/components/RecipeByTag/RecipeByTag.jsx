@@ -9,6 +9,7 @@ const RecipeByTag = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [totalRecipes, setTotalRecipes] = useState(null);
   const [tagNames, setTagNames] = useState([]); // New state for storing tag names
+  const [tagName, setTagName] = useState('');
   const { tagId } = useParams();
 
   useEffect(() => {
@@ -45,6 +46,9 @@ const RecipeByTag = () => {
     };
 
     fetchRecipes();
+    const allTagsString = localStorage.getItem('tags');
+    const allTags = JSON.parse(allTagsString);
+    setTagName(allTags.find((tag) => tag._id === tagId));
   }, [currentPage, tagId]);
 
   const handlePageChange = (newPage) => {
@@ -54,7 +58,7 @@ const RecipeByTag = () => {
   return (
     <div className='recipes-container'>
       {/* Display tag names in the heading */}
-      <h1>Συνταγές {tagNames.join(' / ')}</h1>
+      <h1>Συνταγές {tagName.name}</h1>
 
       <div className='recipes-list'>
         {recipes.map((recipe) => (
