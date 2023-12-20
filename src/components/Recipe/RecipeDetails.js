@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
-import { useAuth } from "../AuthContext";
-import EditRecipe from "./EditRecipe";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useAuth } from '../AuthContext';
+import EditRecipe from './EditRecipe';
 
 const RecipeDetails = () => {
   const { recipeId } = useParams();
@@ -13,7 +13,7 @@ const RecipeDetails = () => {
   // retrieve userObject stored in login
   const { userObject } = useAuth();
   // retrieve token from local storage
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
 
   const [recipeData, setRecipeData] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -30,9 +30,9 @@ const RecipeDetails = () => {
       } catch (error) {
         if (error.response && error.response.status === 404) {
           // Recipe not found
-          setErrorMessage("Δεν υπάρχει συνταγ.");
+          setErrorMessage('Δεν υπάρχει συνταγ.');
         } else {
-          console.error("Error fetching recipe data:", error);
+          console.error('Error fetching recipe data:', error);
         }
       }
     };
@@ -48,7 +48,7 @@ const RecipeDetails = () => {
   const handleDelete = async () => {
     if (userObject.id === recipeData.user._id) {
       const shouldDelete = window.confirm(
-        "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτήν τη συνταγή;"
+        'Είστε σίγουροι ότι θέλετε να διαγράψετε αυτήν τη συνταγή;'
       );
       if (shouldDelete) {
         try {
@@ -58,9 +58,9 @@ const RecipeDetails = () => {
             },
           });
           // Redirect to a different page or perform any other action after deletion
-          navigate("/recipes");
+          navigate('/recipes');
         } catch (error) {
-          console.error("Error deleting recipe:", error);
+          console.error('Error deleting recipe:', error);
           //
         }
       }
@@ -72,39 +72,39 @@ const RecipeDetails = () => {
   };
 
   return (
-    <div className="recipe-container">
+    <div className='recipe-container'>
       {isEditing ? (
         <EditRecipe isUpdate={isEditing} editedRecipe={recipeData} />
       ) : (
         <>
           {recipeData ? (
-            <div className="recipe-details">
-              <h2>{recipeData.title}</h2>
-              <p>{recipeData.description}</p>
+            <div className='recipe-details'>
+              <h2>{recipeData?.title}</h2>
+              <p>{recipeData?.description}</p>
               <img
-                src={recipeData.mainImage}
-                alt={recipeData.title}
-                className="recipe-image"
+                src={recipeData?.mainImage}
+                alt={recipeData?.title}
+                className='recipe-image'
               />
               <div>
-                {userObject.id === recipeData.user._id && (
+                {userObject?.id === recipeData?.user._id && (
                   <>
                     <button onClick={handleUpdade}>Επεξεργασία</button>
                     <button onClick={handleDelete}>Διαγραφή</button>
                   </>
                 )}
               </div>
-              <p>Χρόνος προετοιμασίας: {recipeData.preparationTime} minutes</p>
-              <p>Χρόνος μαγειρέματος: {recipeData.cookingTime} minutes</p>
-              <p>Μερίδες: {recipeData.servings}</p>
+              <p>Χρόνος προετοιμασίας: {recipeData?.preparationTime} minutes</p>
+              <p>Χρόνος μαγειρέματος: {recipeData?.cookingTime} minutes</p>
+              <p>Μερίδες: {recipeData?.servings}</p>
               <h3>Συστατικά:</h3>
               <ul>
-                {recipeData.ingredients.map((ingredient, index) => (
+                {recipeData?.ingredients?.map((ingredient, index) => (
                   <li key={index}>{ingredient}</li>
                 ))}
               </ul>
               <h3>Εκτέλεση:</h3>
-              <p>{recipeData.instructions}</p>
+              <p>{recipeData?.instructions}</p>
             </div>
           ) : (
             <p>{errorMessage}</p>

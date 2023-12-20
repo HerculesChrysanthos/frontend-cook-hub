@@ -1,22 +1,22 @@
 // Categories.jsx
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { MdKeyboardArrowDown } from "react-icons/md";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { MdKeyboardArrowDown } from 'react-icons/md';
 
 const CategoriesMobile = ({ data }) => {
   const [hoveredCategory, setHoveredCategory] = useState(null);
   const navigate = useNavigate();
 
   return (
-    <div className="categories-container categories-mobile">
+    <div className='categories-container categories-mobile'>
       {data.map((category) => (
-        <div key={category._id} className="category-item">
+        <div key={category._id} className='category-item'>
           <span onClick={() => navigate(`/recipes/${category._id}`)}>
             {category.name}
           </span>
           {category.subcategories.length > 0 && (
             <span
-              className="show-sub-category"
+              className='show-sub-category'
               onClick={() => setHoveredCategory(category)}
             >
               <MdKeyboardArrowDown />
@@ -24,14 +24,12 @@ const CategoriesMobile = ({ data }) => {
           )}
           {hoveredCategory === category &&
             category.subcategories.length > 0 && (
-              <div className="subcategories-menu">
+              <div className='subcategories-menu'>
                 {category.subcategories.map((subcategory) => (
                   <div
                     key={subcategory._id}
-                    className="subcategory-item"
-                    onClick={() =>
-                      navigate(`/recipes/${category._id}/${subcategory._id}`)
-                    }
+                    className='subcategory-item'
+                    onClick={() => navigate(`/recipesub/${subcategory._id}`)}
                   >
                     {subcategory.name}
                   </div>
