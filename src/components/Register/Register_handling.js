@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import RegisterForm from './RegisterForm';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
+import { useAuth } from '../AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const Register_handling = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
+  const { setLoggedInUser } = useAuth();
+  const navigate = useNavigate();
 
   const handleRegister = async (e, formData) => {
     e.preventDefault();
@@ -46,6 +48,29 @@ const Register_handling = () => {
 
       // Registration success
       setSuccessMessage('Registration successful!');
+
+      if (setSuccessMessage) {
+        // Store the token in localstorage
+        window.localStorage.setItem('token', response.data.token);
+
+        // Set the user in the authentication context
+        setLoggedInUser({
+          id: response.data.user._id,
+          name: response.data.user.name,
+          surname: response.data.user.surname
+        });
+        
+        setTimeout(() => {
+          // Navigate to the main page or any other page after successful registration
+          navigate('/');
+        }, 3000); // 3000 milliseconds (adjust as needed)
+      }
+      // // Log local storage
+      // const localStorageKeys = Object.keys(localStorage);
+      // localStorageKeys.forEach((key) => {
+      //   const value = localStorage.getItem(key);
+      //   console.log(`${key}: ${value}`);
+      // });
 
       const greekTranslations = {
         'length must be at least 8 characters long':
