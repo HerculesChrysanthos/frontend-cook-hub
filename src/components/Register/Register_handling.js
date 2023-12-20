@@ -1,16 +1,8 @@
-<<<<<<< HEAD
 import React, { useState } from "react";
 import axios from "axios";
 import RegisterForm from "./RegisterForm";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
-=======
-import React, { useState } from 'react';
-import axios from 'axios';
-import RegisterForm from './RegisterForm';
-import { useAuth } from '../AuthContext';
-import { useNavigate } from 'react-router-dom';
->>>>>>> e846ddf69dc8fbfec4fa14589b4a6ed00d990598
+import { useAuth } from "../AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Register_handling = () => {
   const [loading, setLoading] = useState(false);
@@ -59,18 +51,18 @@ const Register_handling = () => {
 
       if (setSuccessMessage) {
         // Store the token in localstorage
-        window.localStorage.setItem('token', response.data.token);
+        window.localStorage.setItem("token", response.data.token);
 
         // Set the user in the authentication context
         setLoggedInUser({
           id: response.data.user._id,
           name: response.data.user.name,
-          surname: response.data.user.surname
+          surname: response.data.user.surname,
         });
-        
+
         setTimeout(() => {
           // Navigate to the main page or any other page after successful registration
-          navigate('/');
+          navigate("/");
         }, 3000); // 3000 milliseconds (adjust as needed)
       }
       // // Log local storage
