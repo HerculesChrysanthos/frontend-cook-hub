@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import Pagination from "../Pagination/Pagination";
-import RecipeCard from "../RecipeCard/RecipeCard";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Pagination from '../Pagination/Pagination';
+import RecipeCard from '../RecipeCard/RecipeCard';
+import { useParams } from 'react-router-dom';
 
 const RecipeByTag = () => {
   const [recipes, setRecipes] = useState([]);
@@ -40,7 +40,7 @@ const RecipeByTag = () => {
         setTotalRecipes(totalRecipes);
         setTagNames(tagNamesFromRecipe);
       } catch (error) {
-        console.error("Error fetching recipes:", error);
+        console.error('Error fetching recipes:', error);
       }
     };
 
@@ -52,11 +52,11 @@ const RecipeByTag = () => {
   };
 
   return (
-    <div className="recipes-container">
+    <div className='recipes-container'>
       {/* Display tag names in the heading */}
-      <h1>Συνταγές</h1>
+      <h1>Συνταγές {tagNames.join(' / ')}</h1>
 
-      <div className="recipes-list">
+      <div className='recipes-list'>
         {recipes.map((recipe) => (
           <RecipeCard key={recipe.id} recipe={recipe} />
         ))}

@@ -1,22 +1,23 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import Select from "react-select";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Select from 'react-select';
+import { useNavigate } from 'react-router-dom';
 
 const CreateRecipe = () => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const [recipe, setRecipe] = useState({
-    title: "",
-    description: "",
-    ingredients: [""],
-    instructions: "",
-    imageUrl: "",
+    title: '',
+    description: '',
+    ingredients: [''],
+    instructions: '',
+    imageUrl: '',
     preparationTime: 0,
     cookingTime: 0,
     servings: 0,
-    category: "",
-    subcategory: "",
+    category: '',
+    subcategory: '',
     tags: [],
   });
 
@@ -27,17 +28,17 @@ const CreateRecipe = () => {
 
   useEffect(() => {
     // Retrieve categories from local storage on component mount
-    const storedCategories = localStorage.getItem("categories");
+    const storedCategories = localStorage.getItem('categories');
 
-    console.log("storedCategories", storedCategories);
+    console.log('storedCategories', storedCategories);
     if (storedCategories) {
       // Parse the stored JSON data
       const parsedCategories = JSON.parse(storedCategories);
-      console.log("parsedCategories", parsedCategories);
+      console.log('parsedCategories', parsedCategories);
       setCategories(parsedCategories);
     }
 
-    const storedTags = localStorage.getItem("tags");
+    const storedTags = localStorage.getItem('tags');
     if (storedTags) {
       // Parse the stored JSON data
       const parsedTags = JSON.parse(storedTags);
@@ -63,17 +64,17 @@ const CreateRecipe = () => {
   const handleCategoryChange = (event) => {
     const { value } = event.target;
     const selectedCategory = categories.find((cat) => cat._id === value);
-    console.log("selectedCategory", selectedCategory);
+    console.log('selectedCategory', selectedCategory);
     const selectedSubcategories = selectedCategory
       ? selectedCategory.subcategories
       : [];
-  
-    console.log("selectedSubcategories", selectedSubcategories);
+
+    console.log('selectedSubcategories', selectedSubcategories);
 
     setRecipe({
       ...recipe,
       category: selectedCategory._id,
-      subcategory: "",
+      subcategory: '',
     });
 
     // allagi dunamika sti lista subcategories analoga me to category pou dialekse
@@ -86,9 +87,9 @@ const CreateRecipe = () => {
     const selectedSubcategory = subcategories.find(
       (subcat) => subcat._id === value
     );
-  
+
     setRecipe({ ...recipe, subcategory: selectedSubcategory._id });
-    console.log("selectedSubcategory", selectedSubcategory);
+    console.log('selectedSubcategory', selectedSubcategory);
   };
 
   const handleIngredientChange = (event, index) => {
@@ -99,7 +100,7 @@ const CreateRecipe = () => {
   };
 
   const handleAddIngredient = () => {
-    const ingredients = [...recipe.ingredients, ""];
+    const ingredients = [...recipe.ingredients, ''];
     setRecipe({ ...recipe, ingredients });
   };
 
@@ -109,23 +110,24 @@ const CreateRecipe = () => {
   };
 
   const handleSubmit = async (event) => {
+    setIsLoading(true);
     const shouldProceed = window.confirm(
-      "Είστε σίγουροι ότι θέλετε να προχωρήσετε στην ενέργεια;"
+      'Είστε σίγουροι ότι θέλετε να προχωρήσετε στην ενέργεια;'
     );
     if (shouldProceed) {
       event.preventDefault();
       try {
         const formData = new FormData();
         Object.entries(recipe).forEach(([key, value]) => {
-          if (key === "imageUrl") {
+          if (key === 'imageUrl') {
             //to add imageurl logic
             // { isUpdate && (formData)}
-            formData.append("image", value);
-          } else if (key === "tags") {
+            formData.append('image', value);
+          } else if (key === 'tags') {
             recipe.tags.forEach((tagId, index) => {
               formData.append(`tags[${index}]`, tagId);
             });
-          } else if (key === "ingredients") {
+          } else if (key === 'ingredients') {
             recipe.ingredients.forEach((ingredient, index) => {
               formData.append(`ingredients[${index}]`, ingredient);
             });
@@ -134,133 +136,143 @@ const CreateRecipe = () => {
           }
         });
 
-        await axios.post("/api/recipes", formData, {
+        await axios.post('/api/recipes', formData, {
           headers: {
-            "Content-Type": "multipart/form-data",
+            'Content-Type': 'multipart/form-data',
             Authorization: `Bearer ${token}`,
           },
         });
-        alert("Recipe Created");
+        alert('Recipe Created');
 
         // After successful request, navigate to the desired page
-        navigate("/recipes/my-recipes");
+        navigate('/recipes/my-recipes');
       } catch (error) {
         console.error(error);
       }
     }
+    setIsLoading(false);
   };
 
   return (
-    <div className="create-recipe">
+    <div className='create-recipe'>
       <h2> Δημιουργία Συνταγής</h2>
-      <form onSubmit={handleSubmit} className="recipe-form">
-        <label htmlFor="title">Όνομα Συνταγής</label>
+      <form onSubmit={handleSubmit} className='recipe-form'>
+        <label htmlFor='title'>Όνομα Συνταγής</label>
         <input
-          type="text"
-          id="title"
-          name="title"
+          type='text'
+          id='title'
+          name='title'
           value={recipe.title}
           onChange={handleInputChange}
         />
-        <label htmlFor="description">Περιγραφή</label>
+        <label htmlFor='description'>Περιγραφή</label>
         <textarea
-          id="description"
-          name="description"
+          id='description'
+          name='description'
           value={recipe.description}
           onChange={handleInputChange}
         ></textarea>
-        <label htmlFor="ingredients">Συστατικά</label>
+        <label htmlFor='ingredients'>Συστατικά</label>
         {recipe.ingredients.map((ingredient, index) => (
           <input
             key={index}
-            type="text"
-            name="ingredients"
+            type='text'
+            name='ingredients'
             value={ingredient}
             onChange={(event) => handleIngredientChange(event, index)}
           />
         ))}
-        <button type="button" onClick={handleAddIngredient}>
+        <button type='button' onClick={handleAddIngredient}>
           Προσθήκη Συστατικού
         </button>
-        <label htmlFor="instructions">Οδηγίες</label>
+        <label htmlFor='instructions'>Οδηγίες</label>
         <textarea
-          id="instructions"
-          name="instructions"
+          id='instructions'
+          name='instructions'
           value={recipe.instructions}
           onChange={handleInputChange}
         ></textarea>
-        <label htmlFor="image">Προσθήκη Εικόνας </label>
+        <label htmlFor='image'>Προσθήκη Εικόνας </label>
         <input
-          type="file"
-          id="image"
-          name="image"
-          accept="image/jpeg, image/png"
+          type='file'
+          id='image'
+          name='image'
+          accept='image/jpeg, image/png'
           onChange={handleImageChange}
           required
         />
-        <label htmlFor="preparationTime">Χρόνος Προετοιμασίας (λεπτά)</label>
+        <label htmlFor='preparationTime'>Χρόνος Προετοιμασίας (λεπτά)</label>
         <input
-          type="number"
-          id="preparationTime"
-          name="preparationTime"
+          type='number'
+          id='preparationTime'
+          name='preparationTime'
           value={recipe.preparationTime}
           onChange={handleInputChange}
         />
-        <label htmlFor="cookingTime">Χρόνος Μαγειρέματος (λεπτά)</label>
+        <label htmlFor='cookingTime'>Χρόνος Μαγειρέματος (λεπτά)</label>
         <input
-          type="number"
-          id="cookingTime"
-          name="cookingTime"
+          type='number'
+          id='cookingTime'
+          name='cookingTime'
           value={recipe.cookingTime}
           onChange={handleInputChange}
         />
 
-        <label htmlFor="servings">Μερίδες</label>
+        <label htmlFor='servings'>Μερίδες</label>
         <input
-          type="number"
-          id="servings"
-          name="servings"
+          type='number'
+          id='servings'
+          name='servings'
           value={recipe.servings}
           onChange={handleInputChange}
         />
-        <label htmlFor="category">Κατηγορία</label>
+        <label htmlFor='category'>Κατηγορία</label>
         <select
-          id="category"
-          name="category"
+          id='category'
+          name='category'
           // value={recipe.category}
           onChange={handleCategoryChange}
         >
-          <option value="">Διάλεξε Κατηγορία</option>
+          <option value=''>Διάλεξε Κατηγορία</option>
           {categories.map((category) => (
             <option key={category._id} value={category._id}>
               {category.name}
             </option>
           ))}
         </select>
-        <label htmlFor="subcategory">Υποκατηγορία</label>
+        <label htmlFor='subcategory'>Υποκατηγορία</label>
         <select
-          id="subcategory"
-          name="subcategory"
+          id='subcategory'
+          name='subcategory'
           // value={recipe.subcategory}
           onChange={handleSubcategoryChange}
         >
-          <option value="">Διάλεξε Υποκατηγορία</option>
+          <option value=''>Διάλεξε Υποκατηγορία</option>
           {subcategories.map((subcategory) => (
             <option key={subcategory._id} value={subcategory._id}>
               {subcategory.name}
             </option>
           ))}
         </select>
-        <label htmlFor="tags">Tags</label>
+        <label htmlFor='tags'>Tags</label>
         <Select
-          id="tags"
-          name="tags"
+          id='tags'
+          name='tags'
           isMulti
           options={tagsOptions}
           value={tagsOptions.filter((tag) => recipe.tags.includes(tag.value))}
           onChange={handleTagsChange}
         />
-        <button type="submit">Υποβολή</button>
+        <button type='submit' disabled={isLoading}>
+          {isLoading ? (
+            <div className='flex-inline'>
+              Γίνεται υποβολή
+              <div className='loader'></div>
+            </div>
+          ) : (
+            'Υποβολή'
+          )}
+        </button>
       </form>
     </div>
   );

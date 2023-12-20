@@ -226,7 +226,7 @@ nav {
 
 /* Style the magnify class */
 .magnify a::before {
-  content: "\1F50D"; /* Unicode character for a magnifying glass */
+  content: '\1F50D'; /* Unicode character for a magnifying glass */
   margin-right: 5px;
   color: #ffcc00; /* Set the color of the magnifying glass icon to a yellowish color */
 }
@@ -253,7 +253,7 @@ nav {
 }
 
 body {
-  font-family: "Arial", sans-serif;
+  font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -694,7 +694,7 @@ nav a:hover {
 /* Categories start */
 /* Categories.css */
 .categories-container {
-  top: 20px;
+  top: 30px;
   display: flex;
   padding: 10px; /* Adjust padding as needed */
   z-index: 1;
@@ -707,6 +707,7 @@ nav a:hover {
 .categories-li {
   position: relative;
   cursor: pointer;
+  padding: 10px 0;
 }
 
 .categories-li span:hover {
@@ -747,6 +748,7 @@ nav a:hover {
 /*recipes list START*/
 .recipes-container {
   max-width: 1280px;
+  max-width: min(80%, 1280px);
   margin: 0 auto;
   margin-top: 55px;
   margin-bottom: 55px;
@@ -765,10 +767,26 @@ nav a:hover {
   padding-inline: 15px;
 }
 
+.no-results {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+}
+
+.no-results h2 {
+  width: 100%;
+  text-align: center;
+}
+
 .recipe-card {
   box-shadow: 0 0 30px rgba(77, 77, 77, 0.1);
   padding: 20px;
   border-radius: 8px;
+}
+
+.preview {
+  width: 90px;
+  height: auto;
 }
 
 .recipe-card img {
@@ -956,6 +974,21 @@ nav a:hover {
   header {
     display: none !important;
   }
+
+  .create-recipe {
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .recipe-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .recipes-container {
+    max-width: 80%;
+    margin-inline: auto;
+  }
 }
 
 @media screen and (min-width: 1024px) {
@@ -1006,5 +1039,40 @@ nav a:hover {
     line-height: 1.5em;
     height: 3em; /* height is 2x line-height, so two lines will display */
     overflow: hidden; /* prevents extra lines from being visible */
+  }
+}
+
+.flex-inline {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.loader {
+  border: 1px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 2px solid var(--blue);
+  width: 12px;
+  height: 12px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 1s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
