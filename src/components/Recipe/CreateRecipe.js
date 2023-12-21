@@ -100,8 +100,21 @@ const CreateRecipe = () => {
   };
 
   const handleAddIngredient = () => {
-    const ingredients = [...recipe.ingredients, ''];
-    setRecipe({ ...recipe, ingredients });
+    if (
+      recipe.ingredients.length &&
+      recipe.ingredients[recipe.ingredients.length - 1] !== ''
+    ) {
+      const ingredients = [...recipe.ingredients, ''];
+      console.log(ingredients);
+      setRecipe({ ...recipe, ingredients });
+    }
+  };
+
+  const handleRemoveLastIngredient = () => {
+    if (recipe.ingredients.length > 1) {
+      recipe.ingredients.pop();
+      setRecipe({ ...recipe, ingredients: recipe.ingredients });
+    }
   };
 
   const handleImageChange = (event) => {
@@ -186,6 +199,9 @@ const CreateRecipe = () => {
         ))}
         <button type='button' onClick={handleAddIngredient}>
           Προσθήκη Συστατικού
+        </button>
+        <button type='button' onClick={handleRemoveLastIngredient}>
+          Αφαίρεση τελευταίου Συστατικού
         </button>
         <label htmlFor='instructions'>Οδηγίες</label>
         <textarea
