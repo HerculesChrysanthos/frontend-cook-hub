@@ -364,9 +364,6 @@ const EditRecipe = ({ editedRecipe }) => {
             className='recipe-image preview'
             alt='Preview'
           />
-          {/* <button type='button' onClick={handleDeleteImage}>
-            <FontAwesomeIcon icon={faTrash} />
-          </button> */}
         </div>
         <label htmlFor='image'>Αντικατάσταση Εικόνας </label>
         <input
