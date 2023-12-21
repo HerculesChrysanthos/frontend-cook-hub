@@ -940,6 +940,11 @@ nav a:hover {
     align-items: center;
     gap: 10px;
   }
+
+  .recipe-by-id-container {
+    max-width: 100%; /* Set the maximum width to 100% for small screens */
+    margin: 0 20px 0 20px;
+  }
 }
 
 .mobile-menu {
