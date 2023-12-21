@@ -311,7 +311,7 @@ const EditRecipe = ({ editedRecipe }) => {
           {recipe.ingredients.map((ingredient, index) => (
             <div className='ingridients-row'>
               <div className='ingridients-row'>
-                <span>Συστατικό</span> <span>{index}</span>
+                <span>Συστατικό</span> <span>{index + 1}</span>
               </div>
               <input
                 key={index}
