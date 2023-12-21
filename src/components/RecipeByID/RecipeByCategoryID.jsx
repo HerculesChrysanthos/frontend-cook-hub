@@ -36,7 +36,7 @@ const RecipeByID = () => {
 
         const recipesData = response.data.recipes;
         const totalRecipesData = response.data.totalRecipes;
-        const selectedCategoryName = response.data.categoryName;
+
         if (totalRecipesData === 0) {
           setRecipes([]);
           setTotalRecipes(0);
@@ -44,9 +44,11 @@ const RecipeByID = () => {
           setCategoryName(null);
         } else {
           console.log(response.data);
+          const { category } = recipesData[0]; // Extract subcategory from the first recipe
           setRecipes(recipesData);
           setTotalRecipes(totalRecipes);
-          setCategoryName(categoryName);
+          setCategoryName(category ? category.name : null);
+          console.log('sdfsd',{ categoryName });
         }
       } catch (error) {
         console.error('Error fetching recipes:', error);
