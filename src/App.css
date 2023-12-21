@@ -13,6 +13,7 @@
   }
 }
 
+/*
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -23,6 +24,59 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+*/
+
+/* Header.css */
+header {
+  background-color: #bfc3a5;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.header-nav {
+  display: flex;
+  justify-content: flex-end; /* Change from space-between to flex-end */
+  align-items: center;
+  margin-right: 20px; /* Add margin to the right side */
+}
+
+.header-nav li {
+  margin-left: 15px; /* Adjust the margin as needed */
+}
+
+.header-nav a {
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  transition: color 0.3s ease-in-out;
+}
+
+.header-nav a:hover {
+  color: #ffcc00; /* Change the color on hover */
+}
+
+/* Style the magnify class */
+.magnify a::before {
+  content: "\1F50D"; /* Unicode character for a magnifying glass */
+  margin-right: 5px;
+  color: #ffcc00; /* Set the color of the magnifying glass icon to a yellowish color */
+}
+
+.logo-container {
+  text-align: left;
+}
+
+.logo-container img {
+  max-height: 100px; /* Adjust the maximum height of the logo as needed */
+}
+
 
 .App-link {
   color: #61dafb;
@@ -36,3 +90,333 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+
+main {
+  padding: 20px;
+}
+
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+nav li {
+  margin-right: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  transition: color 0.3s ease-in-out;
+}
+
+nav a:hover {
+  color: #ffc107; /* Change color on hover to yellow */
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid black; /* Black bold line */
+  padding-bottom: 5px; /* Add some padding for better appearance */
+}
+
+.search-container input {
+  flex: 1; /* Take up remaining space in the container */
+  background-color: #bfc3a5;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  text-align: center; 
+}
+
+.magnify {
+  cursor: pointer;
+  margin-left: 10px; /* Adjust the margin as needed */
+}
+
+/* Style the magnify class */
+.magnify i {
+  color: black; /* Set the color of the magnifying glass icon to black */
+}
+
+
+
+/* ImageSlider.css */
+.slick-slider {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.slick-prev,
+.slick-next {
+  font-size: 1.5em;
+  color: #333;
+}
+
+.slick-dots {
+  bottom: 10px;
+}
+
+.slick-dots li button:before {
+  font-size: 12px;
+  color: #333;
+}
+/* ImageSlider.css */
+
+/* Card.css */
+.card-columns-wrapper {
+  column-count: 3; /* Adjust the number of columns as needed */
+  column-gap: 20px; /* Adjust the gap between columns as needed */
+  margin: 20px; /* Add margin for spacing */
+  column-gap: 1em; 
+}
+
+.card {
+  width: 18rem; /* Adjust the card width as needed */
+  break-inside: avoid-column; /* Avoid breaking the card between columns */
+  margin-bottom: 1em; 
+}
+
+.card-img-top {
+  height: 200px; /* Adjust the image height as needed */
+  object-fit: cover;
+}
+
+/* styles.css */
+.modal {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+  margin: 10% auto;
+  padding: 20px;
+  background-color: #fefefe;
+  max-width: 600px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+.image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-container:hover {
+  cursor: pointer;
+}
+
+.image-container.hovered img {
+  transform: scale(1.1); /* Adjust the scale factor as needed */
+  transition: transform 0.3s ease; /* Adjust the transition duration and timing function as needed */
+}
+
+
+/* Card.css */
+
+/*registration form begins */
+.register-container {
+  max-width: 400px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin: 100px auto;
+  background-color: #fff;
+}
+
+.register-container h1 {
+  text-align: center;
+  color: #333;
+}
+
+.register-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Center-align content in each form group */
+.register-container .form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register-container label {
+  margin: 10px 0;
+  color: #555;
+  text-align: center; /* Center-align label text */
+}
+
+.register-container input {
+  padding: 12px;
+  margin-bottom: 10px;
+  width: 130%;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.register-container input:focus {
+  outline: none;
+  border-color: #4caf50; /* Change color on focus */
+}
+
+.register-container button {
+  padding: 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.register-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.register-container .error
+{
+  color: #db0c0c;
+  text-align: center; /* Center-align error and success messages */
+  margin-top: 10px;
+}
+.register-container .success {
+  color:  #4caf50;
+  text-align: center; /* Center-align error and success messages */
+  margin-top: 10px;
+}
+/*registration form ends */
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-form-container{
+  max-width: 400px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 100px auto; /* Updated margin for centering */
+}
+
+.login-form-container h2 {
+  text-align: center;
+  color: #333;
+}
+
+.login-form-container label {
+  text-align: left;
+  padding: 4px ;
+}
+
+input {
+  margin: 1 px;
+  padding: 1rem;
+  border: none;
+  border-radius: 10px;
+}
+
+button {
+  border : none;
+  background-color: rgb(178, 150, 150);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.link-btn {
+  background: none;
+  color: rgb(172, 111, 111);
+  text-decoration: underline;
+  align-items:  center;
+
+}
+
+/* Footer.css */
+.footer {
+  background-color: #bfc3a5;
+  color: #fff;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+}
+
+.social-icons {
+  margin-left: -50px; /* Add margin to the left of the social icons */
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 800px; /* Adjust the maximum width as needed */
+  margin: 0 auto; /* Center the content within the footer */
+}
+
+.social-icons a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+  margin: 0 10px; /* Add margin between social icons */
+}
+
+.footer-text {
+  text-align: center; /* Center the text */
+}
+
+.footer-text p {
+  margin: 5px 0; /* Add margin between paragraphs */
+  font-size: 14px;
+}
+
+.footer-text a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px; /* Add margin between links */
+}
+
+/* Style links on hover */
+.footer-text a:hover {
+  text-decoration: underline;
+}
+/* Footer.css */
