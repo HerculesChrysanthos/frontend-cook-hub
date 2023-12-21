@@ -142,7 +142,9 @@ const CreateRecipe = () => {
             });
           } else if (key === 'ingredients') {
             recipe.ingredients.forEach((ingredient, index) => {
-              formData.append(`ingredients[${index}]`, ingredient);
+              if (ingredient !== '') {
+                formData.append(`ingredients[${index}]`, ingredient);
+              }
             });
           } else {
             formData.append(key, value);
@@ -195,6 +197,7 @@ const CreateRecipe = () => {
             name='ingredients'
             value={ingredient}
             onChange={(event) => handleIngredientChange(event, index)}
+            required={index === 0 || ingredient.trim() !== ''}
           />
         ))}
         <button type='button' onClick={handleAddIngredient}>
@@ -209,6 +212,7 @@ const CreateRecipe = () => {
           name='instructions'
           value={recipe.instructions}
           onChange={handleInputChange}
+          required
         ></textarea>
         <label htmlFor='image'>Προσθήκη Εικόνας </label>
         <input
