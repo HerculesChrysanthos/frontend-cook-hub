@@ -48,7 +48,8 @@ const RecipeByID = () => {
           setRecipes(recipesData);
           setTotalRecipes(totalRecipes);
           setCategoryName(category ? category.name : null);
-          console.log('sdfsd',{ categoryName });
+          setMessage(null);
+          console.log('categoryName when recipes exist',{ categoryName });
         }
       } catch (error) {
         console.error('Error fetching recipes:', error);
