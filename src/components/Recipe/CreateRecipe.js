@@ -13,9 +13,9 @@ const CreateRecipe = () => {
     ingredients: [''],
     instructions: '',
     imageUrl: '',
-    preparationTime: 0,
-    cookingTime: 0,
-    servings: 0,
+    preparationTime: 1,
+    cookingTime: 1,
+    servings: 1,
     category: '',
     subcategory: '',
     tags: [],
@@ -164,6 +164,7 @@ const CreateRecipe = () => {
           name='title'
           value={recipe.title}
           onChange={handleInputChange}
+          required
         />
         <label htmlFor='description'>Περιγραφή</label>
         <textarea
@@ -171,6 +172,7 @@ const CreateRecipe = () => {
           name='description'
           value={recipe.description}
           onChange={handleInputChange}
+          required
         ></textarea>
         <label htmlFor='ingredients'>Συστατικά</label>
         {recipe.ingredients.map((ingredient, index) => (
@@ -208,6 +210,8 @@ const CreateRecipe = () => {
           name='preparationTime'
           value={recipe.preparationTime}
           onChange={handleInputChange}
+          min='1'
+          required
         />
         <label htmlFor='cookingTime'>Χρόνος Μαγειρέματος (λεπτά)</label>
         <input
@@ -216,6 +220,8 @@ const CreateRecipe = () => {
           name='cookingTime'
           value={recipe.cookingTime}
           onChange={handleInputChange}
+          min='1'
+          required
         />
 
         <label htmlFor='servings'>Μερίδες</label>
@@ -225,6 +231,8 @@ const CreateRecipe = () => {
           name='servings'
           value={recipe.servings}
           onChange={handleInputChange}
+          min='1'
+          required
         />
         <label htmlFor='category'>Κατηγορία</label>
         <select
@@ -232,6 +240,7 @@ const CreateRecipe = () => {
           name='category'
           // value={recipe.category}
           onChange={handleCategoryChange}
+          required
         >
           <option value=''>Διάλεξε Κατηγορία</option>
           {categories.map((category) => (
@@ -262,6 +271,7 @@ const CreateRecipe = () => {
           options={tagsOptions}
           value={tagsOptions.filter((tag) => recipe.tags.includes(tag.value))}
           onChange={handleTagsChange}
+          required
         />
         <button type='submit' disabled={isLoading}>
           {isLoading ? (
