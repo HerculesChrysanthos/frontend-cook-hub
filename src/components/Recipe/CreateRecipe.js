@@ -275,6 +275,7 @@ const CreateRecipe = () => {
           name='subcategory'
           // value={recipe.subcategory}
           onChange={handleSubcategoryChange}
+          required
         >
           <option value=''>Διάλεξε Υποκατηγορία</option>
           {subcategories.map((subcategory) => (
