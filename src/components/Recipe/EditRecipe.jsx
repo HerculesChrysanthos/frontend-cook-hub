@@ -400,6 +400,7 @@ const EditRecipe = ({ editedRecipe }) => {
           value={recipe.subcategory}
           onChange={handleSubcategoryChange}
         >
+          <option value=''>Διάλεξε Υποκατηγορία</option>
           {subcategories.map((subcategory) => (
             <option key={subcategory._id} value={subcategory._id}>
               {subcategory.name}
