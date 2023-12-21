@@ -114,8 +114,8 @@ const EditRecipe = ({ editedRecipe }) => {
 
   const handleTagsChange = (selectedOptions) => {
     console.log('selectedOptions', selectedOptions);
-    const selectedTagIds = selectedOptions.map((option) => option.value);
-    setRecipe({ ...recipe, tags: selectedTagIds });
+    //const selectedTagIds = selectedOptions.map((option) => option.value);
+    setRecipe({ ...recipe, tags: selectedOptions });
   };
 
   const handleCategoryChange = (event) => {
@@ -245,7 +245,7 @@ const EditRecipe = ({ editedRecipe }) => {
         } = recipe;
 
         console.log('ta tags edw ', tags);
-        //const tagsArr = tags.map((tag) => tag.value);
+        const tagsArr = tags.map((tag) => tag.value);
         // const ingredientsArr = ingredients.map((tag) => tag.value);
 
         formData.append('title', title);
@@ -266,7 +266,7 @@ const EditRecipe = ({ editedRecipe }) => {
           formData.append('ingredients[]', ingredient)
         );
 
-        tags.forEach((tag) => formData.append('tags[]', tag));
+        tagsArr.forEach((tag) => formData.append('tags[]', tag));
 
         console.log('ti tha steilei ', formData);
 
