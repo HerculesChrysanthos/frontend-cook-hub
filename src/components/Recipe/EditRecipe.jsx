@@ -28,7 +28,7 @@ const EditRecipe = ({ editedRecipe }) => {
       })) || [],
   });
 
-  console.log(editedRecipe);
+  //console.log(editedRecipe);
   // useEffect(() => {
   //   if (editedRecipe) {
   //     // Assuming that editedRecipe.data has the same structure as your recipe state
@@ -113,6 +113,7 @@ const EditRecipe = ({ editedRecipe }) => {
   }, [tags]);
 
   const handleTagsChange = (selectedOptions) => {
+    console.log('selectedOptions', selectedOptions);
     const selectedTagIds = selectedOptions.map((option) => option.value);
     setRecipe({ ...recipe, tags: selectedTagIds });
   };
@@ -243,7 +244,8 @@ const EditRecipe = ({ editedRecipe }) => {
           tags,
         } = recipe;
 
-        const tagsArr = tags.map((tag) => tag.value);
+        console.log('ta tags edw ', tags);
+        //const tagsArr = tags.map((tag) => tag.value);
         // const ingredientsArr = ingredients.map((tag) => tag.value);
 
         formData.append('title', title);
@@ -264,7 +266,7 @@ const EditRecipe = ({ editedRecipe }) => {
           formData.append('ingredients[]', ingredient)
         );
 
-        tagsArr.forEach((tag) => formData.append('tags[]', tag));
+        tags.forEach((tag) => formData.append('tags[]', tag));
 
         console.log('ti tha steilei ', formData);
 
