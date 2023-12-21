@@ -57,7 +57,9 @@ const CreateRecipe = () => {
   }, [tags]);
 
   const handleTagsChange = (selectedOptions) => {
+    console.log('mpika na allaksw tag ', selectedOptions);
     const selectedTagIds = selectedOptions.map((option) => option.value);
+    console.log('mpika na allaksw tag kai exw vrei option ', selectedTagIds);
     setRecipe({ ...recipe, tags: selectedTagIds });
   };
 
