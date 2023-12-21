@@ -161,6 +161,7 @@ const EditRecipe = ({ editedRecipe }) => {
   const handleIngredientChange = (event, index) => {
     const { value } = event.target;
     const ingredients = [...recipe.ingredients];
+
     ingredients[index] = value;
     setRecipe({ ...recipe, ingredients });
   };
@@ -246,13 +247,10 @@ const EditRecipe = ({ editedRecipe }) => {
 
         console.log('ta tags edw ', tags);
         const tagsArr = tags.map((tag) => tag.value);
-        // const ingredientsArr = ingredients.map((tag) => tag.value);
 
         formData.append('title', title);
         formData.append('description', description);
-        formData.append('ingredients', ingredients);
         formData.append('instructions', instructions);
-        //formData.append('imageUrl', imageUrl);
         formData.append('preparationTime', preparationTime);
         formData.append('cookingTime', cookingTime);
         formData.append('servings', servings);
@@ -260,8 +258,7 @@ const EditRecipe = ({ editedRecipe }) => {
         formData.append('subcategory', subcategory);
         if (imageUrl) formData.append('image', imageUrl);
 
-        // formData.append('tags', [tagsArr]);
-
+        console.log('ingredients prin stalthoun ', ingredients);
         ingredients.forEach((ingredient) =>
           formData.append('ingredients[]', ingredient)
         );
