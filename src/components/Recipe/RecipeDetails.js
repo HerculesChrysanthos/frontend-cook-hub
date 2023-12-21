@@ -45,6 +45,8 @@ const RecipeDetails = () => {
   //   setLikes(likes + 1);
   // };
 
+  console.log('recipe data', recipeData);
+
   const handleDelete = async () => {
     if (userObject.id === recipeData.user._id) {
       const shouldDelete = window.confirm(
@@ -72,24 +74,25 @@ const RecipeDetails = () => {
   };
 
   return (
-    <div className='recipe-container'>
+    <div className="recipe-container">
       {isEditing ? (
         <EditRecipe isUpdate={isEditing} editedRecipe={recipeData} />
       ) : (
         <>
           {recipeData ? (
-            <div className='recipe-details'>
+            <div className="recipe-details">
               <h2>{recipeData?.title}</h2>
               <p>{recipeData?.description}</p>
               <img
                 src={recipeData?.mainImage}
                 alt={recipeData?.title}
-                className='recipe-image'
+                className="recipe-image"
               />
               <div>
                 {userObject?.id === recipeData?.user._id && (
                   <>
                     <button onClick={handleUpdade}>Επεξεργασία</button>
+                    <span style={{ margin: '0 1px' }}></span>
                     <button onClick={handleDelete}>Διαγραφή</button>
                   </>
                 )}
@@ -105,6 +108,22 @@ const RecipeDetails = () => {
               </ul>
               <h3>Εκτέλεση:</h3>
               <p>{recipeData?.instructions}</p>
+              <div className="cats-frame">
+                <div className="category">
+                  <h3>Κατηγορία</h3>
+                  <div className="label">{recipeData?.category.name}</div>
+                </div>
+                <div className="subcategory">
+                  <h3>Υποκατηγορία</h3>
+                  <div className="label">{recipeData?.subcategory.name}</div>
+                </div>
+              </div>
+              <h3>Tags</h3>
+              <ul class="tag-list">
+                {recipeData?.tags?.map(({ name }, index) => (
+                  <li key={index}>{name}</li>
+                ))}
+              </ul>
             </div>
           ) : (
             <p>{errorMessage}</p>

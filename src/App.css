@@ -687,7 +687,57 @@ nav a:hover {
 
 .recipe-details h3 {
   color: #444;
+  /* margin-bottom: 1px; */
 }
+
+.recipe-details button {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 15px;
+  margin: 5px;
+  border-radius: 5px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+.tag-list li {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 12px;
+  margin: 3px;
+  border-radius: 5px;
+  /* transition: background-color 0.3s ease; */
+}
+
+.cats-frame {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+.category {
+  margin-right: 20px;
+}
+
+.label {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 15px;
+  margin: 5px;
+  /* margin-top: 5px; */
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.tag-list li:hover {
+  background-color: #676666;
+}
+
+/*recipe-details end*/
 
 /* Categories start */
 /* Categories.css */
@@ -838,8 +888,6 @@ nav a:hover {
   .social-icons a {
     max-width: 100%; /* Set the maximum width to 100% for small screens */
   }
-
-  /* Additional responsive adjustments as needed */
 }
 
 .burger-menu {
