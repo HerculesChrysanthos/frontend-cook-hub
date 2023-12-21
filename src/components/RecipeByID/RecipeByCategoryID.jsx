@@ -11,10 +11,13 @@ const RecipeByID = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const [categoryName, setCategoryName] = useState(null);
+  const [message, setMessage] = useState(null);
 
   // Use the useParams hook to get the category ID from the URL
   const { categoryId } = useParams();
   console.log({ categoryId });
+
+  console.log();
 
   useEffect(() => {
     const fetchRecipes = async () => {
@@ -25,15 +28,26 @@ const RecipeByID = () => {
           }`
         );
 
-        const {
-          recipes: recipesData,
-          totalRecipes,
-          categoryName,
-        } = response.data;
-        console.log(response.data);
-        setRecipes(recipesData);
-        setTotalRecipes(totalRecipes);
-        setCategoryName(categoryName);
+        // const {
+        //   recipes: recipesData,
+        //   totalRecipes,
+        //   categoryName,
+        // } = response.data;
+
+        const recipesData = response.data.recipes;
+        const totalRecipesData = response.data.totalRecipes;
+        const selectedCategoryName = response.data.categoryName;
+        if (totalRecipesData === 0) {
+          setRecipes([]);
+          setTotalRecipes(0);
+          setMessage('Δεν υπάρχουν συνταγές στην κατηγορία');
+          setCategoryName(null);
+        } else {
+          console.log(response.data);
+          setRecipes(recipesData);
+          setTotalRecipes(totalRecipes);
+          setCategoryName(categoryName);
+        }
       } catch (error) {
         console.error('Error fetching recipes:', error);
       }
@@ -53,9 +67,20 @@ const RecipeByID = () => {
 
   console.log(recipes);
   return (
-    <div className='recipe-by-id-container'>
-      <h1>Συνταγές {categoryName && categoryName}</h1>
-      <div className='recipes-list'>
+    <div className="recipe-by-id-container">
+      <h1>{categoryName && categoryName}</h1>
+      {message ? (
+        <div className="no-results">
+          <h2> {message}</h2>
+        </div>
+      ) : (
+        <div className="recipes-list">
+          {recipes.map((recipe) => (
+            <RecipeCard key={recipe.id} recipe={recipe} />
+          ))}
+        </div>
+      )}
+      {/* <div className="recipes-list">
         {recipes.length > 0 ? (
           recipes.map((recipe) => (
             <RecipeCard key={recipe.id} recipe={recipe} />
@@ -63,7 +88,7 @@ const RecipeByID = () => {
         ) : (
           <div>Η κατηγορία είναι άδεια</div>
         )}
-      </div>
+      </div> */}
       <div>
         <Pagination
           currentPage={currentPage}
