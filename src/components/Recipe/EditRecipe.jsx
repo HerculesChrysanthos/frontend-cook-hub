@@ -383,6 +383,7 @@ const EditRecipe = ({ editedRecipe }) => {
           name='preparationTime'
           value={recipe.preparationTime}
           onChange={handleInputChange}
+          min='1'
           required
         />
         <label htmlFor='cookingTime'>Χρόνος Μαγειρέματος (λεπτά)</label>
@@ -392,6 +393,7 @@ const EditRecipe = ({ editedRecipe }) => {
           name='cookingTime'
           value={recipe.cookingTime}
           onChange={handleInputChange}
+          min='1'
           required
         />
 
@@ -402,6 +404,7 @@ const EditRecipe = ({ editedRecipe }) => {
           name='servings'
           value={recipe.servings}
           onChange={handleInputChange}
+          min='1'
           required
         />
         <label htmlFor='category'>Κατηγορία</label>
