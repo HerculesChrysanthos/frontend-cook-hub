@@ -2,8 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import Select from 'react-select';
 import { useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const EditRecipe = ({ editedRecipe }) => {
   const token = localStorage.getItem('token');
@@ -29,27 +27,6 @@ const EditRecipe = ({ editedRecipe }) => {
       })) || [],
   });
 
-  //console.log(editedRecipe);
-  // useEffect(() => {
-  //   if (editedRecipe) {
-  //     // Assuming that editedRecipe.data has the same structure as your recipe state
-  //     setRecipe({
-  //       user: editedRecipe.user._id || "",
-  //       title: editedRecipe.title || "",
-  //       description: editedRecipe.description || "",
-  //       ingredients: editedRecipe.ingredients || [""],
-  //       instructions: editedRecipe.instructions || "",
-  //       imageUrl: editedRecipe.imageUrl || "",
-  //       preparationTime: editedRecipe.preparationTime || 0,
-  //       cookingTime: editedRecipe.cookingTime || 0,
-  //       servings: editedRecipe.servings || 0,
-  //       category: editedRecipe.category._id || "",
-  //       subcategory: editedRecipe.subcategory._id || "",
-  //       tags: editedRecipe.tags || [""],
-  //     });
-  //   }
-  // }, [editedRecipe]);
-
   console.log('cayegory', recipe.category);
   console.log('editedRecipe tags', editedRecipe.tags);
   console.log(
@@ -60,7 +37,6 @@ const EditRecipe = ({ editedRecipe }) => {
     }))
   );
   console.log('id in recipe update', editedRecipe._id);
-  //   console.log("id in recipe update", editRecipe._id);
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
   const [tags, setTags] = useState([]);
@@ -213,41 +189,6 @@ const EditRecipe = ({ editedRecipe }) => {
       console.log(recipe);
       try {
         const formData = new FormData();
-        // Object.entries(recipe).forEach(([key, value]) => {
-        //   if (key === "imageUrl") {
-        //     //to add imageurl logic
-        //     // { isUpdate && (formData)}
-        //     formData.append("image", value);
-        //   } else if (key === "tags") {
-        //     recipe.tags.forEach((tagId, index) => {
-        //       formData.append(`tags[${index}]`, tagId);
-        //     });
-        //   } else if (key === "ingredients") {
-        //     recipe.ingredients.forEach((ingredient, index) => {
-        //       formData.append(`ingredients[${index}]`, ingredient);
-        //     });
-        //   } else {
-        //     formData.append(key, value);
-        //   }
-        // });
-
-        // Object.entries(recipe).forEach(([key, value]) => {
-        //   if (key === "category" || key === "subcategory") {
-        //     formData.append(key, value._id); // Assuming you want to append the _id property
-        //   } else if (key === "imageUrl") {
-        //     formData.append("image", value);
-        //   } else if (key === "tags") {
-        //     recipe.tags.forEach((tagId, index) => {
-        //       formData.append("tags[]", tagId);
-        //     });
-        //   } else if (key === "ingredients") {
-        //     recipe.ingredients.forEach((ingredient, index) => {
-        //       formData.append("ingredients[]", ingredient);
-        //     });
-        //   } else {
-        //     formData.append(key, value);
-        //   }
-        // });
 
         const {
           user,

@@ -28,8 +28,6 @@ const RecipeByTag = () => {
           },
         });
 
-        // const { recipes: recipesData, totalRecipes } = response.data;
-
         const recipesData = response.data.recipes;
         const totalRecipesData = response.data.totalRecipes;
 

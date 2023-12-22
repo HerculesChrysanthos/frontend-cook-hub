@@ -40,11 +40,6 @@ const RecipeDetails = () => {
     fetchData();
   }, [recipeId]);
 
-  // const handleLike = () => {
-  //   // You can implement logic here to update the likes on the server as well.
-  //   setLikes(likes + 1);
-  // };
-
   console.log('recipe data', recipeData);
 
   const handleDelete = async () => {

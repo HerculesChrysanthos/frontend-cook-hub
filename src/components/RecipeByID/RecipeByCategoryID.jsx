@@ -28,12 +28,6 @@ const RecipeByID = () => {
           }`
         );
 
-        // const {
-        //   recipes: recipesData,
-        //   totalRecipes,
-        //   categoryName,
-        // } = response.data;
-
         const recipesData = response.data.recipes;
         const totalRecipesData = response.data.totalRecipes;
 

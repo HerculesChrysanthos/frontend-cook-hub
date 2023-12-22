@@ -99,8 +99,8 @@ li span {
   border: 1px solid #ccc;
   border-radius: 4px;
   outline: none;
-  color: #333; /* Text color for the selected option */
-  background-color: #fff; /* Background color for the select element */
+  color: #333;
+  background-color: #fff;
 }
 
 .recipe-by-id-header {
@@ -153,11 +153,10 @@ li span {
   margin-top: 10px;
 }
 
-/* Add this to your existing CSS or RecipeByID.css file */
 .recipe-by-id-container button {
   padding: 12px;
   color: white;
-  background-color: #4198c3; /* Green background color */
+  background-color: #4198c3;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -287,7 +286,7 @@ nav a:hover {
   align-items: center;
   justify-content: center;
   border-bottom: 2px solid black; /* Black bold line */
-  padding-bottom: 5px; /* Add some padding for better appearance */
+  padding-bottom: 5px;
   max-width: 400px;
   margin: auto;
   margin-top: 5px;
@@ -430,7 +429,9 @@ nav a:hover {
 .register-container .success {
   color: green;
 }
-/*registration form ends */ /*Login form starts */
+
+/*registration form ends */
+/*Login form starts */
 .login-form {
   display: flex;
   flex-direction: column;
@@ -510,10 +511,6 @@ nav a:hover {
   margin-top: 200px;
   width: 100%;
 }
-
-/* .social-icons {
-  margin-left: -50px; 
-} */
 
 .footer-content {
   display: flex;
@@ -650,7 +647,7 @@ nav a:hover {
 .recipe-image {
   max-width: 100%;
   height: auto;
-  border-radius: 8px; /* Optional: Add rounded corners */
+  border-radius: 8px;
 }
 
 .recipe-container {
@@ -744,7 +741,7 @@ nav a:hover {
 .categories-container {
   top: 30px;
   display: flex;
-  padding: 10px; /* Adjust padding as needed */
+  padding: 10px;
   z-index: 1;
   flex-direction: column;
   color: white;
@@ -850,7 +847,7 @@ nav a:hover {
 
 @media screen and (max-width: 768px) {
   .header-nav {
-    justify-content: space-between; /* Change back to space-between for medium screens */
+    justify-content: space-between;
     margin-right: 0; /* Remove margin for medium screens */
   }
 
@@ -912,7 +909,6 @@ nav a:hover {
 
 /* Adjustments for large screens */
 @media screen and (min-width: 1024px) {
-  /* Add your specific adjustments for large screens here */
   .burger-menu {
     display: block;
   }

@@ -25,25 +25,9 @@ const RecipeBySub = () => {
           }`
         );
 
-        // const { recipes: recipesData, totalRecipes } = response.data;
-
         const recipesData = response.data.recipes;
         const totalRecipesData = response.data.totalRecipes;
 
-        //   if (recipesData.length > 0) {
-        //     const { subcategory } = recipesData[0]; // Extract subcategory from the first recipe
-        //     setRecipes(
-        //       recipesData.filter(
-        //         (recipe) => recipe.subcategory?._id === subcategoryId
-        //       )
-        //     ); // Filter recipes based on subcategoryId
-        //     setSubcategoryName(subcategory ? subcategory.name : null); // Set subcategory name
-        //   }
-
-        //   setTotalRecipes(totalRecipes);
-        // } catch (error) {
-        //   console.error('Error fetching recipes:', error);
-        // }
         if (totalRecipesData === 0) {
           setRecipes([]);
           setTotalRecipes(0);
