@@ -1,4 +1,4 @@
-# COOK HUB Froented using react.js
+# COOK HUB Frontend using react.js
 
 ### For installing run: `npm install`
 
