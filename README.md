@@ -1,4 +1,14 @@
-# Getting Started with Create React App
+# COOK HUB Froented using react.js
+
+### For installing run: `npm install`
+
+### By default you must run backend REST API locally since on package.json we have:
+
+`"proxy": "http://127.0.0.1:8080"`
+
+### If you want to use the deployed on cyclic REST Backend API add on package.json and run npm install
+
+`"proxy": "https://combative-jumper-pig.cyclic.app"`
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
