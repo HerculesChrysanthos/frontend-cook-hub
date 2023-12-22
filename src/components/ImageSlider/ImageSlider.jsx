@@ -12,6 +12,8 @@ const ImageSlider = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true, // Enable autoplay
+    autoplaySpeed: 5000, // 2 seconds 
   };
 
   const images = [image_1, image];
