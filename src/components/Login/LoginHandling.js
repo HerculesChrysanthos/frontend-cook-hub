@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import axios from "axios";
-import LoginForm from "./LoginForm";
-import { useAuth } from "../AuthContext";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import axios from 'axios';
+import LoginForm from './LoginForm';
+import { useAuth } from '../AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const LoginHandling = () => {
   const [loading, setLoading] = useState(false);
@@ -18,7 +18,7 @@ const LoginHandling = () => {
 
     const { email, password } = formData;
     const headers = {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     };
 
     try {
@@ -27,7 +27,7 @@ const LoginHandling = () => {
 
       // Perform the login request
       const response = await axios.post(
-        "/api/users/login",
+        '/api/users/login',
         {
           email,
           password,
@@ -40,7 +40,7 @@ const LoginHandling = () => {
 
       // Login success
       setSuccessMessage(response.data.message);
-      
+
       if (setSuccessMessage) {
         // Store the token in cookies / localstorage
         window.localStorage.setItem('token', response.data.token);
@@ -49,10 +49,10 @@ const LoginHandling = () => {
         setLoggedInUser({
           id: response.data.user._id,
           name: response.data.user.name,
-          surname: response.data.user.surname
+          surname: response.data.user.surname,
         });
         // Navigate to the main page or any other page after successful login
-        navigate("/");
+        navigate('/');
       }
 
       // Log local storage
@@ -66,27 +66,29 @@ const LoginHandling = () => {
       // Handle specific HTTP status codes
       if (error.response) {
         const statusCode = error.response.status;
-        console.log("HTTP status code:", statusCode);
+        console.log('HTTP status code:', statusCode);
 
         switch (statusCode) {
           case 401:
             setError(
-              "Mη έγκυρα διαπιστευτήρια. Ελέγξτε το email και τον κωδικό πρόσβασής σας."
+              'Mη έγκυρα διαπιστευτήρια. Ελέγξτε το email και τον κωδικό πρόσβασής σας.'
             );
             break;
           case 404:
-            setError("Ο χρήστης δεν βρέθηκε. Παρακαλώ ελέγξτε το email σας.");
+            setError('Ο χρήστης δεν βρέθηκε. Παρακαλώ ελέγξτε το email σας.');
             break;
           case 422:
-            setError("το μηκος του κωδικου πρεπει να ειναι 8 χαρακτήρες");
+            setError('Το μήκος του κωδικού πρέπει να είναι 8 χαρακτήρες');
             break;
           default:
             // For other errors, use a generic messa
-            setError(error.response.data.message || "An error occurred");
+            setError(error.response.data.message || 'An error occurred');
         }
       } else {
         // Handle non-response errors
-        setError("Ωχ κάτι πήγε στραβά ανανεώστε την σελίδα σας και προσπαθήστε ξανά");
+        setError(
+          'Ωχ κάτι πήγε στραβά ανανεώστε την σελίδα σας και προσπαθήστε ξανά'
+        );
       }
     } finally {
       setLoading(false);

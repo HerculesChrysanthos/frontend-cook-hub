@@ -46,10 +46,10 @@ const RecipeByID = () => {
           console.log(response.data);
           const { category } = recipesData[0]; // Extract subcategory from the first recipe
           setRecipes(recipesData);
-          setTotalRecipes(totalRecipes);
+          setTotalRecipes(totalRecipesData);
           setCategoryName(category ? category.name : null);
           setMessage(null);
-          console.log('categoryName when recipes exist',{ categoryName });
+          console.log('categoryName when recipes exist', { categoryName });
         }
       } catch (error) {
         console.error('Error fetching recipes:', error);
@@ -70,14 +70,14 @@ const RecipeByID = () => {
 
   console.log(recipes);
   return (
-    <div className="recipe-by-id-container">
+    <div className='recipe-by-id-container'>
       <h1>{categoryName && categoryName}</h1>
       {message ? (
-        <div className="no-results">
+        <div className='no-results'>
           <h2> {message}</h2>
         </div>
       ) : (
-        <div className="recipes-list">
+        <div className='recipes-list'>
           {recipes.map((recipe) => (
             <RecipeCard key={recipe.id} recipe={recipe} />
           ))}

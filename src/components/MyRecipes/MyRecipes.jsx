@@ -25,15 +25,18 @@ const MyRecipes = () => {
           }
         );
 
-        const { recipes: recipesData, totalRecipes } = response.data;
-
-        if (totalRecipes.length === 0) {
+        // const { recipes: recipesData, totalRecipes } = response.data;
+        const recipesData = response.data.recipes;
+        const totalRecipesData = response.data.totalRecipes;
+        console.log(totalRecipesData);
+        if (totalRecipesData === 0) {
+          console.log('mpika');
           setRecipes([]);
           setTotalRecipes(0);
           setErrorMessage('Δεν έχετε δημοσιευμένες συνταγές ακόμη.');
         } else {
           setRecipes(recipesData);
-          setTotalRecipes(totalRecipes);
+          setTotalRecipes(totalRecipesData);
           setErrorMessage(null);
         }
       } catch (error) {

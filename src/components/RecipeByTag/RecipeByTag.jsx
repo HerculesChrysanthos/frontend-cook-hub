@@ -28,7 +28,10 @@ const RecipeByTag = () => {
           },
         });
 
-        const { recipes: recipesData, totalRecipes } = response.data;
+        // const { recipes: recipesData, totalRecipes } = response.data;
+
+        const recipesData = response.data.recipes;
+        const totalRecipesData = response.data.totalRecipes;
 
         // Extract tag names from the first recipe (assuming all recipes have the same tags)
         const tagNamesFromRecipe =
@@ -38,7 +41,7 @@ const RecipeByTag = () => {
 
         console.log(recipesData);
         setRecipes(recipesData);
-        setTotalRecipes(totalRecipes);
+        setTotalRecipes(totalRecipesData);
         setTagNames(tagNamesFromRecipe);
       } catch (error) {
         console.error('Error fetching recipes:', error);

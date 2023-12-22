@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { useParams } from "react-router-dom";
-import RecipeCard from "../RecipeCard/RecipeCard";
-import Pagination from "../Pagination/Pagination";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import RecipeCard from '../RecipeCard/RecipeCard';
+import Pagination from '../Pagination/Pagination';
 
 const RecipeBySub = () => {
   const [recipes, setRecipes] = useState([]);
@@ -21,7 +21,7 @@ const RecipeBySub = () => {
       try {
         const response = await axios.get(
           `/api/recipes?page=${Number(currentPage)}${
-            subcategoryId ? `&subcategoryId=${subcategoryId}` : ""
+            subcategoryId ? `&subcategoryId=${subcategoryId}` : ''
           }`
         );
 
@@ -47,10 +47,10 @@ const RecipeBySub = () => {
         if (totalRecipesData === 0) {
           setRecipes([]);
           setTotalRecipes(0);
-          setMessage("Δεν υπάρχουν συνταγές");
+          setMessage('Δεν υπάρχουν συνταγές');
           setSubcategoryName(null);
         } else {
-          console.log("mpika edw pera 3 ", recipesData);
+          console.log('mpika edw pera 3 ', recipesData);
           const { subcategory } = recipesData[0]; // Extract subcategory from the first recipe
           setRecipes(
             recipesData.filter(
@@ -58,11 +58,11 @@ const RecipeBySub = () => {
             )
           ); // Filter recipes based on subcategoryId
           setSubcategoryName(subcategory ? subcategory.name : null); // Set subcategory name
-          setTotalRecipes(totalRecipes);
+          setTotalRecipes(totalRecipesData);
           setMessage(null);
         }
       } catch (error) {
-        console.error("Error fetching recipes:", error);
+        console.error('Error fetching recipes:', error);
       }
     };
 
@@ -79,11 +79,11 @@ const RecipeBySub = () => {
   };
 
   return (
-    <div className="recipe-by-id-container">
-      <h1>{subcategoryName}</h1>{" "}
+    <div className='recipe-by-id-container'>
+      <h1>{subcategoryName}</h1>{' '}
       {/* Display subcategory name if available, otherwise use categoryName */}
       <div>
-      {message ? (
+        {message ? (
           <div className='no-results'>
             <h2> {message}</h2>
           </div>
@@ -93,7 +93,7 @@ const RecipeBySub = () => {
               <RecipeCard key={recipe._id} recipe={recipe} />
             ))}
           </div>
-          )}
+        )}
       </div>
       {/* /* <div>
         {recipes.length > 0 ? (
@@ -107,7 +107,7 @@ const RecipeBySub = () => {
             <h2>Δεν υπάρχουν συνταγές</h2>
           </div>
         )}
-      </div> */} 
+      </div> */}
       <div>
         <Pagination
           currentPage={currentPage}
