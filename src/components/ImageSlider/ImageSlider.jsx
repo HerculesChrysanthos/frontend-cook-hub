@@ -21,7 +21,7 @@ const ImageSlider = () => {
   // Custom styles for the slider container
   const sliderStyles = {
     width: '80%', // Adjust the desired width
-    margin: 'auto',
+    margin: '20px auto',
     padding: '10px',
     border: '2px solid #ddd', // Add a border as a frame
     borderRadius: '10px', // Optional: Add border-radius for a rounded frame
